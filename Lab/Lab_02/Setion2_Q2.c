@@ -13,7 +13,6 @@ int main() {
           Rn/=c;
           Rm/=c;
           x*=c;
-          printf("%d", x);
        }
        c+=1;
     }
