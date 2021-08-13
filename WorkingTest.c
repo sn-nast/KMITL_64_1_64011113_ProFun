@@ -1,6 +1,5 @@
 #include<stdio.h>
 int main() {
-    printf("%d", 25%50);
-
+    printf("Hello world");
     return 0;
 }
