@@ -4,7 +4,7 @@ int lastSum;
 int digitSum(int num){
     int sum = 0;
     while(num > 0) {                 
-        int digit = num % 10;   // แยกตัวเลขตัวสุดท้าออกก        
+        int digit = num % 10;   // แยกตัวเลขตัวสุดท้ายออก        
         sum += digit;           // รวมตัวเลขนั้น 
         num /= 10;              // เก็บตัวเลขที่เหลือ 
         printf("%d", digit);
@@ -18,21 +18,19 @@ int digitSum(int num){
 
 int main() {
     int num;
-    printf("input number : ");
-    scanf("%d", &num);
-    if (num > 0) {
-        int c = 1 ;
-        printf("\nDigit sum (round %d) : ", c);
-        // แยกตัวเลขออกแต่ละตัว แล้วบวกรวมกัน
-        digitSum (num);
-        // ถ้าสามารถแยกตัวเลขออกได้อีก ให้แยกแต่ละตัว แล้วบวกรวมกัน
-        while(lastSum >= 10) {
-            c++;
-            printf("Digit sum (round %d) : ", c);
-            digitSum (lastSum);
-        }
+    printf("Enter number : ");
+    scanf("%d", &num);          // ไม่ป้อนเลขที่มีแต่ 0 ต่อกันไปเรื่อยๆ
+    
+    int c = 1 ;
+    printf("\nDigit sum (round %d) : ", c);
+    // แยกตัวเลขออกแต่ละตัว แล้วบวกรวมกัน
+    digitSum (num);
+    // ถ้าสามารถแยกตัวเลขออกได้อีก ให้แยกแต่ละตัว แล้วบวกรวมกัน
+    while(lastSum >= 10) {
+        c++;
+        printf("Digit sum (round %d) : ", c);
+        digitSum (lastSum);
     }
     printf("Final digit sum : %d\n", lastSum);
     return 0;
 }
-
