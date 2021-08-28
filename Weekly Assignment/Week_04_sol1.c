@@ -4,9 +4,9 @@
 int main(){
     float x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, xbar, sd;
     // input
-    printf("Find (sample) standard devision, please input ten Numbers only.\n\n");
+    printf("Find (sample) standard devision, please enter ten Numbers only.\n\n");
     for(int c = 1; c <= 10; c++) {
-        printf("input data %d : ", c);
+        printf("Enter data %d : ", c);
         switch (c) {
             case 1: scanf("%f", &x1);break;
             case 2: scanf("%f", &x2);break; 
