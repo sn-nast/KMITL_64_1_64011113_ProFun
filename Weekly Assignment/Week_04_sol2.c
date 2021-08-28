@@ -1,4 +1,6 @@
 // Level 2
+// 64. จงเขียนโปรแกรมเพื่อรับตัวเลข 10 ตัว แล้วหาค่า standard deviation
+// SOL 02
 #include<stdio.h> 
 #include<math.h>
 int i = 0;
