@@ -2,44 +2,31 @@
 #include<windows.h>
 #include<conio.h>
 
-int draw_MeMan(int, int);
+void draw_MeMan(int);
 void gotoxy(int, int);
-void control(char, int, int, int*, int*);
-void arrowNow2(char, int, int);
-void bomb();
-int xMax = 80, yMax = 30, MeLen;
+void control(char, int, int);
 
 int main() {
-	int x = 0, y = 10;
-	int timeDelay = 10;
+	int x = 5, y = 10;
 	gotoxy(x, y);
-	draw_MeMan(x, y);
+	for (int x1 = x; x1 < 20; x1++) {
+		gotoxy(x1, y);
+		draw_MeMan(10);
+	}
 	char ps = ' ';
 	do {
 		if (_kbhit()) {
-
 			ps = _getch();
-			int xNew, yNew;
-			control(ps, x, y, &xNew, &yNew);
-			x = xNew;
-			y = yNew;
-			//Sleep(timeDelay);
+			control(ps, x, y);
 		}
-	} while (TRUE);
+	} while (ps != 'x');
 	return 0;
 }
 
-int draw_MeMan(int x, int y) {
-	gotoxy(x, y);
-	//printf("/\\__/\\ \n");
-	//printf("|^  ^|\n");
-	//printf("| -- |\n");
-	//printf("|____|\n");
-
-	char Me[20] = " M ";
-	MeLen = strlen(Me);
-	printf("%s", Me );
-	return MeLen;
+void draw_MeMan(int time) {
+	char Me[20] = "<-_->";
+	printf(" %s ", Me);
+	Sleep(time);
 }
 
 void gotoxy(int x, int y) {
@@ -47,59 +34,15 @@ void gotoxy(int x, int y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
-void arrowNow2(char press, int x, int y) {
-	Sleep(100);
-	gotoxy(x - 1, y);
-	printf(" ");
-	gotoxy((x + MeLen) - 1, y);
-	printf(" ");
-}
-
-
-void bomb(){
-	printf("bomb");
-}
-void control(char press, int x, int y, int* xNew, int* yNew) {
-	int arrowNow;
+void control(char press, int x, int y) {
+	int time = 100;
 	if (press == 'a') {
-		if (x <= 0) { x = 0; }
-		else {
-			gotoxy(x - 2, y);
-			printf("<");
-			draw_MeMan(--x, y);
-		}
+		gotoxy(--x, y);
+		draw_MeMan(time);
 	}
-	if (press == 'd') {
-		if (x >= xMax - MeLen) { x = xMax - MeLen; }
-		else {
-			gotoxy(x + 1 + MeLen, y);
-			printf(">");
-			draw_MeMan(++x, y);
-		}
+	if (press == 'd') { 
+		gotoxy(--x, y);
+		draw_MeMan(time); 
 	}
-	if (press == 'w') {
-		if (y <= 0) { y = 0; }
-		else {
-			gotoxy(x, y);
-			for (int i = 0; i < MeLen; i++) printf(" ");
-			draw_MeMan(x, --y);
-		}
-	}
-	if (press == 's') {
-		if (y >= yMax) { y = yMax; }
-		else {
-			gotoxy(x, y);
-			for (int i = 0; i < MeLen; i++) printf(" ");
-			draw_MeMan(x, ++y);
-		}
-	}
-	if (press == ' ') {
-		gotoxy(x, y);
-		for (int i = 0; i < MeLen; i++) printf(" ");
-		gotoxy(x + (MeLen / 3), y);
-		printf("B");
-	}
-	*xNew = x;
-	*yNew = y;
 	fflush(stdin);
 }
