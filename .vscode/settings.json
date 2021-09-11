@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "ostream": "c"
+        "ostream": "c",
+        "SHOOTER.C": "cpp"
     }
 }

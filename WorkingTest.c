@@ -1,21 +1,18 @@
 #include<stdio.h>
-int main()
-{
-	char str[50];
-	char* ptr;
-	ptr = str;
-	scanf("%s", str);
-	printf("str = %s\n", str);
-	printf("ptr = %s\n", ptr);
+#include<stdlib.h>
+int main(){
+  int n = 6;
+  // for (int c =1 ; c < 10; c++){
+    int randCount = rand()%(n) + 1;
+  //   printf("1: %d\n", randCount);
 
-	while (*ptr != '\0') ptr++;
-	ptr--;
-	printf("ptr = %s\n", ptr);
-	printf("reverse : \n    ");
-	while (ptr >= str) {
-		printf("%c", *ptr);
-		ptr--;
-	}
+  //   while (/* condition */)
+  //   {
+  //     /* code */
+  //   }
+  //    (randCount == 0)  {
+  //   printf("%d\n", randCount);
+  //   }
+  // // }
 
-	return 0;
 }
