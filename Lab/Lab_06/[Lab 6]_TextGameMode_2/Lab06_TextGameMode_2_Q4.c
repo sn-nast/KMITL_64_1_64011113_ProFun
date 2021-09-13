@@ -36,8 +36,6 @@ void draw_ship(int x, int y)
 	printf(" ");
 }
 
-//void bulletMove(int x; )
-
 void draw_bullet(int x, int y) {
 	gotoxy(x, y);
 	setcolor(6, 0);
@@ -51,9 +49,9 @@ void erase_bullet(int x, int y) {
 }
 
 
-
-
 int main() {
+	/*  ------------------- Assignment 1 ---------------------- */
+	/* NO Cursor */
 	setcursor(0);
 	char ch = '.';
 
@@ -92,9 +90,8 @@ int main() {
 			}
 			fflush(stdin);
 		}
-		// Auto move
-		if (x <= 0) { direction = 'R'; }
-		if (x >= maxWidth - shipLen) { direction = 'L'; }
+		/*  ------------------- Assignment 2 ---------------------- */
+		/* Auto move */
 		if (direction != ' ') {
 			if (direction == 'L') {
 				if (x <= 0) { x = 0; }
@@ -105,7 +102,8 @@ int main() {
 				else draw_ship(++x, y);
 			}
 		}
-
+		/*  ------------------- Assignment 3 - 4 ---------------------- */
+		/* Bullet */
 		if (bulletRun < bullet) { bulletAdd = bullet - bulletRun ; }
 		if (bullet != 0 || bulletRun != 0) {
 			// have bullet add
