@@ -56,7 +56,7 @@ int main() {
 	char ch = '.';
 
 	int x = 38, y = 30, shipLen = 7;
-	int maxWidth = 189;
+	int maxWidth = 80;
 	char direction = ' ';
 
 	int xbl[6], ybl[6];
