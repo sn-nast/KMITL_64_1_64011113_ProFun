@@ -1,29 +1,23 @@
 #include<stdio.h>
-#include<stdlib.h>
-int main(){
+int gx = 100, gy = 200;
 
-  int x = 10 ,y = 20 , z = 30 ,*p1 ,*p2;
-  p1 = &x;
-  p2 = &y;
-  printf("%d %d %d %d %d\n", x, y, z, *p1, *p2);
-
-  x = 80;
-  printf("%d %d %d %d %d\n", x, y, z, *p1, *p2);
-
-  p1 = &z;
-  p2 = p1 ;
-  printf("%d %d %d %d %d\n", x, y, z, *p1, *p2);
-
-  *p1 = 100;
-  printf("%d %d %d %d %d\n", x, y, z, *p1, *p2);
-
+void func1(int x, int y) {
+	x = x + 10;	y = y + 20; gx = gx - 1; gy = gy + 1;
 }
-// 6684160
-// 1
-// 6684152
-// 6684160
 
-// 6684160
-// 1
-// 6684152
-// 6684160
+void func2(int *x,int *y) {
+	*x = *x + 10; *y = *y + 20; gx = gx - 5, gy = gy + 5;
+}
+
+void func3(int* x, int y) {
+	*x = *x + 30; y = y + 20;  gx = gx + 10, gy = gy - 10;
+}
+
+int main() {
+	int ma = 20, mb = 30;
+  func2(&gx, &ma);
+	printf("%d %d %d %d\n", ma, mb,gx,gy);
+  // func3(*ma, mb);
+
+	return 0;
+}
