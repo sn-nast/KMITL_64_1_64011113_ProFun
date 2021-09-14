@@ -61,7 +61,7 @@ int main() {
 
 	int xbl[6], ybl[6];
 	int bullet = 0;		// no bullet = 0
-	int bulletRe = 5, bulletAdd = 0, bulletRun = 0;
+	int bulletAdd = 0, bulletRun = 0;
 	int bulletNo[5] = { 0, 0, 0, 0, 0 };
 	int* pt_bulletNo = bulletNo;
 
