@@ -1,0 +1,6 @@
+Name		Level	Score
+Anonymous	1	0
+Anonymous	2	100
+Anonymous	3	200
+Anonymous	4	300
+Anonymous	5	400
