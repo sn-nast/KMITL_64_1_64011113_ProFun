@@ -1,0 +1,2 @@
+
+    printf("input\t: ");
