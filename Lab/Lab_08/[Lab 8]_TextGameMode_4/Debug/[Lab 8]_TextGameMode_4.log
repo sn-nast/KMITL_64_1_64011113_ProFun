@@ -1,3 +1,0 @@
-﻿  [Lab 8]_TextGameMode_4.cpp
-D:\A My Project\KMITL_64_ProFun\Lab\Lab_08\[Lab 8]_TextGameMode_4\[Lab 8]_TextGameMode_4.cpp(103,48): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
-  [Lab 8]_TextGameMode_4.vcxproj -> D:\A My Project\KMITL_64_ProFun\Lab\Lab_08\[Lab 8]_TextGameMode_4\Debug\[Lab 8]_TextGameMode_4.exe
