@@ -1,0 +1,4 @@
+﻿  ProFun_Test-Mode -Game.cpp
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode -Game\ProFun_Test-Mode -Game.cpp(33,14): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode -Game\ProFun_Test-Mode -Game.cpp(33,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode -Game\Debug\ProFun_Test-Mode -Game.exe
