@@ -1,3 +1,4 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ProFun_Test-Mode -Game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ProFun_Test-Mode-Game.cpp
-  ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode -Game\Debug\ProFun_Test-Mode-Game.exe
+﻿  ProFun_Test-Mode-Game.cpp
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\main.h(30,2): warning C4091: 'typedef ': ignored on left of 'Player' when no variable is declared
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\ProFun_Test-Mode-Game.cpp(44,48): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
+  ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Debug\ProFun_Test-Mode-Game.exe

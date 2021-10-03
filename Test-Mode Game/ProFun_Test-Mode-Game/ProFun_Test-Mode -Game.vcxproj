@@ -140,13 +140,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
+    <ClCompile Include="Move.cpp" />
     <ClCompile Include="ProFun_Test-Mode-Game.cpp" />
     <ClCompile Include="Addition-Feature.cpp" />
-    <ClCompile Include="Move.cpp" />
+    <ClCompile Include="Move.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Addition-Feature.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
