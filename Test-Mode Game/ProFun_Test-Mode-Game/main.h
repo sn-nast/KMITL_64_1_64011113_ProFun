@@ -17,6 +17,9 @@ extern COORD bufferSize;
 extern COORD characterPos;
 extern SMALL_RECT windowSize;
 
+extern DWORD numEvents;
+extern DWORD numEventsRead;
+
 extern bool playStatus;
 
 const short RIGHT_ARROW_1 = 16;

@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
+    <ClCompile Include="Control.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="ProFun_Test-Mode-Game.cpp" />
     <ClCompile Include="Addition-Feature.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Addition-Feature.h" />
+    <ClInclude Include="Control.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
