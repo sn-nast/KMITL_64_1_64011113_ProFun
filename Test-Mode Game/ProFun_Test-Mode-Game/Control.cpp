@@ -15,21 +15,21 @@ void moveControl(Player *P_struct) {
 				if (KB_keycode == VK_ESCAPE) {
 					playStatus = FALSE;
 				}
-				P_struct->last_position.X = P_struct->position.X;
-				P_struct->last_position.Y = P_struct->position.Y;
+				P_struct->Last_position.X = P_struct->Position.X;
+				P_struct->Last_position.Y = P_struct->Position.Y;
 				switch (KB_Char | KB_keycode) {
-				case 'a': { P_struct->position.X--; break; }
-				case 'A': { P_struct->position.X--; break; }
-				case VK_LEFT: { P_struct->position.X--; break; }
-				case 'd': { P_struct->position.X++; break; }
-				case 'D': { P_struct->position.X++; break; }
-				case VK_RIGHT: { P_struct->position.X++; break; }
-				case 's': { P_struct->position.Y++; break; }
-				case 'S': { P_struct->position.Y++; break; }
-				case VK_DOWN: { P_struct->position.Y++; break; }
-				case 'w': { P_struct->position.Y--; break; }
-				case 'W': { P_struct->position.Y--; break; }
-				case VK_UP: { P_struct->position.Y--; break; }
+				case 'a'		:{ P_struct->Position.X--; break; }
+				case 'A'		:{ P_struct->Position.X--; break; }
+				case VK_LEFT	: { P_struct->Position.X--; break; }
+				case 'd'		: { P_struct->Position.X++; break; }
+				case 'D'		: { P_struct->Position.X++; break; }
+				case VK_RIGHT	: { P_struct->Position.X++; break; }
+				case 's'		: { P_struct->Position.Y++; break; }
+				case 'S'		: { P_struct->Position.Y++; break; }
+				case VK_DOWN	: { P_struct->Position.Y++; break; }
+				case 'w'		: { P_struct->Position.Y--; break; }
+				case 'W'		: { P_struct->Position.Y--; break; }
+				case VK_UP		: { P_struct->Position.Y--; break; }
 				default: break;
 				}
 			}

@@ -21,11 +21,12 @@ int main() {
 	srand(time_t(NULL));
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
 	setCursor(0);
-	strcpy_s(playerMe.format, "[O]");
+	strcpy_s(playerMe.Format, "[O]");
 
-	playerMe.position = { 5, 5 };
-	playerMe.attribute = 7;
-	playerMe.lenght = strlen(playerMe.format);
+	playerMe.Position = { 5, 5 };
+	playerMe.Attribute = 7;
+	playerMe.Lenght = strlen(playerMe.Format);
+	playerMe.Bomb.Amount = 1;
 
 	setMode();
 	while (playStatus) {

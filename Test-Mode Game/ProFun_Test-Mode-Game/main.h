@@ -32,13 +32,19 @@ const short LEFT_ARROW_2 = 27;
 const short UP_ARROW_2 = 24;
 const short DOWN_ARROW_2 = 25;
 
+struct Bomb {
+	unsigned int Amount;
+	unsigned int What;
+};
+
 struct Player {
-	char format[5];
-	unsigned int lenght;
-	unsigned int height;
-	COORD position;
-	COORD last_position;
-	int attribute;
+	char Format[5];
+	unsigned int Lenght;
+	unsigned int Height;
+	COORD Position;
+	COORD Last_position;
+	unsigned int Attribute;
+	Bomb Bomb;
 };
 
 extern Player playerMe;

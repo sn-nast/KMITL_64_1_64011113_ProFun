@@ -4,15 +4,15 @@
 
 void playerMove(Player stPlayer) {
 	Player* pt = &stPlayer;
-	int Len = pt->lenght;
+	int Len = pt->Lenght;
 	for (int i = 0; i < Len; i++) {
-		putBuffer((pt->position.X) + i, pt->position.Y, pt->format[i] , pt->attribute);
+		putBuffer((pt->Position.X) + i, pt->Position.Y, pt->Format[i] , pt->Attribute);
 	}
 	// Direction arrow
-	if (((pt->position.X) != (pt->last_position.X)) || ((pt->position.Y) != (pt->last_position.Y))){
-		if ((pt->position.X) > (pt->last_position.X))		{ putBuffer((pt->position.X) + Len	  , pt->position.Y, RIGHT_ARROW_1, pt->attribute); }
-		else if ((pt->position.X) < (pt->last_position.X))	{ putBuffer((pt->position.X) - Len / 2, pt->position.Y, LEFT_ARROW_1, pt->attribute); }
-		else if ((pt->position.Y) > (pt->last_position.Y))	{ putBuffer((pt->position.X) + Len / 2, pt->position.Y + (pt->height + 1), DOWN_ARROW_2, pt->attribute); }
-		else if ((pt->position.Y) < (pt->last_position.Y))	{ putBuffer((pt->position.X) + Len / 2, pt->position.Y - (pt->height + 1), UP_ARROW_2, pt->attribute); }
+	if (((pt->Position.X) != (pt->Last_position.X)) || ((pt->Position.Y) != (pt->Last_position.Y))){
+		if ((pt->Position.X) > (pt->Last_position.X))		{ putBuffer((pt->Position.X) + Len	  , pt->Position.Y, RIGHT_ARROW_1, pt->Attribute); }
+		else if ((pt->Position.X) < (pt->Last_position.X))	{ putBuffer((pt->Position.X) - Len / 2, pt->Position.Y, LEFT_ARROW_1, pt->Attribute); }
+		else if ((pt->Position.Y) > (pt->Last_position.Y))	{ putBuffer((pt->Position.X) + Len / 2, pt->Position.Y + (pt->Height + 1), DOWN_ARROW_2, pt->Attribute); }
+		else if ((pt->Position.Y) < (pt->Last_position.Y))	{ putBuffer((pt->Position.X) + Len / 2, pt->Position.Y - (pt->Height + 1), UP_ARROW_2, pt->Attribute); }
 	} 
 }
