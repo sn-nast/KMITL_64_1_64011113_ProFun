@@ -2,13 +2,6 @@
 #include "main.h"
 #include "Buffer.h"
 
-//void movePlayer(COORD pos, char *format, int atb) {
-//	for (int i = 0; i < strlen(format); i++) {
-//		putBuffer(pos.X + i, pos.Y, *(format + i), atb);
-//	}
-//	// Direction arrow
-//
-//}
 void playerMove(Player stPlayer) {
 	Player* pt = &stPlayer;
 	int Len = pt->lenght;
@@ -22,8 +15,4 @@ void playerMove(Player stPlayer) {
 		else if ((pt->position.Y) > (pt->last_position.Y))	{ putBuffer((pt->position.X) + Len / 2, pt->position.Y + (pt->height + 1), DOWN_ARROW_2, pt->attribute); }
 		else if ((pt->position.Y) < (pt->last_position.Y))	{ putBuffer((pt->position.X) + Len / 2, pt->position.Y - (pt->height + 1), UP_ARROW_2, pt->attribute); }
 	} 
-}
-
-void drawME() {
-	;
 }

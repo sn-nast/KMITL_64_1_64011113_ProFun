@@ -1,26 +1,23 @@
 #pragma once 
-
 #include <Windows.h>
 #include <stdio.h>
 #include <string.h>
 
-extern const int SCREEN_WIDTH;
-extern const int SCREEN_HEIGHT; 
-extern const int NORMAL_ATTIBUTE;
- 
+#define SCREEN_WIDTH 80
+#define SCREEN_HEIGHT 25
 
+const short NORMAL_ATTIBUTE = 7;
+ 
 extern HANDLE wHnd;
 extern HANDLE rHnd;
 extern DWORD fdwMode;
+
 extern CHAR_INFO consoleBuffer[];
 extern COORD bufferSize;
 extern COORD characterPos;
 extern SMALL_RECT windowSize;
 
-
 extern bool playStatus;
-extern DWORD numEvents;
-extern DWORD numEventsRead;
 
 const short RIGHT_ARROW_1 = 16;
 const short LEFT_ARROW_1 = 17;
@@ -40,6 +37,8 @@ struct Player {
 	COORD last_position;
 	int attribute;
 };
+
+extern Player playerMe;
 
 typedef struct {
 	char format[6];
