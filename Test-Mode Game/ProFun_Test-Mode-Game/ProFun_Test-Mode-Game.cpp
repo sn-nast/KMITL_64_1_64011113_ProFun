@@ -1,36 +1,34 @@
+#include "main.h"
 #include "Move.h"
 #include "Buffer.h"
-#include "main.h"
 
-const int SCREEN_WIDTH = 80;
-const int SCREEN_HEIGHT = 80;
-const int NORMAL_ATTIBUTE = 7;
-
-HANDLE wHnd = 0 ;
-HANDLE rHnd = 0;
-DWORD fdwMode = 0;
+HANDLE wHnd;
+HANDLE rHnd;
+DWORD fdwMode;
 
 CHAR_INFO consoleBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
 COORD bufferSize = { SCREEN_WIDTH,SCREEN_HEIGHT };
 COORD characterPos = { 0, 0 };
 SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 
-bool playStatus;
-Player playerMe, * P_playerMe, player2;
+
+Player playerMe, * P_playerMe;
 
 int main() {
-	setCursor(0);
+	srand(time_t(NULL));
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
+	setCursor(0);
 	strcpy_s(playerMe.format, "[O]");
+
+	bool playStatus = true;
 	playerMe.position = { 5, 5 };
 	playerMe.attribute = 7;
 	playerMe.lenght = strlen(playerMe.format);
 
-
 	DWORD numEvents = 0;
 	DWORD numEventsRead = 0;
+
 	setMode();
-	playStatus = TRUE;
 	while (playStatus) {
 		// Input Keyboard & Mouse events
 		GetNumberOfConsoleInputEvents(rHnd, &numEvents);
@@ -43,7 +41,7 @@ int main() {
 					 eventBuffer[i].Event.KeyEvent.bKeyDown == true){
 					char KB_Char = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
 					WORD KB_keycode = eventBuffer[i].Event.KeyEvent.wVirtualKeyCode;
-					if (KB_Char == VK_ESCAPE) {
+					if (KB_keycode == VK_ESCAPE) {
 						playStatus = FALSE;
 					}
 					playerMe.last_position.X = playerMe.position.X;

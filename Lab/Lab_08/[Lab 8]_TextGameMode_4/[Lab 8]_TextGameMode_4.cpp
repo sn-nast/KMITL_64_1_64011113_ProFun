@@ -35,22 +35,22 @@ int setMode() {
 }
 
 void fill_data_to_buffer(int x, int y, char ch, int atb) {
-	consoleBuffer[x + ( screen_x * y )].Char.AsciiChar = ch;
-	consoleBuffer[x + ( screen_x * y )].Attributes = atb;
+	consoleBuffer[x + (screen_x * y)].Char.AsciiChar = ch;
+	consoleBuffer[x + (screen_x * y)].Attributes = atb;
 }
-void fill_buffer_to_console(){
+void fill_buffer_to_console() {
 	WriteConsoleOutputA(wHnd, consoleBuffer, bufferSize, characterPos, &windowSize);
-} 
+}
 void clear_buffer() {
 	for (int y = 0; y < screen_y; ++y) {
-		for (int x = 0; x < screen_x; ++x) {fill_data_to_buffer(x, y, ' ', 7);}
+		for (int x = 0; x < screen_x; ++x) { fill_data_to_buffer(x, y, ' ', 7); }
 	}
 }
 
 void init_star() {
 	for (int i = 0; i < scount; i++) {
 		star[i] = { short(rand() % screen_x + 1), short(rand() % screen_y + 1) };
-		fill_data_to_buffer(star[i].X , star[i].Y, '*', starColor);
+		fill_data_to_buffer(star[i].X, star[i].Y, '*', starColor);
 	}
 }
 void fill_star_to_buffer() {
@@ -66,7 +66,7 @@ void star_fall() {
 		}
 		else {
 			star[i].Y++;
-			if (ship.Y == star[i].Y && ship.X <= star[i].X && 
+			if (ship.Y == star[i].Y && ship.X <= star[i].X &&
 				ship.X + unsigned(strlen(myShip)) >= unsigned(star[i].X)) {
 				star[i] = { short(rand() % screen_x + 1), 1 };
 				myHP--;
@@ -79,8 +79,8 @@ void star_fall() {
 void draw_ship(int ship_x, int ship_y, int type) {
 	while (shipColor == starColor || (type == 1 && (shipColor > 15 || shipColor == 0))) { shipColor = rand() % 256; }
 	for (unsigned int i = 0; i < unsigned(strlen(myShip)); i++) {
-		if (type == 1)		{ fill_data_to_buffer(ship_x + i, ship_y, myShip[i], shipColor); }
-		else if (type == 0) { fill_data_to_buffer(ship_x + i, ship_y, ' ', 0);}
+		if (type == 1) { fill_data_to_buffer(ship_x + i, ship_y, myShip[i], shipColor); }
+		else if (type == 0) { fill_data_to_buffer(ship_x + i, ship_y, ' ', 0); }
 	}
 }
 
@@ -88,7 +88,7 @@ int main() {
 	srand(time_t(NULL));
 	setConsole(screen_x, screen_y);
 	init_star();
-	bool play = true ;
+	bool play = true;
 	DWORD numEvents = 0;
 	DWORD numEventsRead = 0;
 	setConsole(screen_x, screen_y);
@@ -105,11 +105,10 @@ int main() {
 						play = false;
 					}
 					char keyPressed = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
-					if (keyPressed == 'c'){
+					if (keyPressed == 'c') {
 						shipColor = rand() % 256;
 						draw_ship(ship.X, ship.Y, 1);
 					}
-					printf("%c\n", keyPressed);
 				}
 				else if (eventBuffer[i].EventType == MOUSE_EVENT) {
 					short posx = eventBuffer[i].Event.MouseEvent.dwMousePosition.X;
@@ -126,11 +125,11 @@ int main() {
 			}
 			delete[] eventBuffer;
 		}
-		//star_fall();
-		//clear_buffer();
-		//fill_star_to_buffer();
-		//draw_ship(ship.X, ship.Y, 1);
-		//fill_buffer_to_console();
+		star_fall();
+		clear_buffer();
+		fill_star_to_buffer();
+		draw_ship(ship.X, ship.Y, 1);
+		fill_buffer_to_console();
 		Sleep(100);
 	}
 	return 0;
