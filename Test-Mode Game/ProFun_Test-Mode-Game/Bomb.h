@@ -1,5 +1,6 @@
 #pragma once
 #include "main.h"
-void setupBomb(Player stPlayer);
-void dropBomb(Player stPlayer);
-void checkBomb(Player stPlayer);
+
+void setupBomb(Player *p);
+void dropBomb(Player *p);
+void checkBomb(Player *p);

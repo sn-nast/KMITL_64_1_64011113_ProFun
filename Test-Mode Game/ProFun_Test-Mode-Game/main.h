@@ -34,13 +34,13 @@ const short UP_ARROW_2 = 24;
 const short DOWN_ARROW_2 = 25;
 
 struct _Bomb {
-	COORD Position;
-	unsigned int Amount = 1;
-	unsigned int Drop = 0;
-	unsigned int Power = 1;
-	unsigned int State[15];
-	unsigned int Time = 30;
-	int CoundDn[15];
+	COORD Position[15];
+	int Amount;
+	int Drop;
+	int Power = 1;
+	int State[15];
+	int Time = 50;
+	int CountDn[15];
 };
 
 struct Player {

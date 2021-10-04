@@ -29,16 +29,27 @@ int main() {
 	playerMe.Position = { 5, 5 };
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
-	setupBomb(playerMe);
+
 	playerMe.Bomb.Amount = 10;
+
+	playerMe.Bomb.Time = 30;
+	//printf_s("%d\n", sizeof(playerMe.Bomb.State)/sizeof(playerMe.Bomb.State[0]));
+
+	setupBomb(&playerMe);
+	//printf_s("%d\n", playerMe.Bomb.Amount);
+	//printf_s("%d\n", playerMe.Bomb.Time);
+	//for (int c = 0; c < 15; c++) {
+	//	printf_s("%d\n", playerMe.Bomb.CountDn[c]); 
+	//}
+
 
 	setMode();
 	while (playStatus) {
 		// Input Keyboard & Mouse events
 		moveControl(&playerMe);
 		clearBuffer();
-		dropBomb(playerMe);
-		checkBomb(playerMe);
+		dropBomb(&playerMe);
+		checkBomb(&playerMe);
 		playerMove(playerMe);
 		displayBuffer();
 		Sleep(100);
