@@ -1,12 +1,13 @@
 #pragma once 
-
 int setConsole(int x, int y);
 
 int setMode();
 
 void putBuffer(int x, int y, char ch, int atb);
 
-void Display();
+void clearBuffer();
+
+void displayBuffer();
 
 void setCursor(bool visible);
 

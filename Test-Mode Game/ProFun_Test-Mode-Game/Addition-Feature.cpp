@@ -1,5 +1,5 @@
 #include "Addition-Feature.h"
-#include <Windows.h>
+#include "main.h"
 
 void setFontSize(int a, int b){
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -9,4 +9,7 @@ void setFontSize(int a, int b){
     lpConsoleCurrentFontEx->dwFontSize.X = a;
     lpConsoleCurrentFontEx->dwFontSize.Y = b;
     SetCurrentConsoleFontEx(hStdOut, 0, lpConsoleCurrentFontEx);
+}
+int setSize(int a) {
+    return a + 10; ;
 }

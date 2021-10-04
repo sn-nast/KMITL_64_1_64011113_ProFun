@@ -109,6 +109,7 @@ int main() {
 						shipColor = rand() % 256;
 						draw_ship(ship.X, ship.Y, 1);
 					}
+					printf("%c\n", keyPressed);
 				}
 				else if (eventBuffer[i].EventType == MOUSE_EVENT) {
 					short posx = eventBuffer[i].Event.MouseEvent.dwMousePosition.X;
@@ -125,11 +126,11 @@ int main() {
 			}
 			delete[] eventBuffer;
 		}
-		star_fall();
-		clear_buffer();
-		fill_star_to_buffer();
-		draw_ship(ship.X, ship.Y, 1);
-		fill_buffer_to_console();
+		//star_fall();
+		//clear_buffer();
+		//fill_star_to_buffer();
+		//draw_ship(ship.X, ship.Y, 1);
+		//fill_buffer_to_console();
 		Sleep(100);
 	}
 	return 0;

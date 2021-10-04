@@ -93,6 +93,15 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/VERBOSE
+/VERBOSE:CLR
+/VERBOSE:ICF
+/VERBOSE:INCR
+/VERBOSE:LIB
+/VERBOSE:REF	
+/VERBOSE:SAFESEH
+/VERBOSE:UNUSEDDELAYLOAD
+/VERBOSE:UNUSEDLIBS %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

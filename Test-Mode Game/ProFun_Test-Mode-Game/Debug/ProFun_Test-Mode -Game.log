@@ -1,4 +1,8 @@
-﻿  ProFun_Test-Mode-Game.cpp
-D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\main.h(30,2): warning C4091: 'typedef ': ignored on left of 'Player' when no variable is declared
-D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\ProFun_Test-Mode-Game.cpp(44,48): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
+﻿  Move.cpp
+  LINK : 0 new modules and 1 (out of 49) modules have changed since prior linking
+  Generating non-SAFESEH image.
+  Starting pass 2
+       Move.obj
+       MSVCRTD.lib(loadcfg.obj)
+  Finished pass 2
   ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Debug\ProFun_Test-Mode-Game.exe

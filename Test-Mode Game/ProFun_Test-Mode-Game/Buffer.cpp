@@ -20,8 +20,14 @@ void putBuffer(int x, int y, char ch, int atb) {
 	consoleBuffer[x + (SCREEN_WIDTH * y)].Attributes = atb;
 }
 
-void Display() {
+void displayBuffer() {
 	WriteConsoleOutputA(wHnd, consoleBuffer, bufferSize, characterPos, &windowSize);
+}
+
+void clearBuffer() {
+	for (int y = 0; y < SCREEN_WIDTH; ++y) {
+		for (int x = 0; x < SCREEN_HEIGHT; ++x) { putBuffer(x, y, ' ', NORMAL_ATTIBUTE); }
+	}
 }
 
 void setCursor(bool visible) {
