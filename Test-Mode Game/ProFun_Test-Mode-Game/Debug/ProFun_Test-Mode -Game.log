@@ -4,9 +4,10 @@ D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Buffer.cpp(
 D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Buffer.cpp(54,27): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
 D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Buffer.cpp(54,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
   Buffer.h
+  Control.cpp
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Control.cpp(12,47): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
   Move.cpp
   ProFun_Test-Mode-Game.cpp
-D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\ProFun_Test-Mode-Game.cpp(41,49): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
   Addition-Feature.cpp
   Move.h
   Generating Code...
@@ -46,13 +47,13 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
         Found __imp__WriteConsoleOutputA@20
           Referenced in Buffer.obj
           Loaded kernel32.lib(KERNEL32.dll)
-        Found __imp__Sleep@4
-          Referenced in ProFun_Test-Mode-Game.obj
-          Loaded kernel32.lib(KERNEL32.dll)
         Found __imp__GetNumberOfConsoleInputEvents@8
-          Referenced in ProFun_Test-Mode-Game.obj
+          Referenced in Control.obj
           Loaded kernel32.lib(KERNEL32.dll)
         Found __imp__ReadConsoleInputW@16
+          Referenced in Control.obj
+          Loaded kernel32.lib(KERNEL32.dll)
+        Found __imp__Sleep@4
           Referenced in ProFun_Test-Mode-Game.obj
           Loaded kernel32.lib(KERNEL32.dll)
         Found __imp__GetCurrentConsoleFontEx@12
@@ -97,34 +98,33 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
       Searching C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\lib\x86\MSVCRTD.lib:
         Found @_RTC_CheckStackVars@8
           Referenced in Buffer.obj
-          Referenced in ProFun_Test-Mode-Game.obj
           Loaded MSVCRTD.lib(stack.obj)
         Found @__CheckForDebuggerJustMyCode@4
+          Referenced in Addition-Feature.obj
           Referenced in Buffer.obj
+          Referenced in Control.obj
           Referenced in Move.obj
           Referenced in ProFun_Test-Mode-Game.obj
-          Referenced in Addition-Feature.obj
           Loaded MSVCRTD.lib(debugger_jmc.obj)
         Found @__security_check_cookie@4
           Referenced in Buffer.obj
-          Referenced in ProFun_Test-Mode-Game.obj
           Loaded MSVCRTD.lib(secchk.obj)
         Found __RTC_InitBase
+          Referenced in Addition-Feature.obj
           Referenced in Buffer.obj
+          Referenced in Control.obj
           Referenced in Move.obj
           Referenced in ProFun_Test-Mode-Game.obj
-          Referenced in Addition-Feature.obj
           Loaded MSVCRTD.lib(init.obj)
         Found ___security_cookie
           Referenced in Buffer.obj
-          Referenced in ProFun_Test-Mode-Game.obj
           Referenced in MSVCRTD.lib(secchk.obj)
           Loaded MSVCRTD.lib(gs_cookie.obj)
         Found "void * __cdecl operator new[](unsigned int)" (??_U@YAPAXI@Z)
-          Referenced in ProFun_Test-Mode-Game.obj
+          Referenced in Control.obj
           Loaded MSVCRTD.lib(new_array.obj)
         Found "void __cdecl operator delete[](void *)" (??_V@YAXPAX@Z)
-          Referenced in ProFun_Test-Mode-Game.obj
+          Referenced in Control.obj
           Loaded MSVCRTD.lib(delete_array.obj)
         Found "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
           Referenced in Addition-Feature.obj
@@ -312,12 +312,6 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
         Found __imp__srand
           Referenced in ProFun_Test-Mode-Game.obj
           Loaded ucrtd.lib(ucrtbased.dll)
-        Found __imp____acrt_iob_func
-          Referenced in ProFun_Test-Mode-Game.obj
-          Loaded ucrtd.lib(ucrtbased.dll)
-        Found __imp____stdio_common_vfprintf
-          Referenced in ProFun_Test-Mode-Game.obj
-          Loaded ucrtd.lib(ucrtbased.dll)
         Found __CrtDbgReport
           Referenced in MSVCRTD.lib(init.obj)
           Loaded ucrtd.lib(ucrtbased.dll)
@@ -434,8 +428,6 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
           Referenced in MSVCRTD.lib(pdblkup.obj)
           Loaded ucrtd.lib(ucrtbased.dll)
         Found __IMPORT_DESCRIPTOR_ucrtbased
-          Referenced in ucrtd.lib(ucrtbased.dll)
-          Referenced in ucrtd.lib(ucrtbased.dll)
           Referenced in ucrtd.lib(ucrtbased.dll)
           Referenced in ucrtd.lib(ucrtbased.dll)
           Referenced in ucrtd.lib(ucrtbased.dll)
@@ -653,25 +645,25 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
    /v
    /x
    /fo
-   "C:\Users\sunsu\AppData\Local\Temp\lnk{84CB914D-87DA-4F21-96E8-21900B9D4DDF}.tmp"
-   "C:\Users\sunsu\AppData\Local\Temp\lnk{AABDE3EB-3352-4290-9241-42FECAD4F700}.tmp"
+   "C:\Users\sunsu\AppData\Local\Temp\lnk{EF38CF71-5BC5-4B96-A068-C6A110BF8985}.tmp"
+   "C:\Users\sunsu\AppData\Local\Temp\lnk{E18D0289-0D25-4C5D-A509-983B6C89135D}.tmp"
   Microsoft (R) Windows (R) Resource Compiler Version 10.0.10011.16384
   
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   
-  Creating C:\Users\sunsu\AppData\Local\Temp\lnk{84CB914D-87DA-4F21-96E8-21900B9D4DDF}.tmp
+  Creating C:\Users\sunsu\AppData\Local\Temp\lnk{EF38CF71-5BC5-4B96-A068-C6A110BF8985}.tmp
   
   Using codepage 874 as default
   
-  C:\Users\sunsu\AppData\Local\Temp\lnk{AABDE3EB-3352-4290-9241-42FECAD4F700}.tmp.
+  C:\Users\sunsu\AppData\Local\Temp\lnk{E18D0289-0D25-4C5D-A509-983B6C89135D}.tmp.
   Writing 24:1,	lang:0x409,	size 381
   Invoking cvtres.exe:
    /machine:x86
    /verbose
-   /out:"C:\Users\sunsu\AppData\Local\Temp\lnk{3FC29F42-C12E-49F1-9229-DE5E625E0C01}.tmp"
+   /out:"C:\Users\sunsu\AppData\Local\Temp\lnk{0DA5D10D-26E6-4118-BCE8-6119B568AABF}.tmp"
    /readonly
-   "C:\Users\sunsu\AppData\Local\Temp\lnk{84CB914D-87DA-4F21-96E8-21900B9D4DDF}.tmp"
+   "C:\Users\sunsu\AppData\Local\Temp\lnk{EF38CF71-5BC5-4B96-A068-C6A110BF8985}.tmp"
   Microsoft (R) Windows Resource To Object Converter Version 14.29.30133.0
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
@@ -694,6 +686,7 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
        Addition-Feature.obj
        ProFun_Test-Mode-Game.obj
        Move.obj
+       Control.obj
        Buffer.obj
        kernel32.lib(KERNEL32.dll)
        kernel32.lib(KERNEL32.dll)
@@ -793,8 +786,6 @@ Debug\Move.obj : warning LNK4042: object specified more than once; extras ignore
        vcruntimed.lib(VCRUNTIME140D.dll)
        vcruntimed.lib(VCRUNTIME140D.dll)
        vcruntimed.lib(VCRUNTIME140D.dll)
-       ucrtd.lib(ucrtbased.dll)
-       ucrtd.lib(ucrtbased.dll)
        ucrtd.lib(ucrtbased.dll)
        ucrtd.lib(ucrtbased.dll)
        ucrtd.lib(ucrtbased.dll)
