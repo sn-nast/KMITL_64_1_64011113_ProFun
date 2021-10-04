@@ -12,8 +12,9 @@ void moveControl(Player *P_struct) {
 				eventBuffer[i].Event.KeyEvent.bKeyDown == true) {
 				char KB_Char = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
 				WORD KB_keycode = eventBuffer[i].Event.KeyEvent.wVirtualKeyCode;
-				if (KB_keycode == VK_ESCAPE) {
-					playStatus = FALSE;
+				if (KB_keycode == VK_ESCAPE) { playStatus = FALSE; }
+				if (KB_keycode == VK_SPACE) { 
+					P_struct->Bomb.Drop++; 
 				}
 				P_struct->Last_position.X = P_struct->Position.X;
 				P_struct->Last_position.Y = P_struct->Position.Y;

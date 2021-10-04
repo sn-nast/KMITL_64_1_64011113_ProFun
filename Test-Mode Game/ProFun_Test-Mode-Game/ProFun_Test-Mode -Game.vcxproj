@@ -156,10 +156,12 @@
     <ClCompile Include="ProFun_Test-Mode-Game.cpp" />
     <ClCompile Include="Addition-Feature.cpp" />
     <ClCompile Include="Move.h" />
+    <ClCompile Include="Bomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Addition-Feature.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
