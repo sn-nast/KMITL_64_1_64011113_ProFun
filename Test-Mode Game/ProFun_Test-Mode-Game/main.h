@@ -7,7 +7,6 @@
 #define SCREEN_HEIGHT 25
 
 const short NORMAL_ATTIBUTE = 7;
-const char NORMAL_BOMB = '@';
  
 extern HANDLE wHnd;
 extern HANDLE rHnd;
@@ -33,14 +32,9 @@ const short LEFT_ARROW_2 = 27;
 const short UP_ARROW_2 = 24;
 const short DOWN_ARROW_2 = 25;
 
-struct _Bomb {
-	COORD Position[15];
-	int Amount;
-	int Drop;
-	int Power = 1;
-	int State[15];
-	int Time = 50;
-	int CountDn[15];
+struct Bomb {
+	unsigned int Amount;
+	unsigned int What;
 };
 
 struct Player {
@@ -49,11 +43,11 @@ struct Player {
 	unsigned int Height;
 	COORD Position;
 	COORD Last_position;
-	COORD Direction;
-	COORD Last_Direction = { 0, 0 };
 	unsigned int Attribute;
-	_Bomb Bomb;
+	Bomb Bomb;
 };
+
+extern Player playerMe;
 
 typedef struct {
 	char format[6];

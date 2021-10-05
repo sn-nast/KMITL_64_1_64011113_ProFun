@@ -1,4 +1,4 @@
 #pragma once 
 #include "main.h"
 
-void playerMove(Player *p);
+void playerMove(Player stPlayer);
