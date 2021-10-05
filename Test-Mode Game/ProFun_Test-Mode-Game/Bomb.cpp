@@ -53,12 +53,12 @@ void checkBomb(Player *p) {
 			if(p->Bomb.CountDn[c] == 0) {
 				p->Bomb.State[c] = 0;
 				p->Bomb.CountDn[c] = p->Bomb.Time;
-				showBomb(pos_B, ' ');
+				//showBomb(pos_B, ' ');
+				burstBomb(*p, c);
 				continue;
 			}
 			p->Bomb.CountDn[c]--;
 			showBomb(pos_B, NORMAL_BOMB);
-
 		}
 	}	
 }
@@ -74,4 +74,15 @@ void showBomb(Player* p) {
 }
 void showBomb(COORD pos, char bomb) {
 	putBuffer(pos.X, pos.Y, bomb, NORMAL_ATTIBUTE);
+}
+
+void burstBomb(Player S, int i) {
+	COORD pos = { S.Bomb.Position[i].X , S.Bomb.Position[i].Y };
+	int c = S.Bomb.Power;
+	for (int c1 = 0-c; c1 < c; c1++) {
+		putBuffer(pos.X + c1, pos.Y, 'X', NORMAL_ATTIBUTE);
+	}
+	for (int c2 = -c; c2 < c; c2++) {
+		putBuffer(pos.X , pos.Y + c2, 'X', NORMAL_ATTIBUTE);
+	}
 }
