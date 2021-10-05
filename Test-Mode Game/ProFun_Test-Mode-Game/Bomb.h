@@ -4,3 +4,5 @@
 void setupBomb(Player *p);
 void dropBomb(Player *p);
 void checkBomb(Player *p);
+void showBomb(Player* p);
+void showBomb(COORD pos, char bomb);

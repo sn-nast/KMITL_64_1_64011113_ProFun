@@ -1,8 +1,9 @@
-﻿  Bomb.cpp
+﻿  Control.cpp
+D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Control.cpp(12,47): warning C4805: '==': unsafe mix of type 'BOOL' and type 'bool' in operation
   LINK : 0 new modules and 1 (out of 51) modules have changed since prior linking
   Generating non-SAFESEH image.
   Starting pass 2
-       Bomb.obj
+       Control.obj
        MSVCRTD.lib(loadcfg.obj)
   Finished pass 2
   ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Debug\ProFun_Test-Mode-Game.exe

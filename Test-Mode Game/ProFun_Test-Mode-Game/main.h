@@ -49,6 +49,8 @@ struct Player {
 	unsigned int Height;
 	COORD Position;
 	COORD Last_position;
+	COORD Direction;
+	COORD Last_Direction = { 0, 0 };
 	unsigned int Attribute;
 	_Bomb Bomb;
 };

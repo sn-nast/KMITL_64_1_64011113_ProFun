@@ -30,7 +30,7 @@ int main() {
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
 
-	playerMe.Bomb.Amount = 10;
+	playerMe.Bomb.Amount = 5;
 
 	playerMe.Bomb.Time = 30;
 	//printf_s("%d\n", sizeof(playerMe.Bomb.State)/sizeof(playerMe.Bomb.State[0]));
@@ -48,9 +48,11 @@ int main() {
 		// Input Keyboard & Mouse events
 		moveControl(&playerMe);
 		clearBuffer();
+
 		dropBomb(&playerMe);
 		checkBomb(&playerMe);
-		playerMove(playerMe);
+		showBomb(&playerMe);
+		playerMove(&playerMe);
 		displayBuffer();
 		Sleep(100);
 	}
