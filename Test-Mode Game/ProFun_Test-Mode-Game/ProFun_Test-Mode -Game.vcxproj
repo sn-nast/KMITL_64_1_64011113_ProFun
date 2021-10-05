@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Addition-Feature.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
