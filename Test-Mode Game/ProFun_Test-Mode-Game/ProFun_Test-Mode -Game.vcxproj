@@ -154,7 +154,7 @@
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Move.cpp" />
-    <ClCompile Include="ProFun_Test-Mode-Game.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Addition-Feature.cpp" />
     <ClCompile Include="Move.h" />
   </ItemGroup>

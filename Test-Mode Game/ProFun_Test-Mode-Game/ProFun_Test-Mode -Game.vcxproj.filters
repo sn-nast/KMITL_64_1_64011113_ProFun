@@ -21,7 +21,7 @@
     <ClCompile Include="Buffer.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProFun_Test-Mode-Game.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Move.h">
