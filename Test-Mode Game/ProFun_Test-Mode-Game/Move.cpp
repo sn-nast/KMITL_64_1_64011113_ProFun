@@ -36,3 +36,5 @@ void playerMove(Player* p) {
 		putBuffer(pos.X, pos.Y, Arrow, p->Attribute);
 	}
 }
+
+//void screenMove()

@@ -1,4 +1,5 @@
 #pragma once 
+#include "main.h"
 int setConsole(int x, int y);
 
 int setMode();
@@ -16,3 +17,5 @@ void gotoxy(int x, int y);
 void setcolor(int fg, int bg);
 
 char cursor(int x, int y);
+
+char cursorBuffer(COORD pos);

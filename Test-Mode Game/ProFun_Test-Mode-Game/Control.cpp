@@ -28,23 +28,35 @@ void moveControl(Player* p) {
 					}
 				}
 			jump:
+
 				p->Last_position.X = p->Position.X;
 				p->Last_position.Y = p->Position.Y;
-				switch (KB_Char | KB_keycode) {
-				case 'a': { p->Position.X--; break; }
-				case 'A': { p->Position.X--; break; }
-				case VK_LEFT: { p->Position.X--; break; }
-				case 'd': { p->Position.X++; break; }
-				case 'D': { p->Position.X++; break; }
-				case VK_RIGHT: { p->Position.X++; break; }
-				case 's': { p->Position.Y++; break; }
-				case 'S': { p->Position.Y++; break; }
-				case VK_DOWN: { p->Position.Y++; break; }
-				case 'w': { p->Position.Y--; break; }
-				case 'W': { p->Position.Y--; break; }
-				case VK_UP: { p->Position.Y--; break; }
-				default: break;
+				COORD* pos = &p->Position;
+				//if (pos->X <= 0 + (p->Lenght / 2)) { pos->X = 0 + (p->Lenght / 2) + 2; }
+				//if (pos->X >= 96 + p->Lenght) { pos->X = 96 + p->Lenght + 2; }
+				//if (pos->Y <= 0 + (p->Height + 1)) { pos->Y = 0 + (p->Height + 1); }
+				//if (pos->Y >= 32 - (p->Height + 1)) { pos->Y = 32 - (p->Height + 1); }
+				{
+					switch (KB_Char | KB_keycode) {
+					case 'a': { pos->X -= p->SpeedX; break; }
+					case 'A': { pos->X -= p->SpeedX; break; }
+					case VK_LEFT: { pos->X -= p->SpeedX; break; }
+					case 'd': { pos->X += p->SpeedX; break; }
+					case 'D': { pos->X += p->SpeedX; break; }
+					case VK_RIGHT: { pos->X += p->SpeedX; break; }
+					case 's': { pos->Y += p->SpeedY; break; }
+					case 'S': { pos->Y += p->SpeedY; break; }
+					case VK_DOWN: { pos->Y += p->SpeedY; break; }
+					case 'w': { pos->Y -= p->SpeedY; break; }
+					case 'W': { pos->Y -= p->SpeedY; break; }
+					case VK_UP: { pos->Y -= p->SpeedY; break; }
+					default: break;
+					}
 				}
+				if (pos->X <= 0 + (p->Lenght / 2) + 2) { pos->X = 0 + (p->Lenght / 2) + 2; }
+				if (pos->X >= 96 - p->Lenght - 2) { pos->X = 96 - p->Lenght - 2; }
+				if (pos->Y <= 0 + (p->Height + 1)) { pos->Y = 0 + (p->Height + 1); }
+				if (pos->Y >= 32 - (p->Height + 1)) { pos->Y = 32 - (p->Height + 1); }
 			}
 			else if (eventBuffer[i].EventType == MOUSE_EVENT) {
 				//int M_posx = eventBuffer[i].Event.MouseEvent.dwMousePosition.X;

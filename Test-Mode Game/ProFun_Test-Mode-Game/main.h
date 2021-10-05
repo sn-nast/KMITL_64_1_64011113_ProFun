@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SCREEN_WIDTH 80
-#define SCREEN_HEIGHT 25
+#define SCREEN_WIDTH 120
+#define SCREEN_HEIGHT 40
 
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
@@ -50,14 +50,20 @@ struct Player {
 	COORD Position;
 	COORD Last_position;
 	COORD Direction;
-	COORD Last_Direction = { 0, 0 };
+	COORD Last_Direction;
+	unsigned int SpeedX = 1;
+	unsigned int SpeedY = 1;
 	unsigned int Attribute;
 	_Bomb Bomb;
 };
 
-typedef struct {
-	char format[6];
-	COORD position;
-	COORD last_position;
-	int attribute;
-}newStuctForm;
+struct _Map{
+	const int Width = 96;
+	const int Height = 32;
+	char Format[32][80];
+	unsigned int Attribute; 
+};
+
+//struct List {
+//	_Map Map;
+//};

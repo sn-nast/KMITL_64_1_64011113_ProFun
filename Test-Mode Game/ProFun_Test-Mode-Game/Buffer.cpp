@@ -57,3 +57,7 @@ char cursor(int x, int y) {
 	else
 		return buf[0];
 }
+
+char cursorBuffer(COORD pos) {
+	return consoleBuffer[pos.X + (SCREEN_WIDTH * pos.Y)].Char.AsciiChar;
+}
