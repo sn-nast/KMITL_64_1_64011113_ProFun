@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Control.cpp" />

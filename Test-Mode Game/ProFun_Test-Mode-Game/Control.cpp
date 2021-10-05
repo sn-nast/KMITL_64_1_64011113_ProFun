@@ -1,7 +1,7 @@
 #include"Control.h"
 #include "main.h"
 
-void moveControl(Player *P_struct) {
+void moveControl(Player* p) {
 	GetNumberOfConsoleInputEvents(rHnd, &numEvents);
 	if (numEvents != 0) {
 		INPUT_RECORD* eventBuffer = new INPUT_RECORD[numEvents];
@@ -12,24 +12,37 @@ void moveControl(Player *P_struct) {
 				eventBuffer[i].Event.KeyEvent.bKeyDown == true) {
 				char KB_Char = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
 				WORD KB_keycode = eventBuffer[i].Event.KeyEvent.wVirtualKeyCode;
-				if (KB_keycode == VK_ESCAPE) {
-					playStatus = FALSE;
+				if (KB_keycode == VK_ESCAPE) { playStatus = FALSE; }
+				if (KB_keycode == VK_SPACE) {
+					int size = p->Bomb.Amount;
+					int i = 0;
+					if (p->Bomb.Drop < size) {
+						for (int c = 0; c < size; c++) {
+							if (p->Bomb.State[c] == 2) { i++; }
+							if ((p->Direction.X == p->Bomb.Position[c].X
+								&& p->Direction.Y == p->Bomb.Position[c].Y)) {
+								goto jump;
+							}
+						}
+						if (p->Bomb.Drop < size - i) { p->Bomb.Drop++; }
+					}
 				}
-				P_struct->Last_position.X = P_struct->Position.X;
-				P_struct->Last_position.Y = P_struct->Position.Y;
+			jump:
+				p->Last_position.X = p->Position.X;
+				p->Last_position.Y = p->Position.Y;
 				switch (KB_Char | KB_keycode) {
-				case 'a'		:{ P_struct->Position.X--; break; }
-				case 'A'		:{ P_struct->Position.X--; break; }
-				case VK_LEFT	: { P_struct->Position.X--; break; }
-				case 'd'		: { P_struct->Position.X++; break; }
-				case 'D'		: { P_struct->Position.X++; break; }
-				case VK_RIGHT	: { P_struct->Position.X++; break; }
-				case 's'		: { P_struct->Position.Y++; break; }
-				case 'S'		: { P_struct->Position.Y++; break; }
-				case VK_DOWN	: { P_struct->Position.Y++; break; }
-				case 'w'		: { P_struct->Position.Y--; break; }
-				case 'W'		: { P_struct->Position.Y--; break; }
-				case VK_UP		: { P_struct->Position.Y--; break; }
+				case 'a': { p->Position.X--; break; }
+				case 'A': { p->Position.X--; break; }
+				case VK_LEFT: { p->Position.X--; break; }
+				case 'd': { p->Position.X++; break; }
+				case 'D': { p->Position.X++; break; }
+				case VK_RIGHT: { p->Position.X++; break; }
+				case 's': { p->Position.Y++; break; }
+				case 'S': { p->Position.Y++; break; }
+				case VK_DOWN: { p->Position.Y++; break; }
+				case 'w': { p->Position.Y--; break; }
+				case 'W': { p->Position.Y--; break; }
+				case VK_UP: { p->Position.Y--; break; }
 				default: break;
 				}
 			}

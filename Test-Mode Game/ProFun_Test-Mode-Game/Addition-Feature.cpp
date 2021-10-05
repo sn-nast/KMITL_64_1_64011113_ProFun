@@ -1,7 +1,7 @@
 #include "Addition-Feature.h"
 #include "main.h"
 
-void setFontSize(int a, int b){
+void setFontSize(int a, int b) {
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
     PCONSOLE_FONT_INFOEX lpConsoleCurrentFontEx = new CONSOLE_FONT_INFOEX();
     lpConsoleCurrentFontEx->cbSize = sizeof(CONSOLE_FONT_INFOEX);
