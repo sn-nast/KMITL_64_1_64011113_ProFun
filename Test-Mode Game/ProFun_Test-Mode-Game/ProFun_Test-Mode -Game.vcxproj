@@ -162,9 +162,6 @@
     <ClInclude Include="Control.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Feature-Move.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
