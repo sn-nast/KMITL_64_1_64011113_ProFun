@@ -3,9 +3,6 @@
 
 # Folder
 /[Dd]ebug/
-**/.vs/
-
-
 
 # User-specific files
 *.suo

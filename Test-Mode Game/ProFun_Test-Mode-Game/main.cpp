@@ -21,7 +21,10 @@ DWORD numEventsRead = 0;
 Player playerMe, * P_playerMe, Newplay;
 _Map Map[5];
 
+_Object Wall_1, Wall_2, Obj_Potion;
 
+
+extern char m;
 int main() {
 	srand(time_t(NULL));
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -35,6 +38,9 @@ int main() {
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 30;
 
+	//Wall_1 = { '#', NORMAL_ATTIBUTE };
+	//Obj_Potion = { '#', NORMAL_ATTIBUTE };
+
 
 	setupBomb(&playerMe);
 	setMode();
@@ -42,11 +48,11 @@ int main() {
 	while (playStatus) {
 		// Input Keyboard & Mouse events
 		//gotoxy(38, 100);
-		printf_s("(%d, %d)", playerMe.Position.X, playerMe.Position.Y);
+		//printf_s("(%d, %d)", playerMe.Position.X, playerMe.Position.Y);
 
 		moveControl(&playerMe);
 		clearBuffer();
-		planMap1();
+		//planMap1();
 		dropBomb(&playerMe);
 		checkBomb(&playerMe);
 		showBomb(&playerMe);

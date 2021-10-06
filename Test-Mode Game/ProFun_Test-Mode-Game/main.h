@@ -5,6 +5,11 @@
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 40
+#define MAP_WIDTH 96
+#define MAP_HEIGHT 32
+
+//const char SHARP_SYM '#'
+//const char POTION_ 'P';
 
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
@@ -33,6 +38,8 @@ const short LEFT_ARROW_2 = 27;
 const short UP_ARROW_2 = 24;
 const short DOWN_ARROW_2 = 25;
 
+FILE* F;
+
 struct _Bomb {
 	COORD Position[15];
 	int Amount;
@@ -60,10 +67,18 @@ struct Player {
 struct _Map{
 	const int Width = 96;
 	const int Height = 32;
-	char Format[32][80];
-	unsigned int Attribute; 
+	char Format[32][96];
+	unsigned int State[32][96];
+	unsigned int Attribute[32][96];
 };
 
-//struct List {
-//	_Map Map;
-//};
+typedef struct {
+	const char Symbol;
+	const int Attribute;
+}_Object;
+
+_Object Wall_1;
+Wall_1 = { '#', NORMAL_ATTIBUTE };
+Obj_Potion = { '#', NORMAL_ATTIBUTE };
+
+
