@@ -1,8 +1,0 @@
-﻿  Map.cpp
-  LINK : 0 new modules and 1 (out of 53) modules have changed since prior linking
-  Generating non-SAFESEH image.
-  Starting pass 2
-       Map.obj
-       MSVCRTD.lib(loadcfg.obj)
-  Finished pass 2
-  ProFun_Test-Mode -Game.vcxproj -> D:\A My Project\KMITL_64_ProFun\Test-Mode Game\ProFun_Test-Mode-Game\Debug\ProFun_Test-Mode-Game.exe
