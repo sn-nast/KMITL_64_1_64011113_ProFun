@@ -1,2 +1,0 @@
-
-            if (badNumNow - c <= n) {
