@@ -19,11 +19,14 @@ DWORD numEvents = 0;
 DWORD numEventsRead = 0;
 
 Player playerMe, * P_playerMe, Newplay;
-_Map Map[5];
+Map nMap[5];
 
-_Object Wall_1, Wall_2, Obj_Potion;
-
-
+_Object
+	Space = { ' ', NORMAL_ATTIBUTE },
+	Wall_1 = { SYM_SHARP, 9 },
+	Wall_2 = { '|', 10 },
+	Potion = { SYM_POTION, 9 }
+;
 extern char m;
 int main() {
 	srand(time_t(NULL));
@@ -38,30 +41,25 @@ int main() {
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 30;
 
-	//Wall_1 = { '#', NORMAL_ATTIBUTE };
-	//Obj_Potion = { '#', NORMAL_ATTIBUTE };
-
-
+	//printf_s("%d", playerMe.Lenght);
 	setupBomb(&playerMe);
 	setMode();
 
 	while (playStatus) {
 		// Input Keyboard & Mouse events
-		//gotoxy(38, 100);
-		//printf_s("(%d, %d)", playerMe.Position.X, playerMe.Position.Y);
-
-		moveControl(&playerMe);
+		moveControl(&playerMe, &nMap[0]);
 		clearBuffer();
-		//planMap1();
-		dropBomb(&playerMe);
-		checkBomb(&playerMe);
+
+		setupMap(&nMap[0], 1);
+		dropBomb(&playerMe, &nMap[0]);
+		checkBomb(&playerMe, &nMap[0]);
 		showBomb(&playerMe);
 		playerMove(&playerMe);
-		putBuffer(35, 100, playerMe.Position.X, NORMAL_ATTIBUTE);
+		putBuffer(35, 100, (char)playerMe.Position.X, NORMAL_ATTIBUTE);
 
 		displayBuffer();
 
-		Sleep(100);
+		Sleep(150);
 	}
 	return 0;
 }

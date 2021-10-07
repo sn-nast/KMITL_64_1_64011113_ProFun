@@ -1,6 +1,7 @@
 #include "Move.h"
 #include "main.h"
 #include "Buffer.h"
+#include "Map.h"
 
 void playerMove(Player* p) {
 	int Len = p->Lenght;
@@ -36,5 +37,3 @@ void playerMove(Player* p) {
 		putBuffer(pos.X, pos.Y, Arrow, p->Attribute);
 	}
 }
-
-//void screenMove()

@@ -2,17 +2,17 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 40
 #define MAP_WIDTH 96
 #define MAP_HEIGHT 32
 
-//const char SHARP_SYM '#'
-//const char POTION_ 'P';
-
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
+
+const int MAP_SPACE = 0;
 
 extern HANDLE wHnd;
 extern HANDLE rHnd;
@@ -38,19 +38,22 @@ const short LEFT_ARROW_2 = 27;
 const short UP_ARROW_2 = 24;
 const short DOWN_ARROW_2 = 25;
 
-FILE* F;
+const short LEFT = 1;
+const short RIGHT = 2;
+const short DOWN = 3;
+const short UP = 4;
 
-struct _Bomb {
+
+typedef struct _Bomb{
 	COORD Position[15];
-	int Amount;
-	int Drop;
-	int Power = 1;
+	int Amount, Drop;
+	int Power = 3;
 	int State[15];
 	int Time = 50;
 	int CountDn[15];
-};
+}Bomb;
 
-struct Player {
+typedef struct _Player {
 	char Format[5];
 	unsigned int Lenght;
 	unsigned int Height;
@@ -61,24 +64,21 @@ struct Player {
 	unsigned int SpeedX = 1;
 	unsigned int SpeedY = 1;
 	unsigned int Attribute;
-	_Bomb Bomb;
+	Bomb Bomb;
+}Player;
+
+struct _Object {
+	char Format;
+	int Attribute;
 };
 
-struct _Map{
-	const int Width = 96;
-	const int Height = 32;
-	char Format[32][96];
-	unsigned int State[32][96];
-	unsigned int Attribute[32][96];
-};
+typedef struct _Map {
+	unsigned int State[MAP_HEIGHT][MAP_WIDTH];
+	_Object Object[MAP_HEIGHT][MAP_WIDTH];
+}Map;
 
-typedef struct {
-	const char Symbol;
-	const int Attribute;
-}_Object;
-
-_Object Wall_1;
-Wall_1 = { '#', NORMAL_ATTIBUTE };
-Obj_Potion = { '#', NORMAL_ATTIBUTE };
+const char SYM_SHARP = '#';
+const char SYM_POTION = 'P';
+extern _Object Space, Wall_1, Wall_2, Potion;
 
 
