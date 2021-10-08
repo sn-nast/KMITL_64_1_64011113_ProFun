@@ -1,25 +1,22 @@
 // Level 4
 // 64011113
-/* 63.	จงเขียนโปรแกรม Copy ไฟล์ข้อมูลโดยให้นักศึกษาป้อนข้อมูลของไฟล์ต้นทาง และข้อมูลไฟล์ปลายทาง */
-// Sol 2
+/* 75. จงเขียนโปรแกรมหาค่า x + y โดยรับมาจาก “a.txt” และแสดงใน “b.txt” */
+// Sol 1
 
 #include<stdio.h> 
 
 int main(){
-    FILE *inputFile_ptr, *outputFile_ptr;
-    char inputFile_path[100], outputFile_path[100];
-    // input File path
-    printf("input\t: ");
-    scanf("%[^\n]%*c", inputFile_path);
-    printf("output\t: ");
-    scanf("%[^\n]%*c", outputFile_path);
+    int x, y;
+    FILE *f1, *f2;
 
-    // copy file
-    char ch;
-    inputFile_ptr = fopen(inputFile_path, "r");
-    outputFile_ptr = fopen(outputFile_path, "w"); 
-    while((ch = fgetc(inputFile_ptr)) != EOF) {fputc(ch, outputFile_ptr);}
-    fclose(inputFile_ptr);
-    fclose(outputFile_ptr);
+    f1 = fopen("a.txt", "r");
+    fscanf(f1,"%d %d", &x, &y);
+    printf("%d %d", x, y); // check number
+
+    f2 = fopen("b.txt", "w");
+    fprintf(f2, "%d", x+y);
+
+    fclose(f1);
+    fclose(f2);
     return 0;
 }
