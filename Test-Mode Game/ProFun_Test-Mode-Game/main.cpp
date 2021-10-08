@@ -24,8 +24,9 @@ Map nMap[5];
 _Object
 	Space = { ' ', NORMAL_ATTIBUTE, 0 },
 	Wall_1 = { SYM_SHARP, 9, 1 },
-	Wall_2 = { '|', 10, 2 },
-	Potion = { SYM_POTION, 9 }
+	Wall_2 = { '|', 10, 20 },
+	Potion = { SYM_POTION, 9, 5 },
+	Bomb_burst = {'X', 4, 10}
 ;
 extern char m;
 int main() {
@@ -39,7 +40,7 @@ int main() {
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
-	playerMe.Bomb.Time = 30;
+	playerMe.Bomb.Time = 10;
 
 	//printf_s("%d", playerMe.Lenght);
 	setupBomb(&playerMe);

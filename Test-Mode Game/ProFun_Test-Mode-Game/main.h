@@ -82,6 +82,6 @@ typedef struct _Map {
 
 const char SYM_SHARP = '#';
 const char SYM_POTION = 'P';
-extern _Object Space, Wall_1, Wall_2, Potion;
+extern _Object Space, Wall_1, Wall_2, Potion, Bomb_burst;
 
 
