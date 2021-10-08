@@ -41,17 +41,15 @@ int main() {
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 10;
+	playerMe.SpeedX = 5;
 
 	//printf_s("%d", playerMe.Lenght);
 	setupBomb(&playerMe);
 	setMode();
 
-	//while()
+	//while() // เลือก map
 	setupMap(&nMap[0], 1);
-	//playerMove(&playerMe);
 
-	//displayBuffer();
-	//Sleep(5000);
 	while (playStatus) {
 		// Input Keyboard & Mouse events
 		moveControl(&playerMe, &nMap[0]);
@@ -68,7 +66,6 @@ int main() {
 		gotoxy(MAP_WIDTH + 10, 0);
 		printf_s("HELLO");
 		Sleep(150);
-		//Sleep(5000);
 	}
 	return 0;
 }

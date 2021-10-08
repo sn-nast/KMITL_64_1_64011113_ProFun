@@ -78,26 +78,29 @@ void checkControl(int Direction, Player* p, Map* m) {
 	COORD* pos = &p->Position;
 	int Len = p->Lenght;
 	if (Direction == LEFT) {
-		if (m->State[pos->Y][ pos->X - 1] == MAP_SPACE) {
+		if (m->State[pos->Y][ pos->X - 1] == Space.NormalState) {
 			pos->X -= p->SpeedX;
 		}
 	}
-	else if (Direction == RIGHT) {
-		if (m->State[pos->Y][pos->X + Len + p->SpeedX - 1] == MAP_SPACE) {
-			pos->X += p->SpeedX;
-		}
-	}
+	//else if (Direction == RIGHT) {
+	//	if (m->State[pos->Y][pos->X + Len + p->SpeedX - 1] == Space.NormalState) {
+	//		for (int i = 1; i <= p->SpeedX - 1; i++) {
+	//			if (m->State[pos->Y][pos->X + Len + i] != Space.NormalState) { return; }
+	//		}
+	//		pos->X += p->SpeedX;
+	//	}
+	//}
 	else if (Direction == DOWN) {
 		int c = 0;
 		for (int i = 0; i < Len; i++) {
-			if (m->State[pos->Y + p->SpeedY][pos->X + i] == MAP_SPACE) { c++; }
+			if (m->State[pos->Y + p->SpeedY][pos->X + i] == Space.NormalState) { c++; }
 		}
 		if (c == Len) { pos->Y += p->SpeedY; }
 	}
 	else if (Direction == UP) {
 		int c = 0;
 		for (int i = 0; i < Len; i++) {
-			if (m->State[pos->Y - p->SpeedY][pos->X + i] == MAP_SPACE) { c++; }
+			if (m->State[pos->Y - p->SpeedY][pos->X + i] == Space.NormalState) { c++; }
 		}
 		if (c == Len) { pos->Y -= p->SpeedY; }
 	}
