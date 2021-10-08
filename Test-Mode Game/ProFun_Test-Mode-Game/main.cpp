@@ -22,9 +22,9 @@ Player playerMe, * P_playerMe, Newplay;
 Map nMap[5];
 
 _Object
-	Space = { ' ', NORMAL_ATTIBUTE },
-	Wall_1 = { SYM_SHARP, 9 },
-	Wall_2 = { '|', 10 },
+	Space = { ' ', NORMAL_ATTIBUTE, 0 },
+	Wall_1 = { SYM_SHARP, 9, 1 },
+	Wall_2 = { '|', 10, 2 },
 	Potion = { SYM_POTION, 9 }
 ;
 extern char m;
@@ -35,7 +35,7 @@ int main() {
 	strcpy_s(playerMe.Format, "[O]");
 
 	// Setup 
-	playerMe.Position = { 5, 5 };
+	playerMe.Position = { 18, 14 };
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
@@ -45,21 +45,29 @@ int main() {
 	setupBomb(&playerMe);
 	setMode();
 
+	//while()
+	setupMap(&nMap[0], 1);
+	//playerMove(&playerMe);
+
+	//displayBuffer();
+	//Sleep(5000);
 	while (playStatus) {
 		// Input Keyboard & Mouse events
 		moveControl(&playerMe, &nMap[0]);
 		clearBuffer();
 
-		setupMap(&nMap[0], 1);
+		changeStateMap(&nMap[0]);
 		dropBomb(&playerMe, &nMap[0]);
 		checkBomb(&playerMe, &nMap[0]);
 		showBomb(&playerMe);
 		playerMove(&playerMe);
-		putBuffer(35, 100, (char)playerMe.Position.X, NORMAL_ATTIBUTE);
 
 		displayBuffer();
 
+		gotoxy(MAP_WIDTH + 10, 0);
+		printf_s("HELLO");
 		Sleep(150);
+		//Sleep(5000);
 	}
 	return 0;
 }

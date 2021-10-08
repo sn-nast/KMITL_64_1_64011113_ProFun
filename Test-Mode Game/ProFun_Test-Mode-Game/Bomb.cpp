@@ -80,8 +80,11 @@ void burstBomb(Player S, int i, Map* m) {
 	int c = S.Bomb.Power;
 	for (int c1 = -c; c1 <= c; c1++) {
 		putBuffer(pos.X + c1, pos.Y, 'X', NORMAL_ATTIBUTE);
+		m->State[pos.Y][pos.X + c1] = NOW_BOMB;
 	}
 	for (int c2 = -c; c2 <= c; c2++) {
 		putBuffer(pos.X, pos.Y + c2, 'X', NORMAL_ATTIBUTE);
+		m->State[pos.Y + c2][pos.X] = NOW_BOMB;
+		m->Object[pos.Y + c2][pos.X] = { Space.Format, Space.Attribute };
 	}
 }

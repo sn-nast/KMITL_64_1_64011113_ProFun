@@ -11,6 +11,7 @@
 
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
+const short NOW_BOMB = 10;
 
 const int MAP_SPACE = 0;
 
@@ -65,11 +66,13 @@ typedef struct _Player {
 	unsigned int SpeedY = 1;
 	unsigned int Attribute;
 	Bomb Bomb;
+	unsigned int Live = 1;
 }Player;
 
 struct _Object {
 	char Format;
 	int Attribute;
+	int NormalState;
 };
 
 typedef struct _Map {

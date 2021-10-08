@@ -1,6 +1,7 @@
 #include"Control.h"
 #include "main.h"
 #include "Buffer.h"
+
 void moveControl(Player* p, Map* m) {
 	GetNumberOfConsoleInputEvents(rHnd, &numEvents);
 	if (numEvents != 0) {
