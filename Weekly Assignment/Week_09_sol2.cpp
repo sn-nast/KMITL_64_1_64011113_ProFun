@@ -19,7 +19,7 @@ int main(){
     strcpy(inputFile[1].path, "c.txt");
 
     // Add input file path
-    // strcpy(inputFile[0].path, "....") ....
+    // strcpy(inputFile[i].path, "....") ....
 
     // output file path
     strcpy(outputFile.path, "b.txt");
