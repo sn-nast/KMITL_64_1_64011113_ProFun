@@ -3,12 +3,13 @@
 #include "Buffer.h"
 #include "Map.h"
 
-void playerMove(Player* p) {
+void playerMove(Player* p, Map* m) {
 	int Len = p->Lenght;
+	COORD* pos = &p->Position;
 	for (int i = 0; i < Len; i++) {
 		putBuffer((p->Position.X) + i, p->Position.Y, p->Format[i], p->Attribute);
 	}
-
+	//if (m->State[pos->Y][pos->X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
 	// Direction arrow
 	short Arrow;
 	//if ((p->Direction.X != Space.Format) || (p->Direction.Y != Space.Format)) {
@@ -36,8 +37,8 @@ void playerMove(Player* p) {
 			Arrow = UP_ARROW_2;
 		}
 		else { return; }
-		COORD pos = { p->Direction.X, p->Direction.Y };
-		putBuffer(pos.X, pos.Y, Arrow, p->Attribute);
+		COORD pos_D = { p->Direction.X, p->Direction.Y };
+		putBuffer(pos_D.X, pos_D.Y, Arrow, p->Attribute);
 	//}
 }
 

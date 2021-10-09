@@ -62,7 +62,7 @@ int main() {
 	//while() // เลือก map
 	setupMap(&nMap[0], 1);
 
-	while (playStatus) {
+	while (playStatus /*&& playerMe.Life >= 0*/) {
 		// Input Keyboard & Mouse events
 		moveControl(&playerMe, &nMap[0]);
 		clearBuffer();
@@ -71,7 +71,8 @@ int main() {
 		dropBomb(&playerMe, &nMap[0]);
 		checkBomb(&playerMe, &nMap[0]);
 		showBomb(&playerMe);
-		playerMove(&playerMe);
+
+		playerMove(&playerMe, &nMap[0]);
 
 		displayBuffer();
 
@@ -80,5 +81,10 @@ int main() {
 		//Summary();
 		Sleep(150);
 	}
+
+	clearBuffer();
+	displayBuffer();
+	gotoxy(0, 0);
+	printf_s("GAME OVER!!!");
 	return 0;
 }

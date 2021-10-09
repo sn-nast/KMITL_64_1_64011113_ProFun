@@ -69,7 +69,7 @@ typedef struct _Player {
 	unsigned int SpeedY = 1;
 	unsigned int Attribute;
 	Bomb Bomb;
-	unsigned int Live = 1;
+	int Life = 1;
 } Player;
 
 struct _Object {

@@ -53,7 +53,7 @@ void checkBomb(Player* p, Map* m) {
 			if (p->Bomb.CountDn[c] == 0) {
 				p->Bomb.State[c] = 0;
 				p->Bomb.CountDn[c] = p->Bomb.Time;
-				burstBomb(*p, c, m);
+				burstBomb(p, c, m);
 				continue;
 			}
 			p->Bomb.CountDn[c]--;
@@ -77,9 +77,9 @@ void showBomb(COORD pos) {
 	putBuffer(pos.X, pos.Y, Bomb_Nm.Format , Bomb_Nm.Attribute);
 }
 
-void burstBomb(Player P, int i, Map* m) {
-	COORD pos = { P.Bomb.Position[i].X , P.Bomb.Position[i].Y };
-	int c = P.Bomb.Power;
+void burstBomb(Player* p, int i, Map* m) {
+	COORD pos = { p->Bomb.Position[i].X , p->Bomb.Position[i].Y };
+	int c = p->Bomb.Power;
 	for (int c1 = 0; c1 >= -c; c1--) {
 		if (m->State[pos.Y][pos.X + c1] == Wall_2.NormalState) { break; }
 		putBuffer(pos.X + c1, pos.Y, Bomb_burst.Format, Bomb_burst.Attribute);
@@ -106,4 +106,6 @@ void burstBomb(Player P, int i, Map* m) {
 		m->LastState[pos.Y + c2][pos.X] = m->State[pos.Y + c2][pos.X];
 		m->State[pos.Y + c2][pos.X] = Bomb_burst.NormalState;
 	}
+	int Len = p->Lenght;
+	if (m->State[p->Position.Y][p->Position.X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
 }
