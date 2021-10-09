@@ -77,6 +77,7 @@ int main() {
 
 		gotoxy(MAP_WIDTH + 10, 0);
 		printf_s("HELLO");
+		//Summary();
 		Sleep(150);
 	}
 	return 0;

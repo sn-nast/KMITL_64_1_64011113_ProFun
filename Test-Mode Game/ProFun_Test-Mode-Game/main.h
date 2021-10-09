@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <stdlib.h>
+#include "Buffer.h"
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 40
@@ -49,12 +50,12 @@ const short UP = 4;
 
 typedef struct _Bomb{
 	COORD Position[15];
-	int Amount, Drop;
+	int Amount = 1, Drop = 0;
 	int Power = 3;
 	int State[15];
 	int Time = 50;
 	int CountDn[15];
-}Bomb;
+} Bomb;
 
 typedef struct _Player {
 	char Format[5];
@@ -69,7 +70,7 @@ typedef struct _Player {
 	unsigned int Attribute;
 	Bomb Bomb;
 	unsigned int Live = 1;
-}Player;
+} Player;
 
 struct _Object {
 	char Format;
@@ -81,13 +82,9 @@ typedef struct _Map {
 	unsigned int State[MAP_HEIGHT][MAP_WIDTH];
 	unsigned int LastState[MAP_HEIGHT][MAP_WIDTH];
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
-}Map;
+} Map;
 
 const char SYM_SHARP = '#';
 const char SYM_POTION = 'P';
 extern _Object Space, Wall_1, Wall_2, Bomb_Nm, Bomb_burst, Life, Potion;
-
-//void Summary() {
-//	;
-//}
 

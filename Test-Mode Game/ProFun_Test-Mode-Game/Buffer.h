@@ -19,3 +19,5 @@ void setcolor(int fg, int bg);
 char cursor(int x, int y);
 
 char cursorBuffer(COORD pos);
+
+void Summary();
