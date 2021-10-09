@@ -5,5 +5,5 @@ void setupBomb(Player* p);
 void dropBomb(Player* p, Map* m);
 void checkBomb(Player* p, Map* m);
 void showBomb(Player* p);
-void showBomb(COORD pos, char bomb);
+void showBomb(COORD pos);
 void burstBomb(Player S, int i, Map* m);

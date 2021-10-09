@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
+#include <stdlib.h>
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 40
@@ -77,11 +79,15 @@ struct _Object {
 
 typedef struct _Map {
 	unsigned int State[MAP_HEIGHT][MAP_WIDTH];
+	unsigned int LastState[MAP_HEIGHT][MAP_WIDTH];
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
 }Map;
 
 const char SYM_SHARP = '#';
 const char SYM_POTION = 'P';
-extern _Object Space, Wall_1, Wall_2, Potion, Bomb_burst;
+extern _Object Space, Wall_1, Wall_2, Bomb_Nm, Bomb_burst, Life, Potion;
 
+//void Summary() {
+//	;
+//}
 

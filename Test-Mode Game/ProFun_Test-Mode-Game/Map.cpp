@@ -1,6 +1,7 @@
 ﻿#include "Map.h"
 #include "main.h"
 #include "Buffer.h"
+#include "Object.h"
 
 void setupMap(Map* m, int n_map) {
 	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
@@ -75,12 +76,18 @@ char planMap(int n, COORD pos) {
 void changeStateMap(Map* m) {
 	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
 		for (short pX = 0; pX < MAP_WIDTH; pX++) {
-			if (m->State[pY][pX] == Bomb_burst.NormalState) { 
-				m->State[pY][pX] = Space.NormalState;
-				m->Object[pY][pX] = { Space.Format, Space.Attribute }; 
+			if (m->State[pY][pX] == Bomb_burst.NormalState) {
+				if (m->LastState[pY][pX] != Space.NormalState &&
+					m->LastState[pY][pX] != Bomb_Nm.NormalState) { 
+					dropObject(m, { pX, pY }); }
+				else {
+					m->State[pY][pX] = Space.NormalState;
+					m->Object[pY][pX] = { Space.Format, Space.Attribute };
+				}
 			}
 			_Object* Ob = &m->Object[pY][pX];
 			putBuffer(pX, pY, Ob->Format, Ob->Attribute);
 		}
 	}
 }
+

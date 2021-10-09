@@ -4,6 +4,8 @@
 #include "Control.h"
 #include "Bomb.h"
 #include "Map.h" 
+#include "Object.h"
+
 
 HANDLE wHnd;
 HANDLE rHnd;
@@ -21,26 +23,36 @@ DWORD numEventsRead = 0;
 Player playerMe, * P_playerMe, Newplay;
 Map nMap[5];
 
+const int CAN_KEEP = 12;
+const int CAN_DESTROY = 1;
+const int CANt_DESTROY = 2;
+const int BOMB_SHOW = 7;
+const int BOMB_BURST = 10;
+
 _Object
-	Space = { ' ', NORMAL_ATTIBUTE, 0 },
-	Wall_1 = { SYM_SHARP, 9, 1 },
-	Wall_2 = { '|', 10, 20 },
-	Potion = { SYM_POTION, 9, 5 },
-	Bomb_burst = {'X', 4, 10}
+	Space = { ' ', NORMAL_ATTIBUTE, 0},
+	Wall_1 = { SYM_SHARP, 9, CAN_DESTROY },
+	Wall_2 = { '|', 10, CANt_DESTROY },
+	Bomb_Nm = {'@', 7, BOMB_SHOW},
+	Bomb_burst = {'X', 4, BOMB_BURST},
+	Life = { 3, 6, CAN_KEEP },
+	Potion = { SYM_POTION, 11, CAN_KEEP }
 ;
-extern char m;
+
 int main() {
-	srand(time_t(NULL));
+	srand(time(NULL));
+
+	printf_s("\n");
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
 	setCursor(0);
-	strcpy_s(playerMe.Format, "[O]");
 
 	// Setup 
+	strcpy_s(playerMe.Format, "[O]");
 	playerMe.Position = { 18, 14 };
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
-	playerMe.Bomb.Time = 10;
+	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 1;
 
 	//printf_s("%d", playerMe.Lenght);
