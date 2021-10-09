@@ -75,7 +75,7 @@ char planMap(int n, COORD pos) {
 void changeStateMap(Map* m) {
 	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
 		for (short pX = 0; pX < MAP_WIDTH; pX++) {
-			if (m->State[pY][pX] == NOW_BOMB) { 
+			if (m->State[pY][pX] == Bomb_burst.NormalState) { 
 				m->State[pY][pX] = Space.NormalState;
 				m->Object[pY][pX] = { Space.Format, Space.Attribute }; 
 			}

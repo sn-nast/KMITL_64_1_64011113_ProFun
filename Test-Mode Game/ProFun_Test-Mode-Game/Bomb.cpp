@@ -15,8 +15,8 @@ void setupBomb(Player* p) {
 void dropBomb(Player* p, Map* m) {
 	COORD pos_P = p->Position;
 	COORD posL_P = p->Last_position;
-	COORD pos_D = { p->Direction.X, p->Direction.Y };
-	COORD posL_D = p->Last_Direction;
+	//COORD pos_D = { p->Direction.X, p->Direction.Y };
+	//COORD posL_D = p->Last_Direction;
 
 	int Drop = p->Bomb.Drop;
 	int Len = p->Lenght;
@@ -35,8 +35,8 @@ void dropBomb(Player* p, Map* m) {
 
 	for (int c = 0; c < size; c++) {
 		if (p->Bomb.State[c] == 1 /*&& (posL_D.X != pos_D.X || posL_D.Y != pos_D.Y)*/) {
-			p->Bomb.Position[c].X = pos_D.X;
-			p->Bomb.Position[c].Y = pos_D.Y;
+			p->Bomb.Position[c].X = pos_P.X + Len / 2;
+			p->Bomb.Position[c].Y = pos_P.Y;
 			COORD pos_B = { p->Bomb.Position[c].X, p->Bomb.Position[c].Y };
 			p->Bomb.State[c] = 2;
 			p->Bomb.Drop--;

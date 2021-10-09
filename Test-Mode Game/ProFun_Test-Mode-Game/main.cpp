@@ -41,7 +41,7 @@ int main() {
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 10;
-	playerMe.SpeedX = 5;
+	playerMe.SpeedX = 1;
 
 	//printf_s("%d", playerMe.Lenght);
 	setupBomb(&playerMe);
