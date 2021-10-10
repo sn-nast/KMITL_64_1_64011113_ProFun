@@ -107,5 +107,5 @@ void burstBomb(Player* p, int i, Map* m) {
 		m->State[pos.Y + c2][pos.X] = Bomb_burst.NormalState;
 	}
 	int Len = p->Lenght;
-	if (m->State[p->Position.Y][p->Position.X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
+	//if (m->State[p->Position.Y][p->Position.X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
 }

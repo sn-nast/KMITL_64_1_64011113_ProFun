@@ -23,14 +23,8 @@ DWORD numEventsRead = 0;
 Player playerMe, * P_playerMe, Newplay;
 Map nMap[5];
 
-const int CAN_KEEP = 12;
-const int CAN_DESTROY = 1;
-const int CANt_DESTROY = 2;
-const int BOMB_SHOW = 7;
-const int BOMB_BURST = 10;
-
 _Object
-	Space = { ' ', NORMAL_ATTIBUTE, 0},
+	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE},
 	Wall_1 = { SYM_SHARP, 9, CAN_DESTROY },
 	Wall_2 = { '|', 10, CANt_DESTROY },
 	Bomb_Nm = {'@', 7, BOMB_SHOW},

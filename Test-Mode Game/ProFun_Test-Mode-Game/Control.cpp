@@ -10,7 +10,7 @@ void moveControl(Player* p, Map* m) {
 
 		for (DWORD i = 0; i < numEventsRead; ++i) {
 			if (eventBuffer[i].EventType == KEY_EVENT &&
-				eventBuffer[i].Event.KeyEvent.bKeyDown == true) {
+				eventBuffer[i].Event.KeyEvent.bKeyDown == TRUE) {
 				char KB_Char = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
 				WORD KB_keycode = eventBuffer[i].Event.KeyEvent.wVirtualKeyCode;
 				if (KB_keycode == VK_ESCAPE) { 
@@ -76,33 +76,38 @@ void moveControl(Player* p, Map* m) {
 
 void checkControl(int Direction, Player* p, Map* m) {
 	COORD* pos = &p->Position;
+	unsigned int* State;
 	int Len = p->Lenght;
 	if (Direction == LEFT) {
-		if (m->State[pos->Y][ pos->X - 1] == Space.NormalState ||
-			m->State[pos->Y][pos->X - 1] == Bomb_Nm.NormalState ) {
-			pos->X -= p->SpeedX;
-		}
+		State = &m->State[pos->Y][pos->X - 1];
+		if (checkStateControl(*State) == 1) { pos->X -= p->SpeedX; }
 	}
 	else if (Direction == RIGHT) {
-		if (m->State[pos->Y][pos->X + Len + p->SpeedX - 1] == Space.NormalState ||
-			m->State[pos->Y][pos->X + Len + p->SpeedX - 1] == Bomb_Nm.NormalState) {
-			pos->X += p->SpeedX;
-			}
-		}
+		State = &m->State[pos->Y][pos->X + Len + p->SpeedX - 1];
+		if (checkStateControl(*State) == 1) { pos->X += p->SpeedX; }
+	}
 	else if (Direction == DOWN) {
 		int c = 0;
 		for (int i = 0; i < Len; i++) {
-			if (m->State[pos->Y + p->SpeedY][pos->X + i] == Space.NormalState ||
-				m->State[pos->Y + p->SpeedY][pos->X + i] == Bomb_Nm.NormalState) { c++; }
+			State = &m->State[pos->Y + p->SpeedY][pos->X + i];
+			if (checkStateControl(*State) == 1) { c++; }
 		}
 		if (c == Len) { pos->Y += p->SpeedY; }
 	}
 	else if (Direction == UP) {
 		int c = 0;
 		for (int i = 0; i < Len; i++) {
-			if (m->State[pos->Y - p->SpeedY][pos->X + i] == Space.NormalState || 
-				m->State[pos->Y - p->SpeedY][pos->X + i] == Bomb_Nm.NormalState) { c++; }
+			State = &m->State[pos->Y - p->SpeedY][pos->X + i];
+			if (checkStateControl(*State) == 1) { c++; }
 		}
 		if (c == Len) { pos->Y -= p->SpeedY; }
 	}
+}
+
+int checkStateControl(unsigned int St) {
+	if (St == Space.NormalState ||
+		St == Bomb_Nm.NormalState ||
+		St == CAN_KEEP)
+		{ return 1; }
+	else return 0;
 }

@@ -12,12 +12,40 @@
 #define MAP_WIDTH 96
 #define MAP_HEIGHT 32
 
+// Const of Bomb
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
 const short NOW_BOMB = 10;
 
+// Const of State
+const int CAN_KEEP = 12;
+const int CAN_DESTROY = 1;
+const int CANt_DESTROY = 2;
+const int BOMB_SHOW = 7;
+const int BOMB_BURST = 10;
 const int MAP_SPACE = 0;
 
+// Const of Object
+const char SYM_SHARP = '#';
+const char SYM_POTION = 'P';
+
+// Const of Arrow
+const short LEFT = 1;
+const short RIGHT = 2;
+const short DOWN = 3;
+const short UP = 4;
+// Type of Arrow
+	const short RIGHT_ARROW_1 = 16;
+	const short LEFT_ARROW_1 = 17;
+	const short UP_ARROW_1 = 30;
+	const short DOWN_ARROW_1 = 31;
+	
+	const short RIGHT_ARROW_2 = 26;
+	const short LEFT_ARROW_2 = 27;
+	const short UP_ARROW_2 = 24;
+	const short DOWN_ARROW_2 = 25;
+	
+// Extern from main
 extern HANDLE wHnd;
 extern HANDLE rHnd;
 extern DWORD fdwMode;
@@ -32,22 +60,7 @@ extern DWORD numEventsRead;
 
 extern bool playStatus;
 
-const short RIGHT_ARROW_1 = 16;
-const short LEFT_ARROW_1 = 17;
-const short UP_ARROW_1 = 30;
-const short DOWN_ARROW_1 = 31;
-
-const short RIGHT_ARROW_2 = 26;
-const short LEFT_ARROW_2 = 27;
-const short UP_ARROW_2 = 24;
-const short DOWN_ARROW_2 = 25;
-
-const short LEFT = 1;
-const short RIGHT = 2;
-const short DOWN = 3;
-const short UP = 4;
-
-
+//Struct form
 typedef struct _Bomb{
 	COORD Position[15];
 	int Amount = 1, Drop = 0;
@@ -84,7 +97,5 @@ typedef struct _Map {
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
 } Map;
 
-const char SYM_SHARP = '#';
-const char SYM_POTION = 'P';
+// Extern Object
 extern _Object Space, Wall_1, Wall_2, Bomb_Nm, Bomb_burst, Life, Potion;
-

@@ -9,7 +9,6 @@ void playerMove(Player* p, Map* m) {
 	for (int i = 0; i < Len; i++) {
 		putBuffer((p->Position.X) + i, p->Position.Y, p->Format[i], p->Attribute);
 	}
-	//if (m->State[pos->Y][pos->X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
 	// Direction arrow
 	short Arrow;
 	//if ((p->Direction.X != Space.Format) || (p->Direction.Y != Space.Format)) {
