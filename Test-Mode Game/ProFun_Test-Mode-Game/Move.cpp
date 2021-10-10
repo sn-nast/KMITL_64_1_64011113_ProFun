@@ -2,6 +2,7 @@
 #include "main.h"
 #include "Buffer.h"
 #include "Map.h"
+#include "Object.h"
 
 void playerMove(Player* p, Map* m) {
 	int Len = p->Lenght;
@@ -39,5 +40,6 @@ void playerMove(Player* p, Map* m) {
 		COORD pos_D = { p->Direction.X, p->Direction.Y };
 		putBuffer(pos_D.X, pos_D.Y, Arrow, p->Attribute);
 	//}
+		keepObject(p, m);
 }
 

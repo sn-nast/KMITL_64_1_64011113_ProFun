@@ -76,7 +76,7 @@ int main() {
 		Sleep(150);
 	}
 
-	clearBuffer();
+	//clearBuffer();
 	displayBuffer();
 	gotoxy(0, 0);
 	printf_s("GAME OVER!!!");

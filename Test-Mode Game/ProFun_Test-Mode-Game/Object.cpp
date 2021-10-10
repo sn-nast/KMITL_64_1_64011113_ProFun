@@ -34,9 +34,25 @@ void dropObject(Map* m, COORD pos) {
 	}
 }
 
-//void keepObject(Player* p, Map* m) {
-//	COORD* posP = &p->Position;
-//
-//	
-//	;
-//}
+void keepObject(Player* p, Map* m) {
+	unsigned int Len = p->Lenght;
+	COORD* posP = &p->Position;
+	COORD posOb = { posP->X + Len / 2, posP->Y };
+	if (m->State[posOb.Y][posOb.X] == CAN_KEEP) {
+		char Format = m->Object[posOb.Y][posOb.X].Format;
+
+		if (Format == Life.Format) {
+			removeObject(m, posOb);
+			p->Life++;
+		}
+		else if (Format == Potion.Format) {
+			removeObject(m, posOb);
+			p->Bomb.Power++;
+		}
+	}
+}
+
+void removeObject(Map* m, COORD pos) {
+	m->State[pos.Y][pos.X] = Space.NormalState;
+	m->Object[pos.Y][pos.X] = { Space.Format, Space.Attribute };
+}
