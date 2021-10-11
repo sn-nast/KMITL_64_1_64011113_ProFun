@@ -47,7 +47,8 @@ void keepObject(Player* p, Map* m) {
 		}
 		else if (Format == Potion.Format) {
 			removeObject(m, posOb);
-			p->Bomb.Power++;
+			p->Bomb.PowerX++;
+			p->Bomb.PowerY++;
 		}
 	}
 }

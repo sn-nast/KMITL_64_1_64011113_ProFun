@@ -31,11 +31,11 @@ char planMap(int n, COORD pos) {
 	if (n == 1) {
 		char map1[MAP_HEIGHT][MAP_WIDTH] = {
 			{"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"},
+			{"||               #    #                                                            ||"},
+			{"||               #####                                                             ||"},
+			{"||               #####                                                             ||"},
 			{"||               #   #                                                             ||"},
-			{"||               #   #                                                             ||"},
-			{"||               #   #                                                             ||"},
-			{"||               #   #                                                             ||"},
-			{"||               #   #                                                             ||"},
+			{"||               # ###                                                             ||"},
 			{"||               #   #                                                             ||"},
 			{"||               #   #                                                             ||"},
 			{"||               #   #                                                             ||"},
@@ -91,3 +91,16 @@ void changeStateMap(Map* m) {
 	}
 }
 
+void Summary(Player* p, COORD pos) {
+	setcolor(7, 1);
+	gotoxy(pos.X, pos.Y + 1);
+	printf_s("Player name\t: %s\n", p->Name);
+	gotoxy(pos.X, pos.Y + 2);
+	printf_s("Power in X\t: %d", p->Bomb.PowerX);
+	gotoxy(pos.X, pos.Y + 3);
+	printf_s("Power in Y\t: %d", p->Bomb.PowerY);
+	gotoxy(pos.X, pos.Y + 4);
+	printf_s("Life\t: %d", p->Life);
+	gotoxy(pos.X, pos.Y + 5);
+	printf_s("HAND\t: ");
+}

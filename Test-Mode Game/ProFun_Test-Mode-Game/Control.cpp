@@ -107,6 +107,7 @@ void checkControl(int Direction, Player* p, Map* m) {
 int checkStateControl(unsigned int St) {
 	if (St == Space.NormalState ||
 		St == Bomb_Nm.NormalState ||
+		St == Bomb_burst.NormalState ||
 		St == CAN_KEEP)
 		{ return 1; }
 	else return 0;

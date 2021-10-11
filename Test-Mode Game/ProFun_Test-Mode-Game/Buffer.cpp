@@ -1,6 +1,5 @@
-#include "Buffer.h"
-#include "main.h"
-
+#include"Buffer.h"
+#include"main.h"
 
 int setConsole(int x, int y) {
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -60,10 +59,4 @@ char cursor(int x, int y) {
 
 char cursorBuffer(COORD pos) {
 	return consoleBuffer[pos.X + (SCREEN_WIDTH * pos.Y)].Char.AsciiChar;
-}
-
-void Summary() {
-	setcolor(7, 5);
-	gotoxy(MAP_WIDTH, 2);
-	printf_s("Player name\t: ");
 }

@@ -42,17 +42,16 @@ int main() {
 
 	// Setup 
 	strcpy_s(playerMe.Format, "O");
-	playerMe.Position = { 18, 14 };
-	playerMe.Attribute = 5;
+	playerMe.Position = { 18, 15 };
+	playerMe.Attribute = 9;
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 1;
 
-	playerBot[0].Position = { 25, 14 };
+	playerBot[0].Position = { 18, 1 };
 	setupBot(&playerBot[0]);
-	//
-	//printf_s("%d", playerMe.Lenght);
+
 	setupBomb(&playerMe);
 	setMode();
 
@@ -63,32 +62,31 @@ int main() {
 		// Input Keyboard & Mouse events
 		int Forwalk = rand();
 		moveControl(&playerMe, &nMap[0]);
-		//moveControl(&playerBot[0], &nMap[0]);
 
 		if (Forwalk % 2 == 0) { moveBot(&playerBot[0], &nMap[0]); }
+		dropBombBot(&playerBot[0], &nMap[0]);
 
 		clearBuffer();
 
 		changeStateMap(&nMap[0]);
+		setOfBomb(&playerMe, &nMap[0]);
 
-		dropBomb(&playerMe, &nMap[0]);
-		showBomb(&playerMe, &nMap[0]);
-		checkBomb(&playerMe, &nMap[0]);
+		setOfBot(&playerBot[0], &nMap[0]);
 
 		playerMove(&playerMe, &nMap[0]);
-		playerMove(&playerBot[0], &nMap[0]);
+		//playerMove(&playerBot[0], &nMap[0]);
 
 		displayBuffer(); 
 
-		gotoxy(MAP_WIDTH + 10, 0);
-		printf_s("HELLO");
-		//Summary();
+		//gotoxy(MAP_WIDTH + 10, 0);
+		//printf_s("HELLO");
+		Summary(&playerMe, { MAP_WIDTH + 1, 2 });
 		Sleep(150);
 	}
 
 	//clearBuffer();
-	displayBuffer();
-	gotoxy(0, 0);
-	printf_s("GAME OVER!!!");
+	//displayBuffer();
+	//gotoxy(0, 0);
+	//printf_s("GAME OVER!!!")S;
 	return 0;
 }

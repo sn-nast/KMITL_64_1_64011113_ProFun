@@ -64,13 +64,14 @@ extern bool playStatus;
 typedef struct _Bomb{
 	COORD Position[15];
 	int Amount = 1, Drop = 0;
-	int Power = 1;
 	int State[15];
-	int Time = 50;
+	int Time = 15;
 	int CountDn[15];
+	int PowerX = 1, PowerY = 1;
 } Bomb;
 
 typedef struct _Player {
+	char Name[20];
 	char Format[5];
 	unsigned int Lenght;
 	unsigned int Height;
