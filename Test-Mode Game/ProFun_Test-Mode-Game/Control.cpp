@@ -20,15 +20,15 @@ void moveControl(Player* p, Map* m) {
 					printf_s("END!!");
 					playStatus = FALSE; }
 				if (KB_keycode == VK_SPACE) {
+					COORD pos = { p->Position.X , p->Position.Y };
 					int size = p->Bomb.Amount;
 					int i = 0;
 					if (p->Bomb.Drop < size) {
 						for (int c = 0; c < size; c++) {
 							if (p->Bomb.State[c] == 2) { i++; }
-							if ((p->Position.X == p->Bomb.Position[c].X
-								&& p->Position.Y == p->Bomb.Position[c].Y)) {
-								goto jump;
-							}
+						}
+						if (m->State[pos.Y][pos.X] == Bomb_Nm.NormalState) {
+							goto jump;
 						}
 						if (p->Bomb.Drop < size - i) { p->Bomb.Drop++; }
 					}

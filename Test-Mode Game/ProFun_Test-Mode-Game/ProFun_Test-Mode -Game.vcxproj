@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Bot.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Control.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Addition-Feature.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="Bot.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />

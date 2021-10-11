@@ -13,6 +13,8 @@ void setupBomb(Player* p) {
 }
 
 void dropBomb(Player* p, Map* m) {
+
+
 	COORD pos_P = p->Position;
 	COORD posL_P = p->Last_position;
 	//COORD pos_D = { p->Direction.X, p->Direction.Y };
@@ -63,12 +65,14 @@ void checkBomb(Player* p, Map* m) {
 	}
 }
 
-void showBomb(Player* p) {
+void showBomb(Player* p, Map* m) {
 	int size = sizeof(p->Bomb.State) / sizeof(p->Bomb.State[0]);
 	for (int c = 0; c < size; c++) {
 		COORD pos = { p->Bomb.Position[c].X,p->Bomb.Position[c].Y };
 		if (p->Bomb.State[c] == 2) {
 			putBuffer(pos.X, pos.Y, Bomb_Nm.Format, Bomb_Nm.Attribute);
+			m->LastState[pos.Y][pos.X] = m->State[pos.Y][pos.X];
+			m->State[pos.Y][pos.X] = Bomb_Nm.NormalState;
 		}
 	}
 }
@@ -85,8 +89,6 @@ void burstBomb(Player* p, int i, Map* m) {
 		putBuffer(pos.X + c1, pos.Y, Bomb_burst.Format, Bomb_burst.Attribute);
 		m->LastState[pos.Y][pos.X + c1] = m->State[pos.Y][pos.X + c1];
 		m->State[pos.Y][pos.X + c1] = Bomb_burst.NormalState;
-		//dropObject(m, { (SHORT)(pos.X + c1), pos.Y });
-		//m->Object[pos.Y][pos.X + c1] = { Space.Format, Space.Attribute };
 	}
 	for (int c1 = 1; c1 <= c; c1++) {
 		if (m->State[pos.Y][pos.X + c1] == Wall_2.NormalState) { break; }
@@ -106,6 +108,4 @@ void burstBomb(Player* p, int i, Map* m) {
 		m->LastState[pos.Y + c2][pos.X] = m->State[pos.Y + c2][pos.X];
 		m->State[pos.Y + c2][pos.X] = Bomb_burst.NormalState;
 	}
-	int Len = p->Lenght;
-	//if (m->State[p->Position.Y][p->Position.X + Len / 2] == Bomb_burst.NormalState) { p->Life--; return; }
 }

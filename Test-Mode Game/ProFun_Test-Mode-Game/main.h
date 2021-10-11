@@ -64,7 +64,7 @@ extern bool playStatus;
 typedef struct _Bomb{
 	COORD Position[15];
 	int Amount = 1, Drop = 0;
-	int Power = 3;
+	int Power = 1;
 	int State[15];
 	int Time = 50;
 	int CountDn[15];

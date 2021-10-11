@@ -5,7 +5,7 @@
 #include "Bomb.h"
 #include "Map.h" 
 #include "Object.h"
-
+#include "Bot.h"
 
 HANDLE wHnd;
 HANDLE rHnd;
@@ -20,7 +20,7 @@ bool playStatus = true;
 DWORD numEvents = 0;
 DWORD numEventsRead = 0;
 
-Player playerMe, * P_playerMe, Newplay;
+Player playerMe, * P_playerMe, playerBot[3];
 Map nMap[5];
 
 _Object
@@ -41,14 +41,17 @@ int main() {
 	setCursor(0);
 
 	// Setup 
-	strcpy_s(playerMe.Format, "[O]");
+	strcpy_s(playerMe.Format, "O");
 	playerMe.Position = { 18, 14 };
-	playerMe.Attribute = 7;
+	playerMe.Attribute = 5;
 	playerMe.Lenght = strlen(playerMe.Format);
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 1;
 
+	playerBot[0].Position = { 25, 14 };
+	setupBot(&playerBot[0]);
+	//
 	//printf_s("%d", playerMe.Lenght);
 	setupBomb(&playerMe);
 	setMode();
@@ -58,17 +61,24 @@ int main() {
 
 	while (playStatus /*&& playerMe.Life >= 0*/) {
 		// Input Keyboard & Mouse events
+		int Forwalk = rand();
 		moveControl(&playerMe, &nMap[0]);
+		//moveControl(&playerBot[0], &nMap[0]);
+
+		if (Forwalk % 2 == 0) { moveBot(&playerBot[0], &nMap[0]); }
+
 		clearBuffer();
 
 		changeStateMap(&nMap[0]);
+
 		dropBomb(&playerMe, &nMap[0]);
+		showBomb(&playerMe, &nMap[0]);
 		checkBomb(&playerMe, &nMap[0]);
-		showBomb(&playerMe);
 
 		playerMove(&playerMe, &nMap[0]);
+		playerMove(&playerBot[0], &nMap[0]);
 
-		displayBuffer();
+		displayBuffer(); 
 
 		gotoxy(MAP_WIDTH + 10, 0);
 		printf_s("HELLO");

@@ -18,7 +18,6 @@ void playerMove(Player* p, Map* m) {
 		if ((p->Position.X) > (p->Last_position.X)) {
 			p->Direction.X = p->Position.X + Len;
 			p->Direction.Y = p->Position.Y;
-
 			Arrow = RIGHT_ARROW_1;
 		}
 		else if ((p->Position.X) < (p->Last_position.X)) {
@@ -42,4 +41,3 @@ void playerMove(Player* p, Map* m) {
 	//}
 		keepObject(p, m);
 }
-
