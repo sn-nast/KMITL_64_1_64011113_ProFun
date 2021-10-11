@@ -20,6 +20,10 @@ void setupMap(Map* m, int n_map) {
 				Ob->Attribute = Wall_2.Attribute;
 				m->State[pY][pX] = Wall_2.NormalState;
 			}
+			else if (Ob->Format == Wall_3.Format) {
+				Ob->Attribute = Wall_3.Attribute;
+				m->State[pY][pX] = Wall_3.NormalState;
+			}
 			putBuffer(pX, pY, Ob->Format, Ob->Attribute);
 		}
 	}
@@ -31,11 +35,11 @@ char planMap(int n, COORD pos) {
 	if (n == 1) {
 		char map1[MAP_HEIGHT][MAP_WIDTH] = {
 			{"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"},
-			{"||               #    #                                                            ||"},
-			{"||               #####                                                             ||"},
-			{"||               #####                                                             ||"},
-			{"||               #   #                                                             ||"},
-			{"||               # ###                                                             ||"},
+			{"||   ##&           #    #                                                          ||"},
+			{"|| &&#&&              #####                                                        ||"},
+			{"||   &            #####                                                            ||"},
+			{"||   &            #   #                                                            ||"},
+			{"||   &            # ###                                                            ||"},
 			{"||               #   #                                                             ||"},
 			{"||               #   #                                                             ||"},
 			{"||               #   #                                                             ||"},
@@ -92,7 +96,7 @@ void changeStateMap(Map* m) {
 }
 
 void Summary(Player* p, COORD pos) {
-	setcolor(7, 1);
+	setcolor(7, 0);
 	gotoxy(pos.X, pos.Y + 1);
 	printf_s("Player name\t: %s\n", p->Name);
 	gotoxy(pos.X, pos.Y + 2);

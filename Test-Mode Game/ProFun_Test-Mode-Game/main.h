@@ -99,4 +99,4 @@ typedef struct _Map {
 } Map;
 
 // Extern Object
-extern _Object Space, Wall_1, Wall_2, Bomb_Nm, Bomb_burst, Life, Potion;
+extern _Object Space, Wall_1, Wall_2, Wall_3, Bomb_Nm, Bomb_burst, Life, Potion;

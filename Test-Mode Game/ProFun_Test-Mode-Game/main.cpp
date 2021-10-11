@@ -27,6 +27,7 @@ _Object
 	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE},
 	Wall_1 = { SYM_SHARP, 9, CAN_DESTROY },
 	Wall_2 = { '|', 10, CANt_DESTROY },
+	Wall_3 = { '&', 10, CANt_DESTROY },
 	Bomb_Nm = {'@', 7, BOMB_SHOW},
 	Bomb_burst = {'X', 4, BOMB_BURST},
 	Life = { 3, 6, CAN_KEEP },
@@ -49,7 +50,7 @@ int main() {
 	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 1;
 
-	playerBot[0].Position = { 18, 1 };
+	playerBot[0].Position = { 3, 1 };
 	setupBot(&playerBot[0]);
 
 	setupBomb(&playerMe);

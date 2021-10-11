@@ -85,27 +85,27 @@ void burstBomb(Player* p, int i, Map* m) {
 	int cY = p->Bomb.PowerY;
 	int Len = p->Lenght;
 	for (int c1 = Len / 2; c1 >= -cX; c1--) {
-		if (m->State[pos.Y][pos.X + c1] == Wall_2.NormalState) { break; }
+		if (m->State[pos.Y][pos.X + c1] == CANt_DESTROY) { break; }
 		putBuffer(pos.X + c1, pos.Y, Bomb_burst.Format, Bomb_burst.Attribute);
 		if (c1 >= 0) { continue; }
 		m->LastState[pos.Y][pos.X + c1] = m->State[pos.Y][pos.X + c1];
 		m->State[pos.Y][pos.X + c1] = Bomb_burst.NormalState;
 	}
 	for (int c1 = Len / 2; c1 <= cX; c1++) {
-		if (m->State[pos.Y][pos.X + c1] == Wall_2.NormalState) { break; }
+		if (m->State[pos.Y][pos.X + c1] == CANt_DESTROY) { break; }
 		putBuffer(pos.X + c1, pos.Y, Bomb_burst.Format, Bomb_burst.Attribute);
 		if (c1 < Len - 1) { continue; }
 		m->LastState[pos.Y][pos.X + c1] = m->State[pos.Y][pos.X + c1];
 		m->State[pos.Y][pos.X + c1] = Bomb_burst.NormalState;
 	}
 	for (int c2 = -1; c2 >= -cY; c2--) {
-		if (m->State[pos.Y + c2][pos.X] == Wall_2.NormalState) { break; }
+		if (m->State[pos.Y + c2][pos.X] == CANt_DESTROY) { break; }
 		putBuffer(pos.X, pos.Y + c2, Bomb_burst.Format, Bomb_burst.Attribute);
 		m->LastState[pos.Y + c2][pos.X] = m->State[pos.Y + c2][pos.X];
 		m->State[pos.Y + c2][pos.X] = Bomb_burst.NormalState;
 	}
 	for (int c2 = 1; c2 <= cY; c2++) {
-		if (m->State[pos.Y + c2][pos.X] == Wall_2.NormalState) { break; }
+		if (m->State[pos.Y + c2][pos.X] == CANt_DESTROY) { break; }
 		putBuffer(pos.X, pos.Y + c2, Bomb_burst.Format, Bomb_burst.Attribute);
 		m->LastState[pos.Y + c2][pos.X] = m->State[pos.Y + c2][pos.X];
 		m->State[pos.Y + c2][pos.X] = Bomb_burst.NormalState;
