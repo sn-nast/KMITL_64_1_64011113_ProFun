@@ -8,7 +8,7 @@
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 40
-#define MAP_WIDTH 80
+#define MAP_WIDTH 96
 #define MAP_HEIGHT 32
 
 // Const of Bomb
@@ -83,7 +83,6 @@ typedef struct _Player {
 	unsigned int Attribute;
 	Bomb Bomb;
 	int Life = 1;
-	long int Point;
 } Player;
 
 struct _Object {

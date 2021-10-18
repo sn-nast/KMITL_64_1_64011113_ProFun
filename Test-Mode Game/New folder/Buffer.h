@@ -11,6 +11,3 @@ void gotoxy(int x, int y);
 void setcolor(int fg, int bg);
 char cursor(int x, int y);
 char cursorBuffer(COORD pos);
-void convertToChar(int n, char* keepArray);
-void printBuffer(COORD pos, char* text);
-void printBuffer(COORD pos, int n);

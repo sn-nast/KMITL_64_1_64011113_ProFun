@@ -19,8 +19,8 @@ void setupBot(Player* p) {
 }
 
 void setOfBot(Player* p, Map* m) {
-	//dropBombBot(p, m);
-	//setOfBomb(p, m);
+	dropBombBot(p, m);
+	setOfBomb(p, m);
 	playerMove(p, m);
 }
 
@@ -44,7 +44,7 @@ void dropBombBot(Player* p, Map* m) {
 	int drop = rand();
 	int size = p->Bomb.Amount;
 	int i = 0;
-	if (drop % 10 == 0) {
+	if (drop % 5 == 0) {
 		if (p->Bomb.Drop < size) {
 			for (int c = 0; c < size; c++) {
 				if (p->Bomb.State[c] == 2) { i++; }

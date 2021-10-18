@@ -28,7 +28,7 @@ _Object
 	Wall[10] = {
 		{ '#', 9, CAN_DESTROY	},
 		{ '|', 10, CANt_DESTROY },
-		{ '&', 11, CANt_DESTROY },
+		{ '&', 10, CANt_DESTROY },
 		{ '$', 10, CANt_DESTROY },
 		{ '+', 11, CANt_DESTROY},
 		{ 13, 12, CANt_DESTROY }
@@ -49,24 +49,19 @@ int main() {
 
 	// Setup 
 	strcpy_s(playerMe.Format, "O");
-	strcpy_s(playerMe.Name, "it's Me");
-	playerMe.Position = { 3, 20 };
+	playerMe.Position = { 18, 15 };
 	playerMe.Attribute = 7;
 	playerMe.Lenght = strlen(playerMe.Format);
-	playerMe.Height = 1;
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 1;
 
 	playerBot[0].Position = { 3, 1 };
 	setupBot(&playerBot[0]);
-	playerBot[0].Attribute = 250;
+
 	setupBomb(&playerMe);
 	setMode();
-	gotoxy(0, 0);
-	//printf("[000]\n");
-	//printf("[000]\n");
-	//printf("[T T]\n");
+
 	//while() // เลือก map
 	setupMap(&nMap[0], 1);
 
@@ -84,17 +79,15 @@ int main() {
 		setOfBomb(&playerMe, &nMap[0]);
 
 		setOfBot(&playerBot[0], &nMap[0]);
-		playerMove(&playerMe, &nMap[0]);
 
+		playerMove(&playerMe, &nMap[0]);
 		//playerMove(&playerBot[0], &nMap[0]);
 
 		displayBuffer(); 
 
 		//gotoxy(MAP_WIDTH + 10, 0);
 		//printf_s("HELLO");
-		Summary(&playerMe, { MAP_WIDTH, 2 });
-		Summary(&playerBot[0], { MAP_WIDTH, 15 });
-
+		//Summary(&playerMe, { MAP_WIDTH + 1, 2 });
 		Sleep(150);
 	}
 

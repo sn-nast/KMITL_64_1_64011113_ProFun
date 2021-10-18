@@ -27,12 +27,12 @@ void playerMove(Player* p, Map* m) {
 		}
 		else if ((p->Position.Y) > (p->Last_position.Y)) {
 			p->Direction.X = p->Position.X + Len / 2;
-			p->Direction.Y = p->Position.Y + p->Height;
+			p->Direction.Y = p->Position.Y + (p->Height + 1);
 			Arrow = DOWN_ARROW_2;
 		}
 		else if ((p->Position.Y) < (p->Last_position.Y)) {
 			p->Direction.X = p->Position.X + Len / 2;
-			p->Direction.Y = p->Position.Y - p->Height;
+			p->Direction.Y = p->Position.Y - (p->Height + 1);
 			Arrow = UP_ARROW_2;
 		}
 		else { return; }
