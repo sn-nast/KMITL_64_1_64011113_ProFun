@@ -40,10 +40,9 @@ void dropObject(Map* m, COORD pos) {
 void keepObject(Player* p, Map* m) {
 	unsigned int Len = p->Lenght;
 	COORD* posP = &p->Position;
-	COORD posOb = { posP->X + Len / 2, posP->Y };
+	COORD posOb = *posP;
 	if (m->State[posOb.Y][posOb.X] == CAN_KEEP) {
 		char Format = m->Object[posOb.Y][posOb.X].Format;
-
 		if (Format == Life.Format) {
 			//removeObject(m, posOb);
 			p->Life++;
@@ -57,9 +56,16 @@ void keepObject(Player* p, Map* m) {
 			//removeObject(m, posOb);
 			p->Bomb.Amount++;
 		}
-		removeObject(m, posOb);
+		int Len = p->Lenght;
+		int Hei = p->Height;
+		for (int H = 0; H < Hei; H++) {
+			for (int L = 0; L < Len; L++) {
+				removeObject(m, { (SHORT)(posOb.X + L), (SHORT)(posOb.Y + H)});
+			}
+		}
 	}
 }
+
 
 void removeObject(Map* m, COORD pos) {
 	m->State[pos.Y][pos.X] = Space.NormalState;

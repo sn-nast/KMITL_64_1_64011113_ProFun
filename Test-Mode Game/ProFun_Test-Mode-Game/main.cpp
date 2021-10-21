@@ -55,12 +55,12 @@ int main() {
 	strcpy_s(playerMe.Name, "Me");
 	playerMe.Position = {51, 16 };
 	playerMe.Attribute = 7;
-	playerMe.Lenght = 2;
-	playerMe.Height = 2;
+	playerMe.Lenght = 3;
+	playerMe.Height = 3;
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
-	playerMe.SpeedX = 2;
-	playerMe.SpeedY = 2;
+	playerMe.SpeedX = 3;
+	playerMe.SpeedY = 3;
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 
