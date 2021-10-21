@@ -98,6 +98,7 @@ typedef struct _Map {
 	unsigned int LastState[MAP_HEIGHT][MAP_WIDTH];
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
 	int Time[MAP_HEIGHT][MAP_WIDTH];
+	int ObjRand[MAP_HEIGHT][MAP_WIDTH];
 } Map;
 
 // Extern Object

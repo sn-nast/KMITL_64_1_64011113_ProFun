@@ -3,11 +3,11 @@
 #include "Map.h"
 
 void dropObject(Map* m, COORD pos) {
-	int objRand = rand() % 5;
+	int* objRand = &m->ObjRand[pos.Y][pos.X];
 	_Object* obj = &m->Object[pos.Y][pos.X];
 	unsigned int* sta = &m->State[pos.Y][pos.X];
 	int* time = &m->Time[pos.Y][pos.X];
-	switch (objRand) {
+	switch (*objRand % 5) {
 		case 1: {
 			*sta = Life.NormalState;
 			*obj = { Life.Format, Life.Attribute, Life.NormalState };

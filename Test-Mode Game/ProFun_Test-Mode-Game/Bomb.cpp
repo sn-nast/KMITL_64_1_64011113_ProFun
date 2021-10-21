@@ -6,7 +6,6 @@
 void setupBomb(Player* p) {
 	int Amount = p->Bomb.Amount;
 	int size = sizeof(p->Bomb.State) / sizeof(p->Bomb.State[0]);
-	//p->Bomb.PowerX += p->Lenght / 2;
 	for (int i = 0; i < size; i++) {
 		p->Bomb.State[i] = 0;
 		p->Bomb.CountDn[i] = p->Bomb.Time;
@@ -100,75 +99,81 @@ void burstBomb(Player* p, int i, Map* m) {
 	int Len = p->Lenght;
 	int Hei = p->Height;
 
+	int nextObj[4];
+	for (int i = 0; i < sizeof(nextObj)/sizeof(nextObj[0]); i++) {
+		nextObj[i] = rand();
+	}
+
 	for (int H = 0; H < Hei; H++) {
 		// Left burst
-		for (int c1 = 0; c1 >= -(pX * Len); c1--) {
+		int count1 = 0;
+		// include middle burst (start from Len)
+		for (int c1 = Len - 1; c1 >= -(pX * Len); c1--) {
 			if (m->State[pos.Y + H][pos.X + c1] == CANt_DESTROY) { break; }
 			putBuffer(pos.X + c1, pos.Y + H, Bomb_burst.Format, Bomb_burst.Attribute);
-			//if (c1 == 0) { continue; }
-			if (m->State[pos.Y + H][pos.X + c1] == CAN_DESTROY) {
-				m->LastState[pos.Y + H][pos.X + c1] = m->State[pos.Y + H][pos.X + c1];
-				m->State[pos.Y + H][pos.X + c1] = Bomb_burst.NormalState;
-				p->Point += 100;
-				if (H + 1 == Hei) { break; }
-				//break;
-			}
 			m->LastState[pos.Y + H][pos.X + c1] = m->State[pos.Y + H][pos.X + c1];
 			m->State[pos.Y + H][pos.X + c1] = Bomb_burst.NormalState;
+			if (m->LastState[pos.Y + H][pos.X + c1] == CAN_DESTROY) {
+				p->Point += 100 / (Len * Hei);
+				count1++;
+				m->ObjRand[pos.Y + H][pos.X + c1] = nextObj[0];
+				if (count1 == Len) { break; }
+			}
 		}
 		// Right burst
+		int count2 = 0;
 		for (int c1 = Len; c1 < (pX * Len) + Len; c1++) {
 			if (m->State[pos.Y + H][pos.X + c1] == CANt_DESTROY) { break; }
 			putBuffer(pos.X + c1, pos.Y + H, Bomb_burst.Format, Bomb_burst.Attribute);
-			// Check wall
-			if (m->State[pos.Y + H][pos.X + c1] == CAN_DESTROY) {
-				m->LastState[pos.Y + H][pos.X + c1] = m->State[pos.Y + H][pos.X + c1];
-				m->State[pos.Y + H][pos.X + c1] = Bomb_burst.NormalState;
-				p->Point += 100;
-				if (H + 1 == Hei) { break; }
-				//break;
-			}
 			m->LastState[pos.Y + H][pos.X + c1] = m->State[pos.Y + H][pos.X + c1];
 			m->State[pos.Y + H][pos.X + c1] = Bomb_burst.NormalState;
-			//}
+			if (m->LastState[pos.Y + H][pos.X + c1] == CAN_DESTROY) {
+				p->Point += 100 / (Len * Hei);
+				m->ObjRand[pos.Y + H][pos.X + c1] = nextObj[1];
+				count2++;
+				if (count2 == Len) { break; }
+			}
 		}
 	}
+
 	for (int L = 0; L < Len; L++) {
 		// Up burst
+		int count1 = 0;
 		for (int c2 = -1; c2 >= -(pY * Hei); c2--) {
 			if (m->State[pos.Y + c2][pos.X + L] == CANt_DESTROY) { break; }
 			putBuffer(pos.X + L, pos.Y + c2, Bomb_burst.Format, Bomb_burst.Attribute);
 			// Check wall
-			if (m->State[pos.Y + c2][pos.X + L] == CAN_DESTROY) {
-				m->LastState[pos.Y + c2][pos.X + L] = m->State[pos.Y + c2][pos.X + L];
-				m->State[pos.Y + c2][pos.X + L] = Bomb_burst.NormalState;
-				p->Point += 100;
-				if (L + 1 != Len) { break; }
-				//break;
-			}
 			m->LastState[pos.Y + c2][pos.X + L] = m->State[pos.Y + c2][pos.X + L];
 			m->State[pos.Y + c2][pos.X + L] = Bomb_burst.NormalState;
+			if (m->LastState[pos.Y + c2][pos.X + L] == CAN_DESTROY) {
+				p->Point += 100 / (Len * Hei);
+				count1++;
+				m->ObjRand[pos.Y + c2][pos.X + L] = nextObj[2];
+				if (count1 == Hei) { break; }
+			}
 		}
 		// Down burst
+		int count2 = 0;
 		for (int c2 = Hei; c2 < (pY * Hei) + Hei; c2++) {
 			if (m->State[pos.Y + c2][pos.X + L] == CANt_DESTROY) { break; }
 			putBuffer(pos.X + L, pos.Y + c2, Bomb_burst.Format, Bomb_burst.Attribute);
 			// Check wall
-			if (m->State[pos.Y + c2][pos.X + L] == CAN_DESTROY) {
-				m->LastState[pos.Y + c2][pos.X + L] = m->State[pos.Y + c2][pos.X + L];
-				m->State[pos.Y + c2][pos.X + L] = Bomb_burst.NormalState;
-				p->Point += 100;
-				if (L + 1 == Len) { break; }
-				//break;
-			}
 			m->LastState[pos.Y + c2][pos.X + L] = m->State[pos.Y + c2][pos.X + L];
 			m->State[pos.Y + c2][pos.X + L] = Bomb_burst.NormalState;
+			if (m->LastState[pos.Y + c2][pos.X + L] == CAN_DESTROY) {
+				p->Point += 100 / (Len * Hei);
+				count2++;
+				m->ObjRand[pos.Y + c2][pos.X + L] = nextObj[3];
+				if (count2 == Hei) { break; }
+			}
 		}
 	}
-	COORD posP = { p->Position.X , p->Position.Y };
-	if (m->State[posP.Y][posP.X] == Bomb_burst.NormalState) { 
-		//posP = {3, 1};
-		p->Last_position = posP;
-		p->Life--; 
-	}
+	// Check Life and Burst
+	//COORD* posP = &p->Position;
+	//if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) { 
+	//	posP->X = 3;
+	//	posP->Y = 1;
+	//	p->Last_position = *posP;
+	//	p->Life--; 
+	//}
 }

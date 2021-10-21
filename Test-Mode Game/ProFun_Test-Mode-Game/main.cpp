@@ -53,7 +53,7 @@ int main() {
 	// Setup 
 	strcpy_s(playerMe.Format, "Y");
 	strcpy_s(playerMe.Name, "Me");
-	playerMe.Position = {15, 20 };
+	playerMe.Position = {51, 16 };
 	playerMe.Attribute = 7;
 	playerMe.Lenght = 2;
 	playerMe.Height = 2;
@@ -61,8 +61,8 @@ int main() {
 	playerMe.Bomb.Time = 15;
 	playerMe.SpeedX = 2;
 	playerMe.SpeedY = 2;
-	playerMe.Bomb.PowerX = 2;
-	playerMe.Bomb.PowerY = 2;
+	playerMe.Bomb.PowerX = 3;
+	playerMe.Bomb.PowerY = 3;
 
 	playerBot[0].Position = { 3, 1 };
 	setupBot(&playerBot[0]);
