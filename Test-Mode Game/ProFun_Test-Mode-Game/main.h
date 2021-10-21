@@ -78,6 +78,7 @@ typedef struct _Player {
 	COORD Last_position;
 	COORD Direction;
 	COORD Last_Direction;
+	unsigned int Dir_atb = 4;
 	unsigned int SpeedX = 1;
 	unsigned int SpeedY = 1;
 	unsigned int Attribute;
@@ -96,8 +97,9 @@ typedef struct _Map {
 	unsigned int State[MAP_HEIGHT][MAP_WIDTH];
 	unsigned int LastState[MAP_HEIGHT][MAP_WIDTH];
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
+	int Time[MAP_HEIGHT][MAP_WIDTH];
 } Map;
 
 // Extern Object
-extern _Object Space, Bomb_Nm, Bomb_burst, Life, Potion, Wall[];
+extern _Object Space, Bomb_Nm, Bomb_burst, Life, Potion, Wall[], newBomb;
 extern int typeWall;

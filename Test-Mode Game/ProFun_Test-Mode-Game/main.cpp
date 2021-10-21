@@ -30,13 +30,16 @@ _Object
 		{ '|', 10, CANt_DESTROY },
 		{ '&', 11, CANt_DESTROY },
 		{ '$', 10, CANt_DESTROY },
-		{ '+', 11, CANt_DESTROY},
-		{ 13, 12, CANt_DESTROY }
+		{ '+', 11, CANt_DESTROY },
+		{ '%', 6, CAN_DESTROY   },
+		{ '=', 8, CAN_DESTROY   },
+		{ 13, 12, CANt_DESTROY  }
 	},
-	Bomb_Nm = {'@', 7, BOMB_SHOW},
-	Bomb_burst = {'X', 4, BOMB_BURST},
-	Life = { 6, 6, CAN_KEEP },
-	Potion = { SYM_POTION, 11, CAN_KEEP }
+	Bomb_Nm		= {'@', 7, BOMB_SHOW},
+	Bomb_burst	= {'X', 4, BOMB_BURST},
+	Life		= { 3, 6, CAN_KEEP },
+	Potion		= { SYM_POTION, 11, CAN_KEEP },
+	newBomb		= { 15, 12, CAN_KEEP }
 ;
 
 int typeWall = sizeof(Wall) / sizeof(Wall[0]);
@@ -48,25 +51,29 @@ int main() {
 	setCursor(0);
 
 	// Setup 
-	strcpy_s(playerMe.Format, "O");
-	strcpy_s(playerMe.Name, "it's Me");
-	playerMe.Position = { 3, 20 };
+	strcpy_s(playerMe.Format, "Y");
+	strcpy_s(playerMe.Name, "Me");
+	playerMe.Position = {15, 20 };
 	playerMe.Attribute = 7;
-	playerMe.Lenght = strlen(playerMe.Format);
-	playerMe.Height = 1;
+	playerMe.Lenght = 2;
+	playerMe.Height = 2;
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
-	playerMe.SpeedX = 1;
+	playerMe.SpeedX = 2;
+	playerMe.SpeedY = 2;
+	playerMe.Bomb.PowerX = 2;
+	playerMe.Bomb.PowerY = 2;
 
 	playerBot[0].Position = { 3, 1 };
 	setupBot(&playerBot[0]);
-	playerBot[0].Attribute = 250;
+	playerBot[0].Attribute = 180;
 	setupBomb(&playerMe);
 	setMode();
-	gotoxy(0, 0);
-	//printf("[000]\n");
-	//printf("[000]\n");
-	//printf("[T T]\n");
+	//gotoxy(0, 0);
+	//printf("[0 0]\n");
+	//printf("[ v ]\n");
+	//printf(" T T \n");
+	// 
 	//while() // เลือก map
 	setupMap(&nMap[0], 1);
 
@@ -86,14 +93,12 @@ int main() {
 		setOfBot(&playerBot[0], &nMap[0]);
 		playerMove(&playerMe, &nMap[0]);
 
-		//playerMove(&playerBot[0], &nMap[0]);
-
 		displayBuffer(); 
 
 		//gotoxy(MAP_WIDTH + 10, 0);
 		//printf_s("HELLO");
 		Summary(&playerMe, { MAP_WIDTH, 2 });
-		Summary(&playerBot[0], { MAP_WIDTH, 15 });
+		//Summary(&playerBot[0], { MAP_WIDTH, 15 });
 
 		Sleep(150);
 	}

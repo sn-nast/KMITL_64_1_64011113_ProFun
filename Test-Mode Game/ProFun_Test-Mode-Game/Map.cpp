@@ -30,40 +30,37 @@ char planMap(int n, COORD pos) {
 	if (n == 1) {
 		char map1[MAP_HEIGHT][MAP_WIDTH] = {
 			{"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"},
-			{"||  ###$          #    #                                                     ||"},
-			{"|| &$ &&              #####                                                  ||"},
-			{"||# &#&#           #####                                                     ||"},
-			{"||$#&      $       #   #                                                     ||"},
-			{"||#   &      $     # ###                                                     ||"},
-			{"||$$ &         $   #   #                                                     ||"},
-			{"||          $      #   #                                                     ||"},
-			{"||&& &         +   #   #                                                     ||"},
-			{"||    $     +      #   #                                                     ||"},
-			{"||$ &         +    #   #                                                     ||"},
-			{"||##& &        +   #   #                                                     ||"},
-			{"|| &$ $$           #   #                                                     ||"},
-			{"||     $           #   #                                                     ||"},
-			{"||               #   #                                                       ||"},
-			{"||               #   #                                                       ||"},
-			{"||               #   #                                                       ||"},
-			{"||               #   #                                                       ||"},
-			{"||               #   #                                                       ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			{"||                                                                           ||"},
-			//{"||                                                             ##                 
-			//{"||                                                               ##                ||"},
+			{"||  %%%$     $$$$$$$                                                   %     ||"},
+			{"|| $ &&            $                                                   $     ||"},
+			{"||%%%$       $     $                                                   &     ||"},
+			{"||$$$%$$$$$$$$     $     &&&&&&&&                                      =     ||"},
+			{"||  $      $     $&&&&&&&                                                    ||"},
+			{"||$$$%$$$$$$$$   & $&&&&&&&                                                  ||"},
+			{"||%%%%%%%%%%%%    ############                                               ||"},
+			{"||&&%%$&$&$&$    &##$$   ##                                                  ||"},
+			{"||%$%%  $$$$$$   &##$$   ###                      ########                   ||"},
+			{"||$$%%           &##$$   ##                       ########                   ||"},
+			{"||$$%%&&&&&&&&&&&&##$$   ###                      ########                   ||"},
+			{"||$  $$$$$$$$$$$$$##$$   ###                      ########                   ||"},
+			{"||$  $   $$$$$$$         ##                       ########                   ||"},
+			{"||$  $                   ##                       ########                   ||"},
+			{"||$  $   $$$$$$$$$$$$$$$$$$                       ########                   ||"},
+			{"||$  $   $$$$$$$$$$$$$$$$$$                                                  ||"},
+			{"||$   %%%%%%%%%%%%%%%%%%%%%%%%                                               ||"},
+			{"||$  $$$$$$$$                        ################                        ||"},
+			{"||  $$                               ################                        ||"},
+			{"||  $$                    $  ##                                              ||"},
+			{"||  $$                    $  ##                                              ||"},
+			{"||  $$                                                                       ||"},
+			{"||  $$                                                                       ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
+			//{"||                                                                           ||"},
 			{"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"}
-
 		};
 		return map1[pos.Y][pos.X];
 	}
@@ -81,6 +78,14 @@ void changeStateMap(Map* m) {
 					m->LastState[pY][pX] != CAN_KEEP) {
 					dropObject(m, { pX, pY }); }
 				else {
+					m->State[pY][pX] = Space.NormalState;
+					m->Object[pY][pX] = { Space.Format, Space.Attribute };
+				}
+			}
+			if (m->State[pY][pX] == CAN_KEEP) {
+				if (m->Time[pY][pX] > 0) { m->Time[pY][pX]--; }
+				else if (m->Time[pY][pX] == 0) {
+					m->LastState[pY][pX] = m->State[pY][pX];
 					m->State[pY][pX] = Space.NormalState;
 					m->Object[pY][pX] = { Space.Format, Space.Attribute };
 				}
@@ -107,18 +112,19 @@ void Summary(Player* p, COORD pos) {
 	//	putBuffer(pos.X + n, pos.Y + 1, number[n], NORMAL_ATTIBUTE);
 	//	//if (number[n + 1] == '\0') { break; }
 	//}
+
 	gotoxy(pos.X, pos.Y + 2);
 	printf_s("Power in X\t: %d", p->Bomb.PowerX);
+	//gotoxy(pos.X, pos.Y + 3);
+	//printf_s("Power in Y\t: %d", p->Bomb.PowerY);
 	gotoxy(pos.X, pos.Y + 3);
-	printf_s("Power in Y\t: %d", p->Bomb.PowerY);
-	gotoxy(pos.X, pos.Y + 4);
-	printf_s("Life\t: %d", p->Life);
+	printf_s("Life\t\t: %d", p->Life);
+	//gotoxy(pos.X, pos.Y + 5);
+	//printf_s("SpeedX\t: %d", p->SpeedX);
+	//gotoxy(pos.X, pos.Y + 6);
+	//printf_s("SpeedY\t: %d", p->SpeedY);
 	gotoxy(pos.X, pos.Y + 5);
-	printf_s("SpeedX\t: %d", p->SpeedX);
-	gotoxy(pos.X, pos.Y + 6);
-	printf_s("SpeedY\t: %d", p->SpeedY);
-	gotoxy(pos.X, pos.Y + 7);
 	printf_s("Position\t: (%d,%d)", p->Position.X, p->Position.Y);
-	gotoxy(pos.X, pos.Y + 8);
+	gotoxy(pos.X, pos.Y + 6);
 	printf_s("Point\t\t: %d", p->Point);
 }

@@ -78,29 +78,35 @@ void checkControl(int Direction, Player* p, Map* m) {
 	COORD* pos = &p->Position;
 	unsigned int* State;
 	int Len = p->Lenght;
+	int Hei = p->Height;
+	int check = 0;
 	if (Direction == LEFT) {
-		State = &m->State[pos->Y][pos->X - 1];
-		if (checkStateControl(*State) == 1) { pos->X -= p->SpeedX; }
+		for (int H = 0; H < Hei; H++) {
+			State = &m->State[pos->Y + H][pos->X - 1];
+			if (checkStateControl(*State) == 1) { check++; }
+		}
+		if (check == Hei) { pos->X -= p->SpeedX; }
 	}
 	else if (Direction == RIGHT) {
-		State = &m->State[pos->Y][pos->X + Len + p->SpeedX - 1];
-		if (checkStateControl(*State) == 1) { pos->X += p->SpeedX; }
+		for (int H = 0; H < Hei; H++) {
+			State = &m->State[pos->Y + H][pos->X + Len + p->SpeedX - 1];
+			if (checkStateControl(*State) == 1) { check++; }
+		}
+		if (check == Hei) { pos->X += p->SpeedX; }
 	}
 	else if (Direction == DOWN) {
-		int c = 0;
-		for (int i = 0; i < Len; i++) {
-			State = &m->State[pos->Y + p->SpeedY][pos->X + i];
-			if (checkStateControl(*State) == 1) { c++; }
+		for (int L = 0; L < Len; L++) {
+			State = &m->State[pos->Y + (Hei - 1) + p->SpeedY][pos->X + L];
+			if (checkStateControl(*State) == 1) { check++; }
 		}
-		if (c == Len) { pos->Y += p->SpeedY; }
+		if (check == Len) { pos->Y += p->SpeedY; }
 	}
 	else if (Direction == UP) {
-		int c = 0;
-		for (int i = 0; i < Len; i++) {
-			State = &m->State[pos->Y - p->SpeedY][pos->X + i];
-			if (checkStateControl(*State) == 1) { c++; }
+		for (int L = 0; L < Len; L++) {
+			State = &m->State[pos->Y - p->SpeedY][pos->X + L];
+			if (checkStateControl(*State) == 1) { check++; }
 		}
-		if (c == Len) { pos->Y -= p->SpeedY; }
+		if (check == Len) { pos->Y -= p->SpeedY; }
 	}
 }
 
