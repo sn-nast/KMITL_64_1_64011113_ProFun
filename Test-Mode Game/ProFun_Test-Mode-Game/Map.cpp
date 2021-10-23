@@ -99,8 +99,9 @@ void changeStateMap(Map* m) {
 void Summary(Player* p, COORD pos) {
 	setcolor(7, 0);
 	gotoxy(pos.X, pos.Y + 1);
-	printf_s("Player name\t: %s\n", p->Name);
-	
+	printf("Player \t: %s", p->Format);
+	gotoxy(pos.X, pos.Y + 2);
+	printf_s("Power\t: %d", p->Bomb.PowerX);
 	//char text[20] = "Player name";
 	//char* c = text;
 	//for (int n = 0; n < strlen(text); n++) {
@@ -112,17 +113,12 @@ void Summary(Player* p, COORD pos) {
 	//	putBuffer(pos.X + n, pos.Y + 1, number[n], NORMAL_ATTIBUTE);
 	//	//if (number[n + 1] == '\0') { break; }
 	//}
-
 	gotoxy(pos.X, pos.Y + 2);
-	printf_s("Power in X\t: %d", p->Bomb.PowerX);
-	//gotoxy(pos.X, pos.Y + 3);
-	//printf_s("Power in Y\t: %d", p->Bomb.PowerY);
+	printf_s("Power\t: %d", p->Bomb.PowerX);
 	gotoxy(pos.X, pos.Y + 3);
 	printf_s("Life\t\t: %d", p->Life);
-	//gotoxy(pos.X, pos.Y + 5);
-	//printf_s("SpeedX\t: %d", p->SpeedX);
-	//gotoxy(pos.X, pos.Y + 6);
-	//printf_s("SpeedY\t: %d", p->SpeedY);
+	gotoxy(pos.X, pos.Y + 4);
+	printf_s("Max Bomb\t: %d", p->Bomb.Amount);
 	gotoxy(pos.X, pos.Y + 5);
 	printf_s("Position\t: (%d,%d)", p->Position.X, p->Position.Y);
 	gotoxy(pos.X, pos.Y + 6);

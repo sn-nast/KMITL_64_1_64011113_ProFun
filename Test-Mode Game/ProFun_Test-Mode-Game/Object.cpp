@@ -44,16 +44,16 @@ void keepObject(Player* p, Map* m) {
 	if (m->State[posOb.Y][posOb.X] == CAN_KEEP) {
 		char Format = m->Object[posOb.Y][posOb.X].Format;
 		if (Format == Life.Format) {
-			//removeObject(m, posOb);
+			p->Point += Life.Point;
 			p->Life++;
 		}
 		else if (Format == Potion.Format) {
-			//removeObject(m, posOb);
+			p->Point += Potion.Point;
 			p->Bomb.PowerX++;
 			p->Bomb.PowerY++;
 		}
 		else if (Format == newBomb.Format) {
-			//removeObject(m, posOb);
+			p->Point += newBomb.Point;
 			p->Bomb.Amount++;
 		}
 		int Len = p->Lenght;

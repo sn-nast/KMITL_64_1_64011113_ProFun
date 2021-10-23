@@ -24,22 +24,22 @@ Player playerMe, * P_playerMe, playerBot[3];
 Map nMap[5];
 
 _Object
-	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE},
+	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE, NO_POINT},
 	Wall[10] = {
-		{ '#', 9, CAN_DESTROY	},
-		{ '|', 10, CANt_DESTROY },
-		{ '&', 11, CANt_DESTROY },
-		{ '$', 10, CANt_DESTROY },
-		{ '+', 11, CANt_DESTROY },
-		{ '%', 6, CAN_DESTROY   },
-		{ '=', 8, CAN_DESTROY   },
-		{ 13, 12, CANt_DESTROY  }
+		{ '#', 9,	CAN_DESTROY,	WALL_POINT },
+		{ '|', 10,	CANt_DESTROY,	NO_POINT },
+		{ '&', 11,	CANt_DESTROY,	NO_POINT },
+		{ '$', 10,	CANt_DESTROY,	NO_POINT },
+		{ '+', 11,	CANt_DESTROY,	NO_POINT },
+		{ '%', 6,	CAN_DESTROY,	WALL_POINT },
+		{ '=', 8,	CAN_DESTROY,	WALL_POINT },
+		{ 13, 12,	CANt_DESTROY,	NO_POINT  }
 	},
-	Bomb_Nm		= {'@', 7, BOMB_SHOW},
-	Bomb_burst	= {'X', 4, BOMB_BURST},
-	Life		= { 3, 6, CAN_KEEP },
-	Potion		= { SYM_POTION, 11, CAN_KEEP },
-	newBomb		= { 15, 12, CAN_KEEP }
+	Bomb_Nm		= {'@', 7,	BOMB_SHOW,	NO_POINT},
+	Bomb_burst	= {'X', 4,	BOMB_BURST,	NO_POINT },
+	Life		= { 3, 6,	CAN_KEEP,	ITEM_POINT },
+	Potion		= { 'P', 11, CAN_KEEP,	ITEM_POINT},
+	newBomb		= { 15, 12, CAN_KEEP,	ITEM_POINT }
 ;
 
 int typeWall = sizeof(Wall) / sizeof(Wall[0]);
@@ -55,12 +55,12 @@ int main() {
 	strcpy_s(playerMe.Name, "Me");
 	playerMe.Position = {51, 16 };
 	playerMe.Attribute = 7;
-	playerMe.Lenght = 3;
-	playerMe.Height = 3;
+	playerMe.Lenght = 2;
+	playerMe.Height = 2;
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
-	playerMe.SpeedX = 3;
-	playerMe.SpeedY = 3;
+	playerMe.SpeedX = 2;
+	playerMe.SpeedY = 2;
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 

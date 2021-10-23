@@ -169,11 +169,11 @@ void burstBomb(Player* p, int i, Map* m) {
 		}
 	}
 	// Check Life and Burst
-	//COORD* posP = &p->Position;
-	//if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) { 
-	//	posP->X = 3;
-	//	posP->Y = 1;
-	//	p->Last_position = *posP;
-	//	p->Life--; 
-	//}
+	COORD* posP = &p->Position;
+	if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) { 
+		//posP->X = 3;
+		//posP->Y = 1;
+		//p->Last_position = *posP;
+		p->Life--; 
+	}
 }

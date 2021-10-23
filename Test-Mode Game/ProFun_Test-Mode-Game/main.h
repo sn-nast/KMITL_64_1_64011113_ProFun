@@ -25,8 +25,9 @@ const int BOMB_BURST = 10;
 const int MAP_SPACE = 0;
 
 // Const of Object
-const char SYM_SHARP = '#';
-const char SYM_POTION = 'P';
+const int NO_POINT = 0;
+const int WALL_POINT = 100;
+const int ITEM_POINT = 1000;
 
 // Const of Arrow
 const short LEFT = 1;
@@ -91,6 +92,7 @@ struct _Object {
 	char Format;
 	int Attribute;
 	int NormalState;
+	int Point;
 };
 
 typedef struct _Map {
