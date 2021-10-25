@@ -15,7 +15,7 @@ void setupBomb(Player* p) {
 void setOfBomb(Player* p, Map* m) {
 	dropBomb(p, m);
 	showBomb(p, m);
-	checkBomb(p, m);
+	statusBomb(p, m);
 }
 
 void dropBomb(Player* p, Map* m) {
@@ -51,7 +51,7 @@ void dropBomb(Player* p, Map* m) {
 	}
 }
 
-void checkBomb(Player* p, Map* m) {
+void statusBomb(Player* p, Map* m) {
 	int size = sizeof(p->Bomb.State) / sizeof(p->Bomb.State[0]);
 	int Len = p->Lenght;
 	int Hei = p->Height;
@@ -168,12 +168,15 @@ void burstBomb(Player* p, int i, Map* m) {
 			}
 		}
 	}
+}
+
+void checkBomb(Player* p, Map* m) {
 	// Check Life and Burst
 	COORD* posP = &p->Position;
-	if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) { 
+	if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) {
 		//posP->X = 3;
 		//posP->Y = 1;
 		//p->Last_position = *posP;
-		p->Life--; 
+		p->Life--;
 	}
 }

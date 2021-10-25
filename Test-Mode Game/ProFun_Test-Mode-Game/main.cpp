@@ -12,7 +12,7 @@ HANDLE rHnd;
 DWORD fdwMode;
 
 CHAR_INFO consoleBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
-COORD bufferSize = { SCREEN_WIDTH,SCREEN_HEIGHT };
+COORD bufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
 COORD characterPos = { 0, 0 };
 SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 
@@ -53,52 +53,62 @@ int main() {
 	// Setup 
 	strcpy_s(playerMe.Format, "Y");
 	strcpy_s(playerMe.Name, "Me");
-	playerMe.Position = {51, 16 };
-	playerMe.Attribute = 7;
-	playerMe.Lenght = 2;
-	playerMe.Height = 2;
+	playerMe.Position = {2, 1 };
+	playerMe.Attribute = 150;
+	playerMe.Lenght = 3;
+	playerMe.Height = 3;
+	playerMe.SpeedX = 3;
+	playerMe.SpeedY = 3;
 	playerMe.Bomb.Amount = 5;
 	playerMe.Bomb.Time = 15;
-	playerMe.SpeedX = 2;
-	playerMe.SpeedY = 2;
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 
-	playerBot[0].Position = { 3, 1 };
-	setupBot(&playerBot[0]);
-	playerBot[0].Attribute = 180;
+		playerBot[0].Position = { 5, 1 };
+		playerBot[1].Position = { 2, 37 };
+
+		setupBot(&playerBot[0]);
+		//setupBot(&playerBot[1]);
+
+		playerBot[0].Attribute = 180;
+		playerBot[1].Attribute = 180;
+
 	setupBomb(&playerMe);
 	setMode();
-	//gotoxy(0, 0);
-	//printf("[0 0]\n");
-	//printf("[ v ]\n");
-	//printf(" T T \n");
 	// 
 	//while() // เลือก map
-	setupMap(&nMap[0], 1);
+	setupMap(&nMap[0], 2);
 
 	while (playStatus /*&& playerMe.Life >= 0*/) {
 		// Input Keyboard & Mouse events
 		int Forwalk = rand();
 		moveControl(&playerMe, &nMap[0]);
 
-		if (Forwalk % 2 == 0) { moveBot(&playerBot[0], &nMap[0]); }
-		dropBombBot(&playerBot[0], &nMap[0]);
+			moveBot(&playerBot[0], &nMap[0]);
+			dropBombBot(&playerBot[0], &nMap[0]);
+			//moveBot(&playerBot[1], &nMap[0]);
+			//dropBombBot(&playerBot[1], &nMap[0]);
 
 		clearBuffer();
 
 		changeStateMap(&nMap[0]);
 		setOfBomb(&playerMe, &nMap[0]);
+		
+			setOfBot(&playerBot[0], &nMap[0]);
+			//setOfBot(&playerBot[1], &nMap[0]);
 
-		setOfBot(&playerBot[0], &nMap[0]);
 		playerMove(&playerMe, &nMap[0]);
+
+		checkBomb(&playerMe, &nMap[0]);
+			checkBomb(&playerBot[0], &nMap[0]);
+
 
 		displayBuffer(); 
 
-		//gotoxy(MAP_WIDTH + 10, 0);
-		//printf_s("HELLO");
 		Summary(&playerMe, { MAP_WIDTH, 2 });
-		//Summary(&playerBot[0], { MAP_WIDTH, 15 });
+			Summary(&playerBot[0], { MAP_WIDTH, 11 });
+			Summary(&playerBot[1], { MAP_WIDTH, 18 });
+
 
 		Sleep(150);
 	}

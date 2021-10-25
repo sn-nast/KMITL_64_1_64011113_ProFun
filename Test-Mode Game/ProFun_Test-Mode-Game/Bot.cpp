@@ -8,13 +8,16 @@
 #include "Object.h"
 
 void setupBot(Player* p) {
-	strcpy_s(p->Format, "O");
+	strcpy_s(p->Format, "N");
 	strcpy_s(p->Name, "BOT NO.1");
-	p->Lenght = strlen(p->Format);
-	p->Height = 1;
-	p->Attribute = 7;
-	p->SpeedX = 1;
-	p->Bomb.Amount = 10;
+	//p->Attribute = 7;
+	p->Lenght = 3;
+	p->Height = 3;
+	p->SpeedX = 3;
+	p->SpeedY = 3;
+	p->Bomb.Amount = 1;
+	p->Bomb.PowerX = 1;
+	p->Bomb.PowerY = 1;
 	setupBomb(p);
 }
 
@@ -28,14 +31,18 @@ void moveBot(Player* p, Map* m) {
 	p->Last_position.X = p->Position.X;
 	p->Last_position.Y = p->Position.Y;
 	bool canMove = true;
-	int Direction;
+	unsigned int* Direction = &p->Bot.DirectionNow;
+	unsigned int* C_Direction = &p->Bot.CountDirectionNow;
+	while (*C_Direction - p->Bomb.PowerX < 2) { *C_Direction++; }
 	while (canMove) {
-		Direction = rand() % (4 + 1 - 1) + 1;
-		checkControl(Direction, p, m);
+		if (*C_Direction > 0) { *Direction = rand() % (4 + 1 - 1) + 1; }
+		//*Direction = rand() % (4 + 1 - 1) + 1;
+		checkControl(*Direction, p, m);
 		if (p->Position.X != p->Last_position.X ||
 			p->Position.Y != p->Last_position.Y) {
 			canMove = false;
 		}
+		*C_Direction--;
 	}
 }
 

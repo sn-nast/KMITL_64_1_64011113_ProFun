@@ -7,9 +7,11 @@
 #include <stdlib.h>
 
 #define SCREEN_WIDTH 120
-#define SCREEN_HEIGHT 40
-#define MAP_WIDTH 80
-#define MAP_HEIGHT 32
+#define SCREEN_HEIGHT 46
+#define MAP_WIDTH	 50
+#define MAP_HEIGHT	 45
+#define MAP_WIDTH_3  50
+#define MAP_HEIGHT_3 50
 
 // Const of Bomb
 const short NORMAL_ATTIBUTE = 7;
@@ -70,22 +72,29 @@ typedef struct _Bomb{
 	int PowerX = 1, PowerY = 1;
 } Bomb;
 
+typedef struct _ForBot {
+	unsigned int DirectionNow;
+	unsigned int CountDirectionNow = 0;
+
+} ForBot;
+
 typedef struct _Player {
 	char Name[20];
 	char Format[5];
 	unsigned int Lenght;
 	unsigned int Height;
+	unsigned int Dir_atb = 4;
+	unsigned int Attribute;
 	COORD Position;
 	COORD Last_position;
 	COORD Direction;
 	COORD Last_Direction;
-	unsigned int Dir_atb = 4;
 	unsigned int SpeedX = 1;
 	unsigned int SpeedY = 1;
-	unsigned int Attribute;
 	Bomb Bomb;
 	int Life = 1;
 	long int Point;
+	ForBot Bot;
 } Player;
 
 struct _Object {
