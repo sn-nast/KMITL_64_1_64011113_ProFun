@@ -26,19 +26,19 @@ Map nMap[5];
 _Object
 	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE, NO_POINT},
 	Wall[10] = {
-		{ '#', 9,	CAN_DESTROY,	WALL_POINT },
-		{ '|', 10,	CANt_DESTROY,	NO_POINT },
-		{ '&', 11,	CANt_DESTROY,	NO_POINT },
-		{ '$', 10,	CANt_DESTROY,	NO_POINT },
-		{ '+', 11,	CANt_DESTROY,	NO_POINT },
-		{ '%', 6,	CAN_DESTROY,	WALL_POINT },
-		{ '=', 8,	CAN_DESTROY,	WALL_POINT },
-		{ 13, 12,	CANt_DESTROY,	NO_POINT  }
+		{ '#', 9,	CAN_DESTROYED,	WALL_POINT },
+		{ '|', 10,	CANt_DESTROYED,	NO_POINT },
+		{ '&', 11,	CANt_DESTROYED,	NO_POINT },
+		{ '$', 10,	CANt_DESTROYED,	NO_POINT },
+		{ '+', 11,	CANt_DESTROYED,	NO_POINT },
+		{ '%', 6,	CAN_DESTROYED,	WALL_POINT },
+		{ '=', 8,	CAN_DESTROYED,	WALL_POINT },
+		{ 13, 12,	CANt_DESTROYED,	NO_POINT  }
 	},
 	Bomb_Nm		= {'@', 7,	BOMB_SHOW,	NO_POINT},
 	Bomb_burst	= {'X', 4,	BOMB_BURST,	NO_POINT },
 	Life		= { 3, 6,	CAN_KEEP,	ITEM_POINT },
-	Potion		= { 'P', 11, CAN_KEEP,	ITEM_POINT},
+	Potion		= { 'P', 100, CAN_KEEP,	ITEM_POINT},
 	newBomb		= { 15, 12, CAN_KEEP,	ITEM_POINT }
 ;
 
@@ -64,14 +64,14 @@ int main() {
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 
-		playerBot[0].Position = { 5, 1 };
+		playerBot[0].Position = { 44, 1 };
 		playerBot[1].Position = { 2, 37 };
 
 		setupBot(&playerBot[0]);
 		//setupBot(&playerBot[1]);
 
 		playerBot[0].Attribute = 180;
-		playerBot[1].Attribute = 180;
+		//playerBot[1].Attribute = 180;
 
 	setupBomb(&playerMe);
 	setMode();
@@ -84,16 +84,13 @@ int main() {
 		int Forwalk = rand();
 		moveControl(&playerMe, &nMap[0]);
 
-			moveBot(&playerBot[0], &nMap[0]);
-			dropBombBot(&playerBot[0], &nMap[0]);
+			moveBot(&playerBot[0], &nMap[0]); // include dropBomb
 			//moveBot(&playerBot[1], &nMap[0]);
-			//dropBombBot(&playerBot[1], &nMap[0]);
 
 		clearBuffer();
 
 		changeStateMap(&nMap[0]);
 		setOfBomb(&playerMe, &nMap[0]);
-		
 			setOfBot(&playerBot[0], &nMap[0]);
 			//setOfBot(&playerBot[1], &nMap[0]);
 
@@ -102,13 +99,11 @@ int main() {
 		checkBomb(&playerMe, &nMap[0]);
 			checkBomb(&playerBot[0], &nMap[0]);
 
-
 		displayBuffer(); 
 
 		Summary(&playerMe, { MAP_WIDTH, 2 });
-			Summary(&playerBot[0], { MAP_WIDTH, 11 });
-			Summary(&playerBot[1], { MAP_WIDTH, 18 });
-
+			Summary(&playerBot[0], { MAP_WIDTH, 12 });
+			//Summary(&playerBot[1], { MAP_WIDTH, 18 });
 
 		Sleep(150);
 	}

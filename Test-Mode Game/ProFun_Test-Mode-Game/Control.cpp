@@ -34,8 +34,8 @@ void moveControl(Player* p, Map* m) {
 					}
 				}
 			jump:
-				p->Last_position.X = p->Position.X;
-				p->Last_position.Y = p->Position.Y;
+				p->Last_Position.X = p->Position.X;
+				p->Last_Position.Y = p->Position.Y;
 				COORD* pos = &p->Position;
 
 				switch (KB_Char | KB_keycode) {
@@ -76,6 +76,8 @@ void moveControl(Player* p, Map* m) {
 
 void checkControl(int Direction, Player* p, Map* m) {
 	COORD* pos = &p->Position;
+	p->Last_Position.X = pos->X;
+	p->Last_Position.Y = pos->Y;
 	unsigned int* State;
 	int Len = p->Lenght;
 	int Hei = p->Height;
@@ -120,7 +122,6 @@ void checkControl(int Direction, Player* p, Map* m) {
 
 int checkStateControl(unsigned int St) {
 	if (St == Space.NormalState ||
-		St == Bomb_Nm.NormalState ||
 		St == Bomb_burst.NormalState ||
 		St == CAN_KEEP)
 		{ return 1; }

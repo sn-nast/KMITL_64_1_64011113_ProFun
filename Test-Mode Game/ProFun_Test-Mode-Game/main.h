@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define SCREEN_WIDTH 120
 #define SCREEN_HEIGHT 46
@@ -17,11 +18,15 @@
 const short NORMAL_ATTIBUTE = 7;
 const char NORMAL_BOMB = '@';
 const short NOW_BOMB = 10;
+const short BOMB_CAN_PUT = 0;
+const short BOMB_ALREADY_PUT = 1;
+const short BOMB_COUNTING = 2;
+
 
 // Const of State
 const int CAN_KEEP = 12;
-const int CAN_DESTROY = 1;
-const int CANt_DESTROY = 2;
+const int CAN_DESTROYED = 1;
+const int CANt_DESTROYED = 2;
 const int BOMB_SHOW = 7;
 const int BOMB_BURST = 10;
 const int MAP_SPACE = 0;
@@ -74,8 +79,13 @@ typedef struct _Bomb{
 
 typedef struct _ForBot {
 	unsigned int DirectionNow;
-	unsigned int CountDirectionNow = 0;
-
+	unsigned int CountDirectionNow;
+	unsigned int LastDirectionNow;
+	unsigned int CountCanMove;
+	bool CanDropBomb = true;
+	bool ShouldChangeNewDirection = false;
+	unsigned int CountMoveThisDirection[4];
+	
 } ForBot;
 
 typedef struct _Player {
@@ -86,7 +96,7 @@ typedef struct _Player {
 	unsigned int Dir_atb = 4;
 	unsigned int Attribute;
 	COORD Position;
-	COORD Last_position;
+	COORD Last_Position;
 	COORD Direction;
 	COORD Last_Direction;
 	unsigned int SpeedX = 1;
