@@ -22,7 +22,6 @@ const short BOMB_CAN_PUT = 0;
 const short BOMB_ALREADY_PUT = 1;
 const short BOMB_COUNTING = 2;
 
-
 // Const of State
 const int CAN_KEEP = 12;
 const int CAN_DESTROYED = 1;
@@ -84,7 +83,7 @@ typedef struct _ForBot {
 	unsigned int CountCanMove;
 	bool CanDropBomb = true;
 	bool ShouldChangeNewDirection = false;
-	unsigned int CountMoveThisDirection[4];
+	unsigned int CountMovedThisDirection[4];
 	
 } ForBot;
 
@@ -120,6 +119,8 @@ typedef struct _Map {
 	_Object Object[MAP_HEIGHT][MAP_WIDTH];
 	int Time[MAP_HEIGHT][MAP_WIDTH];
 	int ObjRand[MAP_HEIGHT][MAP_WIDTH];
+	int maxBombPowerX = 0;
+	int maxBombPowerY = 0;
 } Map;
 
 // Extern Object

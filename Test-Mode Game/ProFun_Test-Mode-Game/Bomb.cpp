@@ -179,6 +179,10 @@ void burstBomb(Player* p, int i, Map* m) {
 }
 
 void checkBomb(Player* p, Map* m) {
+	// Check maximum bomb power (for bot moving)
+	if (p->Bomb.PowerX > m->maxBombPowerX) { m->maxBombPowerX = p->Bomb.PowerX; }
+	if (p->Bomb.PowerY > m->maxBombPowerY) { m->maxBombPowerY = p->Bomb.PowerY; }
+
 	// Check Life and Burst
 	COORD* posP = &p->Position;
 	if (m->State[posP->Y][posP->X] == Bomb_burst.NormalState) {

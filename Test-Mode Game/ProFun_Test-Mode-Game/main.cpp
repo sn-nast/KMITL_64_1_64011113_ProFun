@@ -33,7 +33,8 @@ _Object
 		{ '+', 11,	CANt_DESTROYED,	NO_POINT },
 		{ '%', 6,	CAN_DESTROYED,	WALL_POINT },
 		{ '=', 8,	CAN_DESTROYED,	WALL_POINT },
-		{ 13, 12,	CANt_DESTROYED,	NO_POINT  }
+		{ 13, 12,	CANt_DESTROYED,	NO_POINT  },
+		{ 'M', 12,  CAN_DESTROYED,  WALL_POINT}
 	},
 	Bomb_Nm		= {'@', 7,	BOMB_SHOW,	NO_POINT},
 	Bomb_burst	= {'X', 4,	BOMB_BURST,	NO_POINT },
@@ -60,12 +61,12 @@ int main() {
 	playerMe.SpeedX = 3;
 	playerMe.SpeedY = 3;
 	playerMe.Bomb.Amount = 5;
-	playerMe.Bomb.Time = 15;
+	playerMe.Bomb.Time = 30;
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 
 		playerBot[0].Position = { 44, 1 };
-		playerBot[1].Position = { 2, 37 };
+		//playerBot[1].Position = { 2, 37 };
 
 		setupBot(&playerBot[0]);
 		//setupBot(&playerBot[1]);

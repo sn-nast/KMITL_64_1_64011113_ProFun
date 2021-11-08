@@ -24,6 +24,7 @@ void setupBot(Player* p) {
 
 void setOfBot(Player* p, Map* m) {
 	setOfBomb(p, m);
+	// Move bot (Part: draw bot)
 	playerMove(p, m);
 }
 
@@ -33,71 +34,45 @@ void moveBot(Player* p, Map* m) {
 	unsigned int* LastDirection = &p->Bot.LastDirectionNow;
 	unsigned int* C_Direction = &p->Bot.CountDirectionNow;
 	// Bomb bot
-	COORD nearestBomb[3] = { {0, 0}, {0, 0}, {0, 0} };
-	double distance[3] = { 0, 0, 0 };
-	int haveBomb = 0;
+	struct _nearestBomb {
+		COORD posBomb = { 0, 0 };
+		double distance = 0;
+		COORD burstArea[4];
+	};
+
+	_nearestBomb nearestBomb[3], *p_nearestBomb;
+	p_nearestBomb = nearestBomb;
+	checkBombBot(p, m, &p_nearestBomb->posBomb, &p_nearestBomb->distance);
+
+
+	//int haveBomb = 0;
 	COORD* pos = &p->Position;
 	int Len = p->Lenght;
 	int Hei = p->Height;
 
+	// Property each of side
 	struct _Direction {
-		int CountCheckSide = 0;
+		int CountCheckSide;
 		int Direction;
 		int propertyX;
 		int propertyY;
 		int CountCanMove;
+		bool CantMoveFromBomb;
 	};
 	_Direction allDirection[4] = {
-		{ 0, LEFT , -Len , 0,	0},
-		{ 0, RIGHT, Len  , 0,	0},
-		{ 0, DOWN , 0    , Hei,	0},
-		{ 0, UP	  , 0    , -Hei,0}
+		{ 0, LEFT , -Len , 0,	0, false},
+		{ 0, RIGHT, Len  , 0,	0, false},
+		{ 0, DOWN , 0    , Hei,	0, false},
+		{ 0, UP	  , 0    , -Hei,0, false}
 	};
-	// Check bomb
-	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
-		for (short pX = 0; pX < MAP_WIDTH; pX++) {
-			if (m->State[pY][pX] == Bomb_Nm.NormalState &&
-				m->State[pY][pX + (Len - 1)] == Bomb_Nm.NormalState &&
-				m->State[pY + (Hei - 1)][pX] == Bomb_Nm.NormalState
-				) {
-				int deltaX = pX - pos->X;
-				int deltaY = pY - pos->Y;
-				distance[2] = sqrt(pow(deltaX, 2) + pow(deltaY, 2));
-				nearestBomb[2] = { pX, pY };
-				if (distance[0] == 0) {
-					distance[0] = distance[2];
-					nearestBomb[0] = nearestBomb[2];
-				}
-				else if (distance[2] < distance[1]) {
-					if (distance[2] < distance[0]) {
-						double temp = distance[1];
-						distance[1] = distance[0];
-						distance[0] = distance[2];
-						distance[2] = temp;
-						COORD tempC = nearestBomb[1];
-						nearestBomb[1] = nearestBomb[0];
-						nearestBomb[0] = nearestBomb[2];
-						nearestBomb[2] = tempC;
-					}
-					else {
-						distance[0] = distance[1];
-						distance[1] = distance[2];
-						nearestBomb[0] = nearestBomb[1];
-						nearestBomb[1] = nearestBomb[2];
-					}
-				}
-				haveBomb++;
-			}
-		}
-	}
-	int dirX = 0, dirY = 0;
+	
 
 	// ------------------------------------ //
 	// Random move
 	const int PASS = 1, cantPASS = 0;
 	int CheckSide[4] = { PASS, PASS, PASS, PASS };
 	int canMoveAmount[4] = { 0, 0, 0, 0 };
-	bool haveBomb1 = false;
+	bool haveBomb = false;
 	// Check side can move
 	if (checkStateControl(m->State[pos->Y][pos->X - Len]) == cantPASS) { CheckSide[0] = cantPASS; }
 	if (checkStateControl(m->State[pos->Y][pos->X + Len]) == cantPASS) { CheckSide[1] = cantPASS; }
@@ -125,17 +100,15 @@ void moveBot(Player* p, Map* m) {
 	}
 	// Random select move
 	// no bomb and Count dir = 0
-	bool ShouldChangeDir = false;
-	while (*C_Direction == 0 && haveBomb1 == false) {
+	while (*C_Direction == 0 && haveBomb == false) {
 		for (int n = 0; n < size; n++) {
 			int randToMove = rand() % 4;
-			unsigned int* CountMoveDir = &p->Bot.CountMoveThisDirection[n];
+			unsigned int* CountMoved = &p->Bot.CountMovedThisDirection[n];
 			if (CheckSide[n] == PASS && randToMove <= 2) {
 				unsigned int temp = *LastDirection;
 				*C_Direction = allDirection[n].CountCanMove;
 				*LastDirection = *Direction;
 				*Direction = allDirection[n].Direction;
-				//ShouldChangeDir = false;
 				break;
 			}
 			// absolutely can't move
@@ -143,14 +116,14 @@ void moveBot(Player* p, Map* m) {
 		}
 	}
 
-	// Same direction should change new
-	unsigned int* CountMoveDir = &p->Bot.CountMoveThisDirection[*Direction - 1];
-	if (*CountMoveDir >= 3) {
-		*CountMoveDir = 0;
+	// Same direction should change new direction
+	unsigned int* CountMoved = &p->Bot.CountMovedThisDirection[*Direction - 1];
+	if (*CountMoved >= 3) {
+		*CountMoved = 0;
 		// if can change direction, should change
 		for (int n = 0; n < size; n++) {
 			int randToMove = rand() % 4;
-			unsigned int* CountMoveDir = &p->Bot.CountMoveThisDirection[n];
+			unsigned int* CountMoved = &p->Bot.CountMovedThisDirection[n];
 			// can pass and not same direction 
 			if ((CheckSide[n] == cantPASS) || (*Direction == allDirection[n].Direction)) { continue; }
 			// L, R -> U, D
@@ -175,40 +148,141 @@ void moveBot(Player* p, Map* m) {
 			if (n == size - 1) { return; }
 		}
 	}
-	// Move bot
+
+	// Check bomb
+	// within bomb power X
+	if (pos->X == nearestBomb[0].posBomb.X && abs(nearestBomb[0].posBomb.Y) <= m->maxBombPowerY) {
+		int randDir = rand() % (UP + 1 - DOWN) + DOWN;
+		if (randDir == DOWN && allDirection[randDir - 1].CountCanMove > 1) { randDir = UP; }
+		else if (randDir == UP && allDirection[randDir - 1].CountCanMove > 1) { randDir = DOWN; }
+		// this direction don't have bomb and can move
+		if (randDir != LEFT && randDir != DOWN) {
+			unsigned int temp = *LastDirection;
+			*C_Direction = allDirection[randDir - 1].CountCanMove;
+			*LastDirection = *Direction;
+			*Direction = allDirection[randDir - 1].Direction;
+		}
+	}
+	// within bomb power Y
+	if ((abs(nearestBomb[0].posBomb.X - pos->X) <= m->maxBombPowerX) && pos->Y == nearestBomb[0].posBomb.Y) {
+		int randDir = rand() % (RIGHT + 1 - LEFT) + RIGHT;
+		if (randDir == LEFT && allDirection[randDir - 1].CountCanMove > 1) { randDir = RIGHT; }
+		else if (randDir == RIGHT && allDirection[randDir - 1].CountCanMove > 1) { randDir = LEFT; }
+		// this direction don't have bomb and can move
+		if (randDir != DOWN && randDir != UP) {
+			unsigned int temp = *LastDirection;
+			*C_Direction = allDirection[randDir - 1].CountCanMove;
+			*LastDirection = *Direction;
+			*Direction = allDirection[randDir - 1].Direction;
+		}
+	}
+
+	// Move bot (Part: selected direction )
 	checkControl(*Direction, p, m);
+	dropBombBot(p, m);
 	(*C_Direction)--;
-	(*CountMoveDir)++;
+	(*CountMoved)++;
 }
 
 void dropBombBot(Player* p, Map* m) {
 	COORD* pos = &p->Position;
 	bool* drop = &p->Bot.CanDropBomb;
-	int size = p->Bomb.Amount;
+	int Amount = p->Bomb.Amount;
 	int Hei = p->Height;
 	int Len = p->Lenght;
 	int check = 0;
-	for (int H = -Hei; H <= Hei; H += Hei) {
-		for (int L = -Len; L <= Len; L += Len) {
-			if (checkStateControl(m->State[pos->Y + H][pos->X + L]) == 1){
-				check++;
-			}
-		}
-	}
+	int CanDropBomb = 1;
+	// Check can drop bomb
+	if (m->State[pos->Y][pos->X - Len] == CAN_DESTROYED) { check++; }
+	if (m->State[pos->Y][pos->X + Len] == CAN_DESTROYED) { check++; }
+	if (m->State[pos->Y + Hei][pos->X] == CAN_DESTROYED) { check++; }
+	if (m->State[pos->Y - Hei][pos->X] == CAN_DESTROYED) { check++; }
+	// Drop only 1 bomb 
 	if (p->Bomb.Drop == 0) { *drop = true; }
 	if (*drop == true && check > 0) {
 		int i = 0;
-		if (p->Bomb.Drop < size) {
-			for (int c = 0; c < size; c++) {
+		if (p->Bomb.Drop < Amount) {
+			for (int c = 0; c < Amount; c++) {
 				if (p->Bomb.State[c] == BOMB_COUNTING) { i++; }
 			}
 			if (m->State[pos->Y][pos->X] == Bomb_Nm.NormalState) {
 				return;
 			}
-			if (p->Bomb.Drop < size - i) { 
+			if (p->Bomb.Drop < Amount - i) { 
 				p->Bomb.Drop++; 
 				*drop = false;
 			}
 		}
 	}
 }
+
+void checkBombBot(Player* p, Map* m, COORD* posBomb, double* distanceBomb) {
+	int haveBomb = 0;
+	COORD* pos = &p->Position;
+	int Len = p->Lenght;
+	int Hei = p->Height;
+	//double distanceBomb[2];
+	// Check bomb all map
+	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
+		for (short pX = 0; pX < MAP_WIDTH; pX++) {
+			if (m->State[pY][pX] == Bomb_Nm.NormalState &&
+				m->State[pY][pX + (Len - 1)] == Bomb_Nm.NormalState &&
+				m->State[pY + (Hei - 1)][pX] == Bomb_Nm.NormalState) {
+				int deltaX = pX - pos->X;
+				int deltaY = pY - pos->Y;
+				//*(posBomb + 2) = sqrt(pow(deltaX, 2) + pow(deltaY, 2));
+				distanceBomb[2] = sqrt(pow(deltaX, 2) + pow(deltaY, 2));
+				posBomb[2] = { pX, pY };
+				if (distanceBomb[0] == 0) {
+					distanceBomb[0] = distanceBomb[2];
+					posBomb[0] = posBomb[2];
+				}
+				else if (distanceBomb[2] < distanceBomb[1]) {
+					if (distanceBomb[2] < distanceBomb[0]) {
+						double temp = distanceBomb[1];
+						distanceBomb[1] = distanceBomb[0];
+						distanceBomb[0] = distanceBomb[2];
+						distanceBomb[2] = temp;
+						COORD tempC = posBomb[1];
+						posBomb[1] = posBomb[0];
+						posBomb[0] = posBomb[2];
+						posBomb[2] = tempC;
+					}
+					else {
+						distanceBomb[0] = distanceBomb[1];
+						distanceBomb[1] = distanceBomb[2];
+						posBomb[0] = posBomb[1];
+						posBomb[1] = posBomb[2];
+					}
+				}
+				haveBomb++;
+			}
+		}
+	}
+	// if COORD (0,0) = no bomb
+	for (int n = 0; n < 3; n++) {
+		if (posBomb[n].X == 0 && posBomb[n].Y == 0) {
+			posBomb[n] = { SCREEN_WIDTH, SCREEN_HEIGHT };
+		}
+	}
+}
+
+//void checkBombPowerBot(Player* p, Map* m, COORD* nearestBomb, unsigned int* Direction) {
+//	COORD* pos = &p->Position;
+//	int Len = p->Lenght;
+//	int Hei = p->Height;
+//
+//	struct _Direction {
+//		int CountCheckSide = 0;
+//		int Direction;
+//		int propertyX;
+//		int propertyY;
+//		int CountCanMove;
+//	};
+//	_Direction allDirection[4] = {
+//		{ 0, LEFT , -maxBombPowerX , 0    , 0},
+//		{ 0, RIGHT, maxBombPowerX  , 0	  , 0},
+//		{ 0, DOWN , 0    , maxBombPowerY  , 0},
+//		{ 0, UP	  , 0    , -maxBombPowerY , 0}
+//	};
+//}
