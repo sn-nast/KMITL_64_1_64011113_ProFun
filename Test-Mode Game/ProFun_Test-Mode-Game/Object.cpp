@@ -2,6 +2,28 @@
 #include "main.h"
 #include "Map.h"
 
+_Object
+	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE, NO_POINT},
+	Wall[10] = {
+		{ '#', 9,	CAN_DESTROYED,	WALL_POINT },
+		{ '|', 10,	CANt_DESTROYED,	NO_POINT },
+		{ '&', 11,	CANt_DESTROYED,	NO_POINT },
+		{ '$', 10,	CANt_DESTROYED,	NO_POINT },
+		{ '+', 11,	CANt_DESTROYED,	NO_POINT },
+		{ '%', 6,	CAN_DESTROYED,	WALL_POINT },
+		{ '=', 8,	CAN_DESTROYED,	WALL_POINT },
+		{ 13, 12,	CANt_DESTROYED,	NO_POINT  },
+		{ 'M', 12,  CAN_DESTROYED,  WALL_POINT}
+	},
+	Bomb_Nm		= {'@', 7,	BOMB_SHOW,	NO_POINT},
+	Bomb_burst	= {'X', 4,	BOMB_BURST,	NO_POINT },
+	Life		= { 3, 6,	CAN_KEEP,	ITEM_POINT },
+	Potion		= { 'P', 100, CAN_KEEP,	ITEM_POINT},
+	newBomb		= { 15, 12, CAN_KEEP,	ITEM_POINT }
+;
+
+int typeWall = sizeof(Wall) / sizeof(Wall[0]);
+
 void dropObject(Map* m, COORD pos) {
 	int* objRand = &m->ObjRand[pos.Y][pos.X];
 	_Object* obj = &m->Object[pos.Y][pos.X];

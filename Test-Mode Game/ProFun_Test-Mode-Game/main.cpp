@@ -8,49 +8,16 @@
 #include "Bot.h"
 #include "Point.h"
 
-
-HANDLE wHnd;
-HANDLE rHnd;
-DWORD fdwMode;
-
-CHAR_INFO consoleBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
-COORD bufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
-COORD characterPos = { 0, 0 };
-SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
-
 bool playStatus = true;
-DWORD numEvents = 0;
-DWORD numEventsRead = 0;
-
-Player playerMe, * P_playerMe, playerBot[3];
-Map nMap[5];
-
-_Object
-	Space = { ' ', NORMAL_ATTIBUTE, MAP_SPACE, NO_POINT},
-	Wall[10] = {
-		{ '#', 9,	CAN_DESTROYED,	WALL_POINT },
-		{ '|', 10,	CANt_DESTROYED,	NO_POINT },
-		{ '&', 11,	CANt_DESTROYED,	NO_POINT },
-		{ '$', 10,	CANt_DESTROYED,	NO_POINT },
-		{ '+', 11,	CANt_DESTROYED,	NO_POINT },
-		{ '%', 6,	CAN_DESTROYED,	WALL_POINT },
-		{ '=', 8,	CAN_DESTROYED,	WALL_POINT },
-		{ 13, 12,	CANt_DESTROYED,	NO_POINT  },
-		{ 'M', 12,  CAN_DESTROYED,  WALL_POINT}
-	},
-	Bomb_Nm		= {'@', 7,	BOMB_SHOW,	NO_POINT},
-	Bomb_burst	= {'X', 4,	BOMB_BURST,	NO_POINT },
-	Life		= { 3, 6,	CAN_KEEP,	ITEM_POINT },
-	Potion		= { 'P', 100, CAN_KEEP,	ITEM_POINT},
-	newBomb		= { 15, 12, CAN_KEEP,	ITEM_POINT }
-;
-
-int typeWall = sizeof(Wall) / sizeof(Wall[0]);
+Player playerMe;/*, playerBot[3];*/
 
 int main() {
 	srand(time(NULL));
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
 	setCursor(0);
+
+	// Read highest points
+	readPoint();
 
 	// Setup 
 	strcpy_s(playerMe.Format, "Y");
@@ -66,7 +33,6 @@ int main() {
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
 	playerMe.Point = 60000000;
-	readPoint();
 
 		playerBot[0].Position = { 44, 1 };
 		//playerBot[1].Position = { 2, 37 };

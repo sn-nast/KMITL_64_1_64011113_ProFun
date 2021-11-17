@@ -7,6 +7,7 @@
 #include "Map.h" 
 #include "Object.h"
 
+Player playerBot[3];
 void setupBot(Player* p) {
 	strcpy_s(p->Format, "N");
 	strcpy_s(p->Name, "BOT NO.1");

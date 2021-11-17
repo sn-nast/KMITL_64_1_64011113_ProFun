@@ -1,6 +1,11 @@
 #include"Buffer.h"
 #include"main.h"
 
+CHAR_INFO consoleBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+COORD bufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
+COORD characterPos = { 0, 0 };
+SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
+
 int setConsole(int x, int y) {
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);

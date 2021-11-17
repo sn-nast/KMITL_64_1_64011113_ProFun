@@ -3,6 +3,8 @@
 #include "Buffer.h"
 #include "Object.h"
 
+Map nMap[5];
+
 void setupMap(Map* m, int n_map) {
 	for (short pY = 0; pY < MAP_HEIGHT; pY++) {
 		for (short pX = 0; pX < MAP_WIDTH; pX++) {

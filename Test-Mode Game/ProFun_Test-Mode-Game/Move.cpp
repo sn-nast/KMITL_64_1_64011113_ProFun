@@ -4,6 +4,12 @@
 #include "Map.h"
 #include "Object.h"
 
+HANDLE wHnd;
+HANDLE rHnd;
+DWORD fdwMode;
+DWORD numEvents = 0;
+DWORD numEventsRead = 0;
+
 void playerMove(Player* p, Map* m) {
 	int Len = p->Lenght;
 	int Hei = p->Height;

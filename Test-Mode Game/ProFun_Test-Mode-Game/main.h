@@ -131,3 +131,9 @@ struct _PointHistory {
 // Extern Object
 extern _Object Space, Bomb_Nm, Bomb_burst, Life, Potion, Wall[], newBomb;
 extern int typeWall;
+
+// Extern map
+extern Map nMap[5];
+
+// Extern Bot
+extern Player playerBot[3];
