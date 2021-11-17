@@ -1,0 +1,65 @@
+#include "Point.h"
+#include "main.h"
+#include "Buffer.h"
+_PointHistory PointHistory[5];
+FILE* f;
+int size = sizeof(PointHistory) / sizeof(PointHistory[0]);
+
+void readPoint() {
+	int CountPlay = 0;
+	f = fopen("00 HighestPoint.txt", "r");
+	while (!feof(f)) {
+		fscanf(f, "%s\t\t%d", &PointHistory[CountPlay].Name, &PointHistory[CountPlay].Point);
+		CountPlay++;
+	}
+	fclose(f);
+	for (int n = 0; n < size; n++) {
+		if (PointHistory[n].Point == 0) {
+			strcpy(PointHistory[n].Name, "------");
+		}
+	}
+}
+
+void arrangePoint() {
+	for (int i = 0; i < size; i++) {
+		for (int j = i + 1; j < size; j++) {
+			if (PointHistory[i].Point < PointHistory[j].Point) {
+				int tempPoint = PointHistory[i].Point;
+				char tempName[50];
+				strcpy(tempName, PointHistory[i].Name);
+				PointHistory[i].Point = PointHistory[j].Point;
+				strcpy(PointHistory[i].Name, PointHistory[j].Name);
+				PointHistory[j].Point = tempPoint;
+				strcpy(PointHistory[j].Name, tempName);
+			}
+		}
+	}
+	f = fopen("00 HighestPoint.txt", "w");
+	for (int n = 0; n < size; n++) {
+		fprintf(f, "%s\t\t%d\n", PointHistory[n].Name, PointHistory[n].Point);
+	}
+	fclose(f);
+	readPoint();
+}
+
+void recordPoint(Player* p) {
+	f = fopen("00 PlayHistory.txt", "a");
+	fprintf(f, "%s\t\t%d\n", p->Name, p->Point);
+	fclose(f);
+	if (p->Point > PointHistory[size - 1].Point) {
+		PointHistory[size - 1].Point = p->Point;
+		strcpy(PointHistory[size - 1].Name, p->Name);
+		arrangePoint();
+	}
+}
+
+void showHighestPoint() {
+	gotoxy(0, MAP_HEIGHT + 5);
+	printf("%28s\n", "Highest Points");
+	printf("---------------------------------------\n");
+	printf("|%4s%-1s| %13s%-3s | %8s%-2s |\n", "No.", "", "Player Name", "", "Points", "");
+	printf("|%4s%-1s| %15s%-1s | %10s%0s |\n", "---", "", "---------------", "", "---------", "");
+	for (int n = 0; n < size; n++) {
+		printf("|  %d  | %-16s | %10d |\n" ,n + 1, PointHistory[n].Name, PointHistory[n].Point);
+	}
+}

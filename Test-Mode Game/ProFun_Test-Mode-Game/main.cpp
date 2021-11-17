@@ -6,6 +6,8 @@
 #include "Map.h" 
 #include "Object.h"
 #include "Bot.h"
+#include "Point.h"
+
 
 HANDLE wHnd;
 HANDLE rHnd;
@@ -47,7 +49,6 @@ int typeWall = sizeof(Wall) / sizeof(Wall[0]);
 
 int main() {
 	srand(time(NULL));
-
 	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
 	setCursor(0);
 
@@ -64,6 +65,8 @@ int main() {
 	playerMe.Bomb.Time = 30;
 	playerMe.Bomb.PowerX = 3;
 	playerMe.Bomb.PowerY = 3;
+	playerMe.Point = 60000000;
+	readPoint();
 
 		playerBot[0].Position = { 44, 1 };
 		//playerBot[1].Position = { 2, 37 };
@@ -79,6 +82,7 @@ int main() {
 	// 
 	//while() // เลือก map
 	setupMap(&nMap[0], 2);
+	//showHighestPoint();
 
 	while (playStatus /*&& playerMe.Life >= 0*/) {
 		// Input Keyboard & Mouse events

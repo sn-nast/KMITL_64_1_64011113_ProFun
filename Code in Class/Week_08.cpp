@@ -44,6 +44,21 @@
 // 	return 0;
 // }
 
+// #include<string.h>
+// #include<stdio.h>
+// int main()  {
+//     struct player {
+//         char name[50];
+//         int level;
+//         int score;
+//     } x, y, z;
+//     strcpy(x.name,"Hello");
+//     player p;
+
+//     printf("Hello world");
+
+// }
+
 #include<string.h>
 #include<stdio.h>
 int main()  {
@@ -52,9 +67,37 @@ int main()  {
         int level;
         int score;
     } x, y, z;
-    strcpy(x.name,"Hello");
     player p;
+    FILE *f;
+    f = fopen("Test.txt", "r");
+    struct text
+    {
+        char i[100];
+        int k;
+    };
+    text text1[5];
+    int n = 0;
+    while (!feof(f)){
+        fscanf(f, "%d %s",&text1[n].k, &text1[n].i);
+        printf("%d %s\n",text1[n].k, text1[n].i);
+        n++;
+    }
+    fclose(f);
 
-    printf("Hello world");
-
+}
+void readPoint() {
+	FILE* f;
+	fopen_s(&f,"HighScore_Player.txt", "r");
+	int n = 0;
+	int k;
+	char t[100];
+	while (!feof(f)) {
+		//printf_s("n = %d\n", n);
+		//fscanf_s(f, "%s %d", &PointHistory[n].Name, &PointHistory[n].Point);
+		//printf_s("%s %d\n", PointHistory[n].Name, PointHistory[n].Point);
+		fscanf_s(f, "%s %d", &k, &t);
+		printf_s("%s %d\n", &k, &t);
+		n++;
+	}
+	fclose(f);
 }

@@ -123,6 +123,11 @@ typedef struct _Map {
 	int maxBombPowerY = 0;
 } Map;
 
+struct _PointHistory {
+	char Name[50];
+	int Point;
+};
+
 // Extern Object
 extern _Object Space, Bomb_Nm, Bomb_burst, Life, Potion, Wall[], newBomb;
 extern int typeWall;
