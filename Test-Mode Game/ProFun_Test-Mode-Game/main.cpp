@@ -19,9 +19,8 @@ int main() {
 	// Read highest points
 	readPoint();
 
-	mapSelected = 2;
 	while (programStatus) {
-		//homePage();
+		homePage();
 		setMode(1);
 		setupAllPlayerToOrigin();
 

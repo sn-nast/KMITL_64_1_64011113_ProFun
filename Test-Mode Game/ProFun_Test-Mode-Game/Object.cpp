@@ -202,7 +202,6 @@ void checkCountDrop(Map* m, int* randNextObj, bool mainPlayer) {
 		}
 	}
 
-
 	for (int n = 0; n < amountObject; n++) {
 		if (Obj[n].mustNewObj == true) {
 			countMustChange++;
