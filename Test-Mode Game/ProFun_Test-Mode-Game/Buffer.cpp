@@ -13,9 +13,14 @@ int setConsole(int x, int y) {
 	return 0;
 }
 
-int setMode() {
-	rHnd = GetStdHandle(STD_INPUT_HANDLE);
-	fdwMode = ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+int setMode(int mode) {
+	if (mode == 0) {
+		fdwMode = ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT;
+	}
+	else if (mode == 1) {
+		fdwMode = ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+		rHnd = GetStdHandle(STD_INPUT_HANDLE);
+	}
 	SetConsoleMode(rHnd, fdwMode);
 	return 0;
 }
@@ -31,7 +36,14 @@ void displayBuffer() {
 
 void clearBuffer() {
 	for (int y = 0; y < SCREEN_HEIGHT; ++y) {
-		for (int x = 0; x < SCREEN_WIDTH; ++x) { putBuffer(x, y, ' ', NORMAL_ATTIBUTE); }
+		for (int x = 0; x < SCREEN_WIDTH; ++x) { putBuffer(x, y, ' ', NORMAL_ATTRIBUTE); }
+	}
+}
+
+void clearScreen() {
+	setcolor(15, 0);
+	for (int y = 0; y < SCREEN_HEIGHT; ++y) {
+		for (int x = 0; x < SCREEN_WIDTH; ++x) { gotoxy(x, y); printf(" "); }
 	}
 }
 
@@ -84,7 +96,7 @@ void convertToChar(int n, char* keepArray) {
 
 void printBuffer(COORD pos, char* text) {
 	for (int n = 0; n < strlen(text); n++) {
-		putBuffer(pos.X + n, pos.Y, *(text + n), NORMAL_ATTIBUTE);
+		putBuffer(pos.X + n, pos.Y, *(text + n), NORMAL_ATTRIBUTE);
 	}
 }
 
@@ -92,6 +104,6 @@ void printBuffer(COORD pos, int n) {
 	char intToChar[10];
 	convertToChar(n, intToChar);
 	for (int i = 0; i < strlen(intToChar); i++) {
-		putBuffer(pos.X + i, pos.Y + 1, intToChar[i], NORMAL_ATTIBUTE);
+		putBuffer(pos.X + i, pos.Y + 1, intToChar[i], NORMAL_ATTRIBUTE);
 	}
 }

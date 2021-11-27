@@ -157,13 +157,12 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Addition-Feature.cpp" />
     <ClCompile Include="Move.h" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="StartAndSetup.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Addition-Feature.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Bot.h" />
@@ -171,6 +170,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="StartAndSetup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

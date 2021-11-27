@@ -7,81 +7,58 @@
 #include "Object.h"
 #include "Bot.h"
 #include "Point.h"
-
-bool playStatus = true;
-Player playerMe;/*, playerBot[3];*/
+#include "StartAndSetup.h"
 
 int main() {
 	srand(time(NULL));
-	setConsole(SCREEN_WIDTH, SCREEN_HEIGHT);
-	setCursor(0);
+
+	// Setup 
+	setAllScreen();
+	levelPlayer = 1;
 
 	// Read highest points
 	readPoint();
 
-	// Setup 
-	strcpy_s(playerMe.Format, "Y");
-	strcpy_s(playerMe.Name, "Me");
-	playerMe.Position = {2, 1 };
-	playerMe.Attribute = 150;
-	playerMe.Lenght = 3;
-	playerMe.Height = 3;
-	playerMe.SpeedX = 3;
-	playerMe.SpeedY = 3;
-	playerMe.Bomb.Amount = 5;
-	playerMe.Bomb.Time = 30;
-	playerMe.Bomb.PowerX = 3;
-	playerMe.Bomb.PowerY = 3;
-	playerMe.Point = 60000000;
+	mapSelected = 2;
+	while (programStatus) {
+		//homePage();
+		setMode(1);
+		setupAllPlayerToOrigin();
 
-		playerBot[0].Position = { 44, 1 };
-		//playerBot[1].Position = { 2, 37 };
+		setupMap(&playMap[mapSelected], mapSelected + 1);
+		Map* m = &playMap[mapSelected];
 
-		setupBot(&playerBot[0]);
-		//setupBot(&playerBot[1]);
+		while (playStatus) {
+			moveControl(&playerMe, m);
+				moveAllBot(m); 
+				dropBombAllBot(m);
+			clearBuffer();
 
-		playerBot[0].Attribute = 180;
-		//playerBot[1].Attribute = 180;
+			changeStateMap(m);
+			setOfBomb(&playerMe, m);
+				setOfAllBot(m);
 
-	setupBomb(&playerMe);
-	setMode();
-	// 
-	//while() // เลือก map
-	setupMap(&nMap[0], 2);
-	//showHighestPoint();
+			playerMove(&playerMe, m);
 
-	while (playStatus /*&& playerMe.Life >= 0*/) {
-		// Input Keyboard & Mouse events
-		int Forwalk = rand();
-		moveControl(&playerMe, &nMap[0]);
+			checkBomb(&playerMe, m);
+				checkBombAllBot(m);
 
-			moveBot(&playerBot[0], &nMap[0]); // include dropBomb
-			//moveBot(&playerBot[1], &nMap[0]);
+			displayBuffer();
+			summary(&playerMe, { MAP_WIDTH + 3, summaryLastLine });
+			summaryAllBot();
 
+			gamePlayPageAndGameCheck();
+
+			countDownGameTime(m);
+			countDownObjectAllPlayer();
+
+			Sleep(150);
+		}
+		recordPoint(&playerMe);
+		endGamePage();
+		changeLevelPlayer();
 		clearBuffer();
-
-		changeStateMap(&nMap[0]);
-		setOfBomb(&playerMe, &nMap[0]);
-			setOfBot(&playerBot[0], &nMap[0]);
-			//setOfBot(&playerBot[1], &nMap[0]);
-
-		playerMove(&playerMe, &nMap[0]);
-
-		checkBomb(&playerMe, &nMap[0]);
-			checkBomb(&playerBot[0], &nMap[0]);
-
-		displayBuffer(); 
-
-		Summary(&playerMe, { MAP_WIDTH, 2 });
-			Summary(&playerBot[0], { MAP_WIDTH, 12 });
-			//Summary(&playerBot[1], { MAP_WIDTH, 18 });
-
-		Sleep(150);
+		displayBuffer();
 	}
-
-	//clearBuffer();
-	//displayBuffer();
-	//gotoxy(0, 0);
-	//printf_s("GAME OVER!!!")S;
 	return 0;
 }

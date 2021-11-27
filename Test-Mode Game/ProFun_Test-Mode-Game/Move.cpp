@@ -4,20 +4,28 @@
 #include "Map.h"
 #include "Object.h"
 
-HANDLE wHnd;
-HANDLE rHnd;
-DWORD fdwMode;
-DWORD numEvents = 0;
-DWORD numEventsRead = 0;
-
 void playerMove(Player* p, Map* m) {
 	int Len = p->Lenght;
 	int Hei = p->Height;
 	COORD* pos = &p->Position;
 	// Player format
+	int randColorInDeathless = rand ();
 	for (int H = 0; H < Hei; H++) {
 		for (int L = 0; L < Len; L++) {
-			putBuffer(p->Position.X + L, p->Position.Y + H, p->Format[0], p->Attribute);
+			int color = p->Attribute;
+			if (p->DeathlessTime > 0) {
+				if ((H < Hei / 2 && L < Len / 2) ||
+					(H > Hei / 2 && L < Len / 2) ||
+					(H < Hei / 2 && L > Len / 2) ||
+					(H > Hei / 2 && L > Len / 2)
+					) {
+					color = randColorInDeathless;
+				}
+				//if (H == Hei / 2 && L == Len / 2) { color = p->Attribute; }
+				//else { 
+			}
+			if (H == Hei / 2 && L == Len / 2) { continue; }
+			putBuffer(p->Position.X + L, p->Position.Y + H, p->Format[0], color);
 		}
 	}
 	// Direction arrow
@@ -54,12 +62,6 @@ void playerMove(Player* p, Map* m) {
 	}
 	else { return; }
 	COORD posD = { p->Direction.X, p->Direction.Y };
-	//for (int L = 0; L < dirX; L++) {
-	//	putBuffer(posD.X + L, posD.Y, Arrow, p->Dir_atb);
-	//}
-	//for (int H = 0; H < dirY; H++) {
-	//	putBuffer(posD.X, posD.Y + H, Arrow, p->Dir_atb);
-	//}
 	putBuffer(posD.X + dirX/2, posD.Y + dirY/2, Arrow, p->Dir_atb);
 	keepObject(p, m);
 }

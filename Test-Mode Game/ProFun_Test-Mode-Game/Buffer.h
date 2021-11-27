@@ -2,9 +2,10 @@
 #include "main.h"
 
 int setConsole(int x, int y);
-int setMode();
+int setMode(int mode);
 void putBuffer(int x, int y, char ch, int atb);
 void clearBuffer();
+void clearScreen();
 void displayBuffer();
 void setCursor(bool visible);
 void gotoxy(int x, int y);

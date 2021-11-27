@@ -2,35 +2,46 @@
 #include "main.h"
 #include "Buffer.h"
 
+HANDLE wHnd;
+HANDLE rHnd;
+DWORD fdwMode;
+DWORD numEvents = 0;
+DWORD numEventsRead = 0;
+
 void moveControl(Player* p, Map* m) {
 	GetNumberOfConsoleInputEvents(rHnd, &numEvents);
 	if (numEvents != 0) {
 		INPUT_RECORD* eventBuffer = new INPUT_RECORD[numEvents];
 		ReadConsoleInput(rHnd, eventBuffer, numEvents, &numEventsRead);
 
-		for (DWORD i = 0; i < numEventsRead; ++i) {
+		for (DWORD i = 0; i < 2; ++i) {
 			if (eventBuffer[i].EventType == KEY_EVENT &&
 				eventBuffer[i].Event.KeyEvent.bKeyDown == TRUE) {
 				char KB_Char = eventBuffer[i].Event.KeyEvent.uChar.AsciiChar;
 				WORD KB_keycode = eventBuffer[i].Event.KeyEvent.wVirtualKeyCode;
 				if (KB_keycode == VK_ESCAPE) { 
+					clearScreen();
 					clearBuffer();
 					displayBuffer();
 					gotoxy(0, 0);
-					printf_s("END!!");
-					playStatus = FALSE; }
+					playStatus = false; 
+					homePageStatus = true;
+					endGameStatus = false;
+				}
 				if (KB_keycode == VK_SPACE) {
 					COORD pos = { p->Position.X , p->Position.Y };
 					int size = p->Bomb.Amount;
 					int i = 0;
-					if (p->Bomb.Drop < size) {
+					if (p->Bomb.CountBombDropNow < size) {
 						for (int c = 0; c < size; c++) {
-							if (p->Bomb.State[c] == 2) { i++; }
+							if (p->Bomb.State[c] == BOMB_COUNTING) { i++; }
 						}
 						if (m->State[pos.Y][pos.X] == Bomb_Nm.NormalState) {
 							goto jump;
 						}
-						if (p->Bomb.Drop < size - i) { p->Bomb.Drop++; }
+						if (p->Bomb.NewDrop < size - i) { 
+							p->Bomb.NewDrop++; 
+						}
 					}
 				}
 			jump:
@@ -54,21 +65,6 @@ void moveControl(Player* p, Map* m) {
 				default: break;
 				}
 			}
-			else if (eventBuffer[i].EventType == MOUSE_EVENT) {
-				//int M_posx = eventBuffer[i].Event.MouseEvent.dwMousePosition.X;
-				//int M_posy = eventBuffer[i].Event.MouseEvent.dwMousePosition.Y;
-				if (eventBuffer[i].Event.MouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {
-					//printf("left click\n")
-					;
-				}
-				else if (eventBuffer[i].Event.MouseEvent.dwButtonState & RIGHTMOST_BUTTON_PRESSED) {
-					//printf("right click\n")
-					;
-				}
-				else if (eventBuffer[i].Event.MouseEvent.dwEventFlags & MOUSE_MOVED) {
-					;
-				}
-			}
 		}
 		delete[] eventBuffer;
 	}
@@ -86,7 +82,7 @@ void checkControl(int Direction, Player* p, Map* m) {
 		for (int H = 0; H < Hei; H++) {
 			for (int L = 0; L < Len; L++) {
 				State = &m->State[pos->Y + H][pos->X - 1 - L ];
-				if (checkStateControl(*State) == 1) { check++; }
+				if (checkStateControl(p, *State) == 1) { check++; }
 			}
 			if (check == Len * Hei) { pos->X -= p->SpeedX; }
 		}
@@ -95,7 +91,7 @@ void checkControl(int Direction, Player* p, Map* m) {
 		for (int H = 0; H < Hei; H++) {
 			for (int L = 0; L < Len; L++) {
 				State = &m->State[pos->Y + H][pos->X + L + p->SpeedX];
-				if (checkStateControl(*State) == 1) { check++; }
+				if (checkStateControl(p, *State) == 1) { check++; }
 			}
 			if (check == Len * Hei) { pos->X += p->SpeedX; }
 		}
@@ -104,7 +100,7 @@ void checkControl(int Direction, Player* p, Map* m) {
 		for (int H = 0; H < Hei; H++) {
 			for (int L = 0; L < Len; L++) {
 				State = &m->State[pos->Y + H + p->SpeedY][pos->X + L];
-				if (checkStateControl(*State) == 1) { check++; }
+				if (checkStateControl(p, *State) == 1) { check++; }
 			}
 		}
 		if (check == Len * Hei) { pos->Y += p->SpeedY; }
@@ -113,17 +109,56 @@ void checkControl(int Direction, Player* p, Map* m) {
 		for (int H = 0; H < Hei; H++) {
 			for (int L = 0; L < Len; L++) {
 				State = &m->State[pos->Y - 1 - H][pos->X + L];
-				if (checkStateControl(*State) == 1) { check++; }
+				if (checkStateControl(p, *State) == 1) { check++; }
 			}
 		}
 		if (check == Len * Hei) { pos->Y -= p->SpeedY; }
 	}
 }
 
-int checkStateControl(unsigned int St) {
-	if (St == Space.NormalState ||
-		St == Bomb_burst.NormalState ||
-		St == CAN_KEEP)
-		{ return 1; }
-	else return 0;
+int checkStateControl(Player*p, unsigned int St) {
+	int n = 0;
+	if (p->Call == playerMe.Call) {
+		if (St == Space.NormalState ||
+			St == Bomb_burst.NormalState ||
+			St == CAN_KEEP) {
+			n = 1;
+		}
+	}
+	else if (levelPlayer == 1) {
+		unsigned int timeNow = (playMap[mapSelected].GameTime_Minute * 60) + playMap[mapSelected].GameTime_Second;
+		int randToKeepObect = rand() % 10;
+		if (randToKeepObect < 8 || timeNow > 4 * 60) {
+			if (St == Space.NormalState ||
+				St == Bomb_burst.NormalState ||
+				St == CAN_KEEP) {
+				n = 1;
+			}
+		}
+		else {
+			if (St == Space.NormalState ||
+				St == Bomb_burst.NormalState) {
+				n = 1;
+			}
+		}
+	}
+	else if (levelPlayer == 2) {
+		if (St == Space.NormalState ||
+			St == Bomb_burst.NormalState ||
+			St == CAN_KEEP) {
+			n = 1;
+		}
+	}
+	else { n = 0; }
+	return n;
 }
+//int checkStateControl(Player* p, unsigned int St) {
+//	int n = 0;
+//	if (St == Space.NormalState ||
+//		St == Bomb_burst.NormalState ||
+//		St == CAN_KEEP) {
+//		n = 1;
+//	}
+//	else { n = 0; }
+//	return n;
+//}

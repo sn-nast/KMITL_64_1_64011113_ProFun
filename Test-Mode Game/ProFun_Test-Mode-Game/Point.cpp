@@ -43,6 +43,8 @@ void arrangePoint() {
 }
 
 void recordPoint(Player* p) {
+	Map* m = &playMap[mapSelected];
+
 	f = fopen("00 PlayHistory.txt", "a");
 	fprintf(f, "%s\t\t%d\n", p->Name, p->Point);
 	fclose(f);
@@ -51,15 +53,30 @@ void recordPoint(Player* p) {
 		strcpy(PointHistory[size - 1].Name, p->Name);
 		arrangePoint();
 	}
+	readPoint();
 }
 
-void showHighestPoint() {
-	gotoxy(0, MAP_HEIGHT + 5);
-	printf("%28s\n", "Highest Points");
-	printf("---------------------------------------\n");
-	printf("|%4s%-1s| %13s%-3s | %8s%-2s |\n", "No.", "", "Player Name", "", "Points", "");
-	printf("|%4s%-1s| %15s%-1s | %10s%0s |\n", "---", "", "---------------", "", "---------", "");
+void showHighestPoint(COORD start) {
+	gotoxy(start.X, start.Y++);
+	printf("%*s%*s", 20 + (strlen("Highest Points") / 2), "Highest Points" , 20 - (strlen("Highest Points") / 2), "");
+	gotoxy(start.X, start.Y++);
+	printf("---------------------------------------");
+	gotoxy(start.X, start.Y++);
+	printf("|%4s%-1s| %13s%-3s | %8s%-2s |", "No.", "", "Player Name", "", "Points", "");
+	gotoxy(start.X, start.Y++);
+	printf("|%4s%-1s| %15s%-1s | %10s%0s |", "---", "", "---------------", "", "---------", "");
 	for (int n = 0; n < size; n++) {
-		printf("|  %d  | %-16s | %10d |\n" ,n + 1, PointHistory[n].Name, PointHistory[n].Point);
+		gotoxy(start.X, start.Y++);
+		if (n == 0) { setcolor(15, 4); }
+		else if (n == 1) { setcolor(0, 14); }
+		else if (n == 2) { setcolor(15, 1); }
+		else { setcolor(15, 0); }
+		printf("|  %d  | %-16s | %10d |" ,n + 1, PointHistory[n].Name, PointHistory[n].Point);
 	}
+	gotoxy(start.X, start.Y++);
+	printf("---------------------------------------");
+	gotoxy(start.X, start.Y++);
+	printf("| %*s%*s | %10d |", 11 + (strlen(playerMe.Name)/2), playerMe.Name, 11 - (strlen(playerMe.Name)/2), "", playerMe.Point);
+	gotoxy(start.X, start.Y++);
+	printf("---------------------------------------");
 }
