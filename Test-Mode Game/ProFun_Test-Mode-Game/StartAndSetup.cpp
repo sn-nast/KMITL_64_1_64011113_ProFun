@@ -112,9 +112,11 @@ void homePage() {
 		}
 		else {
 			gotoxy(15, lastLine + 3);
-			printf("Enter your Name and press [Enter] to continue");
-			gotoxy(15, lastLine + 5);
-			printf("Press [ESC] to clear your input");
+			printf("Please use \"_\" or \"-\" instead of spaces.");
+			gotoxy(15, lastLine + 6);
+			printf("Enter your Name and press [Enter] to continue.");
+			gotoxy(15, lastLine + 7);
+			printf("Press [ESC] to clear your input.");
 		}
 		textCommentLine += 5;
 		gotoxy(2, textCommentLine);

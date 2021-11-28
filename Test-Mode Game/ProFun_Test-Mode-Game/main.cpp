@@ -26,7 +26,6 @@ int main() {
 
 		setupMap(&playMap[mapSelected], mapSelected + 1);
 		Map* m = &playMap[mapSelected];
-
 		while (playStatus) {
 			moveControl(&playerMe, m);
 				moveAllBot(m); 

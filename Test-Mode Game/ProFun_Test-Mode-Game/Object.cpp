@@ -32,7 +32,9 @@ void dropObject(Map* m, COORD pos) {
 	unsigned int* sta = &m->State[pos.Y][pos.X];
 	m->LastState[pos.Y][pos.X] = *sta;
 	int* time = &m->Time[pos.Y][pos.X];
-	switch (*objRand % 5) {
+	int randObjLevel = 5;
+	if (levelPlayer == 2) { randObjLevel = 6; }
+	switch (*objRand % randObjLevel) {
 		case 1: {
 			*sta = Life.NormalState;
 			*obj = { Life.Format, Life.Attribute, Life.NormalState };
@@ -122,7 +124,9 @@ void countDownObjectAllPlayer() {
 }
 
 void checkCountDrop(Map* m, int* randNextObj, bool mainPlayer) {
-	int checkRandObj = *randNextObj % 5;
+	int randObjLevel = 5;
+	if (levelPlayer == 2) { randObjLevel = 6; }
+	int checkRandObj = *randNextObj % randObjLevel;
 	bool mustNewStatus = false;
 	int countMustChange = 0;
 	struct _Obj {
@@ -209,7 +213,7 @@ void checkCountDrop(Map* m, int* randNextObj, bool mainPlayer) {
 	}
 
 	while (mustNewStatus) {
-		checkRandObj = rand() % 5;
+		checkRandObj = rand() % randObjLevel;
 		int countCheck = 0;
 		for (int n = 0; n < amountObject; n++) {
 			if (Obj[n].mustNewObj == true && checkRandObj != Obj[n].numRand) {
