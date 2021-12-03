@@ -1,5 +1,7 @@
 # ADD
 tempCodeRunnerFile.*
+# Add for Visual Studio 2022 Preview
+*.vcxproj
 
 ###################################
 ########   Visual Studio Code  ##########

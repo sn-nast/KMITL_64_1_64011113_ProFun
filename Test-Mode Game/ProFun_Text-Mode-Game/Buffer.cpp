@@ -1,6 +1,10 @@
-#include "Buffer.h"
-#include "main.h"
+#include"Buffer.h"
+#include"main.h"
 
+CHAR_INFO consoleBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+COORD bufferSize = { SCREEN_WIDTH, SCREEN_HEIGHT };
+COORD characterPos = { 0, 0 };
+SMALL_RECT windowSize = { 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1 };
 
 int setConsole(int x, int y) {
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -9,9 +13,14 @@ int setConsole(int x, int y) {
 	return 0;
 }
 
-int setMode() {
-	rHnd = GetStdHandle(STD_INPUT_HANDLE);
-	fdwMode = ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+int setMode(int mode) {
+	if (mode == 0) {
+		fdwMode = ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT;
+	}
+	else if (mode == 1) {
+		fdwMode = ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+		rHnd = GetStdHandle(STD_INPUT_HANDLE);
+	}
 	SetConsoleMode(rHnd, fdwMode);
 	return 0;
 }
@@ -27,7 +36,14 @@ void displayBuffer() {
 
 void clearBuffer() {
 	for (int y = 0; y < SCREEN_HEIGHT; ++y) {
-		for (int x = 0; x < SCREEN_WIDTH; ++x) { putBuffer(x, y, ' ', NORMAL_ATTIBUTE); }
+		for (int x = 0; x < SCREEN_WIDTH; ++x) { putBuffer(x, y, ' ', NORMAL_ATTRIBUTE); }
+	}
+}
+
+void clearScreen() {
+	setcolor(15, 0);
+	for (int y = 0; y < SCREEN_HEIGHT; ++y) {
+		for (int x = 0; x < SCREEN_WIDTH; ++x) { gotoxy(x, y); printf(" "); }
 	}
 }
 
@@ -60,4 +76,34 @@ char cursor(int x, int y) {
 
 char cursorBuffer(COORD pos) {
 	return consoleBuffer[pos.X + (SCREEN_WIDTH * pos.Y)].Char.AsciiChar;
+}
+
+void convertToChar(int n, char* keepArray) {
+	int temp, digit = 0;
+	temp = n;
+	while (temp != 0) { 
+		temp /= 10;
+		digit++;
+	}
+	temp = n;
+	for (int i = digit - 1; i >= 0; i--) {
+		int inDigit = temp % 10;
+		temp /= 10;
+		keepArray[i] = (char)inDigit + '0';
+	}
+	keepArray[digit] = '\0';
+}
+
+void printBuffer(COORD pos, char* text) {
+	for (int n = 0; n < strlen(text); n++) {
+		putBuffer(pos.X + n, pos.Y, *(text + n), NORMAL_ATTRIBUTE);
+	}
+}
+
+void printBuffer(COORD pos, int n) {
+	char intToChar[10];
+	convertToChar(n, intToChar);
+	for (int i = 0; i < strlen(intToChar); i++) {
+		putBuffer(pos.X + i, pos.Y + 1, intToChar[i], NORMAL_ATTRIBUTE);
+	}
 }
