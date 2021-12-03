@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProFun_Test-Mode -Game", "ProFun_Test-Mode -Game.vcxproj", "{52835685-53EB-4E9A-B7DE-FB2368906F96}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProFun_Text-Mode-Game", "ProFun_Text-Mode-Game.vcxproj", "{52835685-53EB-4E9A-B7DE-FB2368906F96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {42592943-8DA6-443F-8D01-3CDCDF3E75D5}
+		SolutionGuid = {8FBD9625-14F3-4D52-851D-206738322651}
 	EndGlobalSection
 EndGlobal

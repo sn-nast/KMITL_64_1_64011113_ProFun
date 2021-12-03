@@ -30,7 +30,7 @@ void setupAllPlayerBot() {
 	playerBot[0].Position = { 44, 1 };
 	playerBot[1].Position = { 2, 37 };
 	playerBot[2].Position = { 44, 37 };
-
+	 
 	strcpy(playerBot[0].Name, "Bot 1");
 	strcpy(playerBot[1].Name, "Bot 2");
 	strcpy(playerBot[2].Name, "Bot 3");
