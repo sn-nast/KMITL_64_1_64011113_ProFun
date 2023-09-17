@@ -5359,3 +5359,8 @@ Hello		0
 fldldf,l;d		0
 Hello		7600
 Hello		3600
+Wowzaa		1100
+ThisFileRead		1100
+jjj		0
+llnkj		12100
+llnkj		0

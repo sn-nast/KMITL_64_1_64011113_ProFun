@@ -85,7 +85,6 @@ typedef struct _ForBot {
 	unsigned int CountCantMoveThisDirection[4];
 	unsigned int MaxCanDropBomb;
 	bool Alive;
-	
 } ForBot;
 
 typedef struct _Player {
